@@ -1,6 +1,5 @@
 <x-app-layout>
 
-    {{-- <livewire:main /> --}}
-    {{--<livewire:dashboard.dashboard />--}}
+    <livewire:main  />
 
     </x-app-layout>
