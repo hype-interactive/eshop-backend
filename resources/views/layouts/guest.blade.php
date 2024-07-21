@@ -25,7 +25,7 @@
         <img src="{{ asset('social/login.png') }}" alt="" class="h-screen w-full object-cover">
 
         <!-- Gradient overlay only on the left side -->
-        <div class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-red-900 to-transparent opacity-75"></div>
+        <div class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-blue-600 to-transparent opacity-75"></div>
 
         <div class="z-20 absolute top-5 left-5">
             <img src="{{ asset('/loginSlider/eshop-icon.png') }}" alt="Logo" class="h-14">
