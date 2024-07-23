@@ -22,7 +22,7 @@
            @break
 
            @case('5')
-5
+           <livewire:customer.customer />
            @break
 
            @case('6')
