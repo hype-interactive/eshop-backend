@@ -1,13 +1,12 @@
 <div>
    @switch($this->side_bar_id)
        @case('1')
-
-       1
             <livewire:dashboard.dashboard />
            @break
 
            @case('2')
-2
+           <livewire:order.order-list  />
+
            @break
 
            @case('3')

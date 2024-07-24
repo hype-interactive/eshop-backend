@@ -9,6 +9,13 @@ class Inventory extends Component
 
     public $istable=true;
 
+    protected $listeners=['closeForm'=>'closeForm'];
+
+    function closeForm(){
+        $this->istable=!$this->istable;
+
+    }
+
     public function switchView(){
         $this->istable=!$this->istable;
     }

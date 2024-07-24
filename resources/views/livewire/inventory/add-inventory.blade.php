@@ -1,110 +1,175 @@
 <div>
-    <div class="max-w-full mx-6 px-16 mx-auto bg-white border rounded-lg px-8 py-8">
+    <div class="w-full mx-6 px-16 mx-auto  rounded-lg px-8 py-8">
         {{-- <h2 class="text-3xl font-semibold mb-6 text-center">Product Registration</h2> --}}
+            <div class="bg-white shadow flex w-full ">
+                <div class="w-1/2">
 
-        <form class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12">
+                    <div class="flex p-4  items-center bg-white justify-between gap-x-3">
+                        <div class="relative">
+                            <h2 class="text-lg  font-medium text-gray-800 dark:text-white"> New  Products </h2>
+                                <h6>  Register product </h6>
+                        </div>
+                    </div>
+
+                                    <div class="p-2 mx-2">
+                                        <div>
+                                            @if (session()->has('message'))
+
+                                                {{-- @if (session('alert-class') == 'alert-success') --}}
+                                                    <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
+                                                        <div class="flex">
+                                                            <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                                                            <div>
+                                                                <p class="font-bold">The process is completed</p>
+                                                                <p class="text-sm">{{ session('message') }} </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {{-- @endif --}}
+                                            @endif
+
+                                            @if (session()->has('message_fail'))
+
+                                                <div class="bg-red-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
+                                                    <div class="flex">
+                                                        <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                                                        <div>
+                                                            <p class="font-bold">The process fail</p>
+                                                            <p class="text-sm">{{ session('message_fail') }} </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
 
 
-            <label for="uploadFile1"
-      class="bg-white text-gray-500 font-semibold text-base rounded max-w-md h-24 w-full flex flex-col items-center justify-center cursor-pointer border-2 border-gray-300 border-dashed mx-auto font-[sans-serif]">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-11 mb-2 fill-gray-500" viewBox="0 0 32 32">
-        <path
-          d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z"
-          data-original="#000000" />
-        <path
-          d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
-          data-original="#000000" />
-      </svg>
-      Upload file
 
-      <input type="file" id='uploadFile1' class="hidden" />
-      <p class="text-xs font-medium text-gray-400 mt-2">PNG, JPG SVG, WEBP, and GIF are Allowed.</p>
-    </label>
+                                        <div class="mt-4">
+                                            <form wire:submit.prevent="save" class="space-y-8">
 
-    <div>
-        <label for="description" class="block text-gray-700 font-medium mb-2">Description</label>
-        <textarea id="description" name="description"
-            class="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required></textarea>
+                                                <div class="grid grid-cols-1   gap-6 pb-4">
+
+
+
+
+
+                                                    <div>
+                                                        <label for="name" class="block text-sm font-medium text-gray-700"> Product Name </label>
+                                                        <input wire:model="name" type="tel" id="phone_number"  placeholder="nyanya" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                                        @error('name') <div for="name" class="text-red-500 text-xs " > {{ $message }}  </div> @enderror
+                                                    </div>
+
+                                                        <div>
+                                                            <label for="unit" class="block text-sm font-medium text-gray-700"> unit </label>
+                                                            <select wire:model.bounce="unit" name="product_category_id" id="product_category_id" class="mt-1 block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                <option value="kg"> KILOS</option>
+                                                                <option value="tani">TANI</option>
+                                                                <option value="litre"> LITRES</option>
+                                                            </select>
+                                                            @error('unit') <div for="name" class="text-red-500 text-xs  " > {{ $message }}  </div> @enderror
+                                                        </div>
+                                                    <div>
+                                                            <label for="vendor_price" class="block text-sm font-medium text-gray-700">Vendor Price </label>
+                                                            <input wire:model="vendor_price" type="number" id="first_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                                            @error('vendor_price') <div for="name" class=" text-red-500 text-xs " > {{ $message }}  </div> @enderror
+                                                        </div>
+
+                                                        <div>
+                                                            <label for="product_category_id" class="block text-sm font-medium text-gray-700"> Product Categotry </label>
+                                                            <select wire:model.bounce="product_category_id" name="product_category_id" id="product_category_id" class="mt-1 block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                                                <option value="1">Individual</option>
+                                                                <option value="1">Group</option>
+                                                                <option value="1">Business</option>
+
+                                                            </select>
+                                                            <div for="membership_type" cl                                                                                                  ass="mt-2" />
+                                                        </div>
+
+                                                        <div>
+                                                            <label for="expire_date" class="block text-sm font-medium text-gray-700">Expire Date</label>
+                                                            <input wire:model="expire_date" type="date" id="expire_date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                                            <div for="expire_date" >  </div>
+                                                        </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                 <div class="w-1/2">
+                    <div class="justify-center mt-6">
+                        <div class="  w-full  items-center justify-center ">
+                            <section class="bg-white-300 flex flex-col items-center rounded-full justify-center  mx-auto" style="width: 200px; height: 200px;">
+                                @if ($this->photo)
+                                    <img class="object-fill rounded-full " src="{{ $photo->temporaryUrl() }}" style="width: 200px; height: 200px;">
+                                @else
+                                    @if ($this->image_url)
+                                        <img class="object-fill  rounded-full " src="{{$this->image_url}}" style="width: 200px; height: 200px;">
+                                    @else
+                                        <img class="object-fill   rounded-full" src="{{ asset('product/product_image.jpeg')  }}" style="width: 300px; height: 200px;" >
+                                    @endif
+
+                                @endif
+                            </section>
+
+                            <label class="flex flex-col cursor-pointer hover:bg-gray-100 hover:border-gray-300 rounded-full mx-auto mt-4 pt-2" style="width: 200px;">
+                                <div class="flex flex-col items-center justify-center ">
+
+                                    <div wire:loading wire:target="photo" class="" >
+
+                                        <svg style="width: 50%; margin: 0 auto;" xmlns="http://www.w3.org/2000/svg" class="animate-spin  w-8 h-8 text-gray-400 group-hover:text-gray-600" fill="white" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+
+                                        </svg>
+                                        <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">Please wait...</p>
+
+                                    </div>
+
+                                    <div wire:loading.remove wire:target="photo" class="flex flex-col items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-400 group-hover:text-gray-600"
+                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                        </svg>
+                                        <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                            Select new image</p>
+                                    </div>
+                                </div>
+                                <input type="file" class="opacity-0" wire:model="photo"/>
+                            </label>
+                            @error('photo') <span class="error text-red-500 text-xs mx-auto">{{ $message }}</span> @enderror
+                            <div class="grid grid-cols-1  gap-6 pb-4">
+                                <div>
+                                    <label for="quantity" class="block text-sm font-medium text-gray-700"> Product Quantity  </label>
+                                    <input wire:model="quantity" type="number" id="expire_date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                    <div for="quantity" >  </div>
+                                </div>
+                                <div class="flex items-center mb-4 justify-between  mx-4  ">
+                                    <div class="flex items-center">
+                                    <input id="default-checkbox" wire:model="visibility" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> visibility </label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input checked id="checked-checkbox" type="checkbox" value="" wire:model="featured" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                        <label for="checked-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> featured </label>
+
+                                    </div>
+
+                                </div>
+                                <div class=" flex w-full px-8 bg-white  -mt-8 mb-3 justify-end shadow-b  item-end ">
+                                    <button wire:click="discard()" type="submit" class="inline-flex items-end justify-end  px-4 py-2 bg-gray-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-800 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150 ms-4">
+                                        Discard
+                                        </button>
+
+                                        <button wire:click="save()" type="submit" class="inline-flex items-end justify-end  px-4 py-2 bg-blue-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-800 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150 ms-4 ">
+                                            New Product
+                                            </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </div>
     </div>
-
-
-
-            <div>
-                <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
-                <input type="text" id="name" name="name"
-                    class="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required>
-            </div>
-
-
-
-            <div>
-                <label for="unit" class="block text-gray-700 font-medium mb-2">Unit</label>
-                <input type="text" id="unit" name="unit"
-                    class="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required>
-            </div>
-
-            <div>
-                <label for="vendor_price" class="block text-gray-700 font-medium mb-2">Vendor Price</label>
-                <input type="number" step="0.01" id="vendor_price" name="vendor_price"
-                    class="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required>
-            </div>
-
-            <div>
-                <label for="final_price" class="block text-gray-700 font-medium mb-2">Final Price</label>
-                <input type="number" step="0.01" id="final_price" name="final_price"
-                    class="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required>
-            </div>
-
-            <div>
-                <label for="product_category_id" class="block text-gray-700 font-medium mb-2">Product Category</label>
-                <select id="product_category_id" name="product_category_id"
-                    class="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required>
-                    <option value="">Select category</option>
-                    <option value="1">Category 1</option>
-                    <option value="2">Category 2</option>
-                    <option value="3">Category 3</option>
-                    <!-- Add more categories as needed -->
-                </select>
-            </div>
-
-            <div>
-                <label for="expire_date" class="block text-gray-700 font-medium mb-2">Expire Date</label>
-                <input type="date" id="expire_date" name="expire_date"
-                    class="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required>
-            </div>
-
-
-
-            <div>
-                <label for="status" class="block text-gray-700 font-medium mb-2">Status</label>
-                <select id="status" name="status"
-                    class="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required>
-                    <option value="">Select status</option>
-                    <option value="available">Available</option>
-                    <option value="out_of_stock">Out of Stock</option>
-                </select>
-            </div>
-
-            <div>
-                <label for="visibility" class="block text-gray-700 font-medium mb-2">Visibility</label>
-                <select id="visibility" name="visibility"
-                    class="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required>
-                    <option value="">Select visibility</option>
-                    <option value="public">Public</option>
-                    <option value="private">Private</option>
-                </select>
-            </div>
-
-            <div class="sm:col-span-2">
-                <label for="featured" class="block text-gray-700 font-medium mb-2">Featured</label>
-                <input type="checkbox" id="featured" name="featured" class="mr-2">
-                <label for="featured" class="text-gray-700">Is Featured?</label>
-            </div>
-
-            <div class="sm:col-span-2">
-                <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Submit</button>
-            </div>
-        </form>
-    </div>
-
 </div>
