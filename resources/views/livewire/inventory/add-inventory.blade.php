@@ -6,11 +6,10 @@
 
                     <div class="flex p-4  items-center bg-white justify-between gap-x-3">
                         <div class="relative">
-                            <h2 class="text-lg  font-medium text-gray-800 dark:text-white"> New  Products </h2>
+                            <h2 class="text-lg  font-medium text-gray-800 s:text-white"> New  Products </h2>
                                 <h6>  Register product </h6>
                         </div>
                     </div>
-
                                     <div class="p-2 mx-2">
                                         <div>
                                             @if (session()->has('message'))
@@ -61,7 +60,7 @@
 
                                                         <div>
                                                             <label for="unit" class="block text-sm font-medium text-gray-700"> unit </label>
-                                                            <select wire:model.bounce="unit" name="product_category_id" id="product_category_id" class="mt-1 block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                            <select wire:model.bounce="unit" name="product_category_id" id="product_category_id" class="mt-1 block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 s:bg-gray-700 s:border-gray-600 s:placeholder-gray-400 s:text-white s:focus:ring-blue-500 s:focus:border-blue-500">
                                                                 <option value="kg"> KILOS</option>
                                                                 <option value="tani">TANI</option>
                                                                 <option value="litre"> LITRES</option>
@@ -76,12 +75,13 @@
 
                                                         <div>
                                                             <label for="product_category_id" class="block text-sm font-medium text-gray-700"> Product Categotry </label>
-                                                            <select wire:model.bounce="product_category_id" name="product_category_id" id="product_category_id" class="mt-1 block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                            <select wire:model.bounce="product_category_id" name="product_category_id" id="product_category_id" class="mt-1 block bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 s:bg-gray-700 s:border-gray-600 s:placeholder-gray-400 s:text-white s:focus:ring-blue-500 s:focus:border-blue-500">
 
-                                                                <option value="1">Individual</option>
-                                                                <option value="1">Group</option>
-                                                                <option value="1">Business</option>
+                                                                <option value=" "> Select </option>
+                                                                @foreach (DB::table('product_categories')->get() as $category  )
 
+                                                                <option value="{{ $category->id }}"> {{ $category->name }}</option>
+                                                                @endforeach
                                                             </select>
                                                             <div for="membership_type" cl                                                                                                  ass="mt-2" />
                                                         </div>
@@ -98,8 +98,10 @@
                                 </div>
                                 </div>
                  <div class="w-1/2">
+
                     <div class="justify-center mt-6">
                         <div class="  w-full  items-center justify-center ">
+
                             <section class="bg-white-300 flex flex-col items-center rounded-full justify-center  mx-auto" style="width: 200px; height: 200px;">
                                 @if ($this->photo)
                                     <img class="object-fill rounded-full " src="{{ $photo->temporaryUrl() }}" style="width: 200px; height: 200px;">
@@ -139,6 +141,9 @@
                                 <input type="file" class="opacity-0" wire:model="photo"/>
                             </label>
                             @error('photo') <span class="error text-red-500 text-xs mx-auto">{{ $message }}</span> @enderror
+
+
+
                             <div class="grid grid-cols-1  gap-6 pb-4">
                                 <div>
                                     <label for="quantity" class="block text-sm font-medium text-gray-700"> Product Quantity  </label>
@@ -147,12 +152,12 @@
                                 </div>
                                 <div class="flex items-center mb-4 justify-between  mx-4  ">
                                     <div class="flex items-center">
-                                    <input id="default-checkbox" wire:model="visibility" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> visibility </label>
+                                    <input id="default-checkbox" wire:model="visibility" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 s:focus:ring-blue-600 s:ring-offset-gray-800 focus:ring-2 s:bg-gray-700 s:border-gray-600">
+                                    <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 s:text-gray-300"> visibility </label>
                                     </div>
                                     <div class="flex items-center">
-                                        <input checked id="checked-checkbox" type="checkbox" value="" wire:model="featured" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="checked-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> featured </label>
+                                        <input checked id="checked-checkbox" type="checkbox" value="" wire:model="featured" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 s:focus:ring-blue-600 s:ring-offset-gray-800 focus:ring-2 s:bg-gray-700 s:border-gray-600">
+                                        <label for="checked-checkbox" class="ms-2 text-sm font-medium text-gray-900 s:text-gray-300"> featured </label>
 
                                     </div>
 

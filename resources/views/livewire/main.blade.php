@@ -10,14 +10,12 @@
            @break
 
            @case('3')
-
-           3
            <livewire:inventory.inventory />
 
            @break
 
            @case('4')
-4
+         <livewire:vendor.vendor />
            @break
 
            @case('5')
@@ -25,10 +23,9 @@
            @break
 
            @case('6')
-6
-           @break
+           <livewire:setting.setting />
 
-7
+           @break
        @default
 
    @endswitch

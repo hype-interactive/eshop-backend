@@ -45,6 +45,7 @@ class AddInventory extends Component
             'product_category_id' => $this->product_category_id,
             'expire_date' => $this->expire_date,
             'visibility' => $this->visibility ? 1 : 0,
+             'vendor_id'=>auth()->user()->id,
             'featured' => $this->featured ? 1 : 0,
         ];
 

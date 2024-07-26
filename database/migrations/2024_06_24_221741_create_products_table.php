@@ -22,11 +22,13 @@ return new class extends Migration
             $table->string('expire_date')->nullable();
             $table->string('image_url')->nullable();
             $table->enum('status',['in_stock','out_of_stock'])->default('in_stock');
+            $table->unsignedBigInteger('vendor_id');
             $table->boolean('visibility')->default(false);
             $table->boolean('featured')->default(false);
             $table->timestamps();
 
             $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade');
+            $table->foreign('vendor_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

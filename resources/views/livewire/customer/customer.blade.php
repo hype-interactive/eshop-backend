@@ -15,16 +15,16 @@
             </div>
             <div class="grid grid-cols-4 gap-4 mb-6">
                 <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600">Total Products</div>
-                    <div class="text-xl font-semibold">390</div>
+                    <div class="text-sm text-gray-600">Total Customers</div>
+                    <div class="text-xl font-semibold">{{  $this->total_customers }}</div>
                 </div>
                 <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600">Total Categories</div>
-                    <div class="text-xl font-semibold">12</div>
+                    <div class="text-sm text-gray-600"> Active Customer</div>
+                    <div class="text-xl font-semibold">{{ $this->total_ative_customers }}</div>
                 </div>
                 <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600">Out of Stock Products</div>
-                    <div class="text-xl font-semibold">75</div>
+                    <div class="text-sm text-gray-600"> Out of Stock Products  </div>
+                    <div class="text-xl font-semibold"> 75 </div>
                 </div>
                 <div class="p-4 bg-white rounded shadow">
                     <div class="text-sm text-gray-600">Low Stock Products</div>
