@@ -25,7 +25,7 @@
 
 
 
-        <div class="bg-white">
+ <div class="bg-white">
 <div class="p-4 mt-8 bg-white rounded-lg shadow-sm xl:p-8">
 <div class="space-y-3 sm:flex sm:items-start sm:space-y-0 sm:justify-between">
 <h2 class="text-lg font-medium text-gray-700 capitalize sm:text-xl md:text-2xl"> Product Category</h2>

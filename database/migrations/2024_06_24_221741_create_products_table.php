@@ -26,7 +26,6 @@ return new class extends Migration
             $table->boolean('visibility')->default(false);
             $table->boolean('featured')->default(false);
             $table->timestamps();
-
             $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade');
             $table->foreign('vendor_id')->references('id')->on('users')->onDelete('cascade');
         });
