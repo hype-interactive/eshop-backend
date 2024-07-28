@@ -96,7 +96,7 @@ class Billboard extends Component
 
         // Handle image upload
         if ($this->image) {
-            $imagePath = $this->image->store('images', 'public');
+            $imagePath = $this->image->store('billboard/images', 'public');
             $this->image_url = Storage::url($imagePath);
         }
 

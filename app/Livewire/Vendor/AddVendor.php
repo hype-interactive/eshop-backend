@@ -12,9 +12,10 @@ class AddVendor extends Component
 {
     use WithFileUploads;
 
-    public $photo;
-    public  $image_url;
     public $status;
+    public  $image_url;
+    public $photo;
+
     public $role_id;
     public $last_name;
     public $middle_name;
@@ -49,7 +50,7 @@ class AddVendor extends Component
 
          //image process here
 
-        User::create([
+         $user=   User::create([
             'status' => $this->status,
             'role_id' => $this->role_id,
             'last_name' => $this->last_name,
@@ -60,6 +61,11 @@ class AddVendor extends Component
             'phone_number' => $this->phone_number,
         ]);
 
+        if ($this->photo) {
+            $user->image_url = $this->photo->store('Vendor/photos');
+            $user->save();
+        }
+
         //send to user of the system
        // mail::to($this->email)->send($password);
 
@@ -67,4 +73,6 @@ class AddVendor extends Component
         session()->flash('message','has been registered successfully ');
 
     }
+
+
 }

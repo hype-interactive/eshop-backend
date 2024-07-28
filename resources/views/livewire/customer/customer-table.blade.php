@@ -51,14 +51,14 @@
                                 <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Total  </th>
                                 <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Scores </th>
 
-                                <th scope="col" class="relative py-3.5 px-4">
+                                {{-- <th scope="col" class="relative py-3.5 px-4">
                                     <span class=" font-normal text-gray-600 ">Edit</span>
-                                </th>
+                                </th> --}}
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200  ">
                             @foreach ($customers as $customer )
-                           
+
                             <tr class="cursor-pointer hover:bg-gray-50 " wire:click="viewCustomerTransactions( {{ $customer->id }})">
                                 <td class="px-4 py-2 text-sm font-medium text-gray-700 whitespace-nowrap">
                                     <div class="inline-flex items-center gap-x-3">
@@ -104,7 +104,7 @@
                                     </div>
                                 </td>
 
-                                <td class="px-4 py-2 text-sm whitespace-nowrap">
+                                {{-- <td class="px-4 py-2 text-sm whitespace-nowrap">
                                     <div class="flex items-center gap-x-6">
                                         <button class="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -118,7 +118,7 @@
                                             </svg>
                                         </button>
                                     </div>
-                                </td>
+                                </td> --}}
                             </tr>
 
                             @endforeach

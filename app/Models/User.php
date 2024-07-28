@@ -33,7 +33,7 @@ class User extends Authenticatable
         'role_id',
         'phone_number',
         'password',
-        'image_url'
+        'image_url',
     ];
 
     /**

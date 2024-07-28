@@ -5,6 +5,7 @@ namespace App\Livewire\Inventory;
 use App\Models\Inventory;
 use App\Models\Product;
 use Livewire\WithFileUploads; // Import the trait
+use Illuminate\Support\Facades\Storage;
 
 use Livewire\Component;
 
@@ -49,9 +50,13 @@ class AddInventory extends Component
             'featured' => $this->featured ? 1 : 0,
         ];
 
+
         if ($this->photo) {
-            $productData['image_url'] = $this->photo->store('photos/product', 'public');
+            $imagePath = $this->photo->store('photos/product', 'public');
+            $productData['image_url'] = Storage::url($imagePath);
         }
+
+
 
         $product = Product::create($productData)->id;
 

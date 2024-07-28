@@ -5,6 +5,7 @@ namespace App\Livewire\Setting;
 use App\Models\ProductCategory as ModelsProductCategory;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProductCategory extends Component
@@ -22,7 +23,12 @@ class ProductCategory extends Component
         'image_url'=>'required'
         ]);
 
-       $image_path= $image_path = $this->image_url->store('productCategory/images', 'public');
+
+       if ($this->image_url) {
+        $imagePath = $this->image_url->store('productCategory/images', 'public');
+        $image_path = Storage::url($imagePath);
+    }
+
 
         ModelsProductCategory::create([
             'name'=>$this->name,
