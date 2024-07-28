@@ -75,7 +75,7 @@
 
                                                 <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
                                                     <button class="flex items-center gap-x-2">
-                                                        <span>Role</span>
+                                                        <span> Description </span>
 
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
@@ -83,9 +83,14 @@
                                                     </button>
                                                 </th>
 
-                                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 ">Email address</th>
+                                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Unit </th>
+                                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Expire Date </th>
+                                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Final Price  </th>
+                                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Vendor  Price  </th>
 
-                                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 ">Teams</th>
+
+
+                                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Feature & Visibility  </th>
 
                                                 <th scope="col" class="relative py-3.5 px-4">
                                                     <span class="sr-only">Edit</span>
@@ -93,16 +98,20 @@
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200  ">
+
+                                            @foreach ($this->products as  $product)
+
+
                                             <tr>
                                                 <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                                     <div class="inline-flex items-center gap-x-3">
                                                         <input type="checkbox" class="text-blue-500 border-gray-300 rounded ">
 
                                                         <div class="flex items-center gap-x-2">
-                                                            <img class="object-cover w-16 h-16 rounded-lg" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80" alt="">
+                                                            <img class="object-cover w-16 h-16 rounded-lg" src=" @if($product->image_url)  {{ asset($product->image_url) }}  @else  {{ asset('public/product/inventoryImage.jpeg') }} @endif  " alt="inventory image ">
                                                             <div>
-                                                                <h2 class="font-medium text-gray-800  ">Arthur Melo</h2>
-                                                                <p class="text-sm font-normal text-gray-600 ">@authurmelo</p>
+                                                                <h2 class="font-medium text-gray-800  "> {{ $product->name }}</h2>
+                                                                <p class="text-sm font-normal text-gray-600 ">{{ DB::table('product_categories')->where('id',$product->product_category_id)->value('name') }} </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -111,15 +120,24 @@
                                                     <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 ">
                                                         <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
 
-                                                        <h2 class="text-sm font-normal text-emerald-500">Active</h2>
+                                                        <h2 class="text-sm font-normal text-emerald-500"> {{ $product->status }}</h2>
                                                     </div>
                                                 </td>
-                                                <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">Design Director</td>
-                                                <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">authurmelo@example.com</td>
+
+                                                <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"> {{ $product->description }}</td>
+                                                <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"> {{ $product->unit }}</td>
+                                                <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"> {{ $product->expire_date }}</td>
+                                                <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"> {{  number_format($product->final_price ,2) }} TZS </td>
+                                                <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"> {{ number_format( $product->vendor_price ,2 ) }} TZS</td>
+
+
+
                                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                                     <div class="flex items-center gap-x-2">
-                                                        <p class="px-3 py-1 text-xs text-indigo-500 rounded-full  bg-indigo-100/60">Design</p>
-                                                        <p class="px-3 py-1 text-xs text-blue-500 rounded-full  bg-blue-100/60">Product</p>
+                                                        @if($product->visibility)
+                                                        <p class="px-3 py-1 text-xs text-indigo-500 rounded-full  bg-indigo-100/60"> Visible </p>
+                                                         @endif
+                                                        <p class="px-3 py-1 text-xs text-blue-500 rounded-full  bg-blue-100/60"> Featured </p>
                                                         <p class="px-3 py-1 text-xs text-pink-500 rounded-full  bg-pink-100/60">Marketing</p>
                                                     </div>
                                                 </td>
@@ -140,13 +158,15 @@
                                                 </td>
                                             </tr>
 
+                                            @endforeach
+
+
                                             <tr>
                                                 <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                                     <div class="inline-flex items-center gap-x-3">
                                                         <input type="checkbox" class="text-blue-500 border-gray-300 rounded s:bg-gray-900 s:ring-offset-gray-900 s:border-gray-700">
 
                                                         <div class="flex items-center gap-x-2">
-                                                            <img class="object-cover w-16 h-16 rounded-lg" src="https://images.unsplash.com/photo-1531590878845-12627191e687?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="">
                                                             <div>
                                                                 <h2 class="font-medium text-gray-800 s:text-white ">Amelia. Anderson</h2>
                                                                 <p class="text-sm font-normal text-gray-600 s:text-gray-400">@ameliaanderson</p>
@@ -163,6 +183,10 @@
                                                 </td>
                                                 <td class="px-4 py-4 text-sm text-gray-500 s:text-gray-300 whitespace-nowrap">Lead Developer</td>
                                                 <td class="px-4 py-4 text-sm text-gray-500 s:text-gray-300 whitespace-nowrap">ameliaanderson@example.com</td>
+                                                <td class="px-4 py-4 text-sm text-gray-500 s:text-gray-300 whitespace-nowrap">ameliaanderson@example.com</td>
+                                                <td class="px-4 py-4 text-sm text-gray-500 s:text-gray-300 whitespace-nowrap">ameliaanderson@example.com</td>
+                                                <td class="px-4 py-4 text-sm text-gray-500 s:text-gray-300 whitespace-nowrap">ameliaanderson@example.com</td>
+
                                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                                     <div class="flex items-center gap-x-2">
                                                         <p class="px-3 py-1 text-xs text-indigo-500 rounded-full s:bg-gray-800 bg-indigo-100/60">Design</p>

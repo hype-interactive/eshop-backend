@@ -27,6 +27,10 @@ class AddVendor extends Component
         return view('livewire.vendor.add-vendor');
     }
 
+    function closeRegisterForm()
+ {
+    $this->dispatch('closeRegisterModel');
+ }
 
     public function register(){
 

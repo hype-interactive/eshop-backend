@@ -62,6 +62,10 @@
 
         @break
 
+        @case('3')
+            <livewire:billboard.billboard />
+        @break
+
         @default
 
     @endswitch

@@ -11,6 +11,7 @@ class Inventory extends Component
 {
 
     public $istable=true;
+    public $products;
 
     public $total_product;
     public $total_category;
@@ -29,6 +30,9 @@ class Inventory extends Component
     {
         $this->total_product=Product::count();
         $this->total_category= ProductCategory::count();
+
+        $this->products=Product::get();
+
         return view('livewire.inventory.inventory');
     }
 }

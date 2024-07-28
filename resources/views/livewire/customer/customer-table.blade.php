@@ -58,7 +58,8 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200  ">
                             @foreach ($customers as $customer )
-                            <tr>
+                           
+                            <tr class="cursor-pointer hover:bg-gray-50 " wire:click="viewCustomerTransactions( {{ $customer->id }})">
                                 <td class="px-4 py-2 text-sm font-medium text-gray-700 whitespace-nowrap">
                                     <div class="inline-flex items-center gap-x-3">
                                         <input type="checkbox" class="text-blue-500 border-gray-300 rounded ">

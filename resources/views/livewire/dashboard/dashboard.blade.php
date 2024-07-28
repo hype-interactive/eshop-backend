@@ -43,7 +43,7 @@
             </div>
             <div>
                 <p class="text-2xl font-bold text-gray-800">571</p>
-                <p class="text-sm text-green-500 mt-1">▲ 5% from last month</p>
+                <p class="text-sm text-green-500 mt-1"> ▲ 5% from last month</p>
             </div>
         </div>
     </div>
@@ -58,13 +58,15 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
             <!-- Overall Sales Chart -->
             <div class="bg-white shadow-md rounded-lg p-6 col-span-2">
+
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-lg font-semibold text-gray-700">Overall Sales</h3>
                     <span class="text-yellow-500 font-semibold">Sales</span>
                 </div>
+
                 <div class="chart-container" style="position: relative; height:40vh; width:100%">
-                    <div id="sales-chart"></div>
-                </div>
+                <canvas id="lineChart" width="1000" height="400"></canvas>
+                    </div>
             </div>
             <!-- Best Selling Products Chart -->
             <div class="bg-white shadow-md rounded-lg p-6">
@@ -72,7 +74,7 @@
                     <h3 class="text-lg font-semibold text-gray-700">Best Selling Products</h3>
                 </div>
                 <div class="chart-container" style="position: relative; height:40vh; width:100%">
-                    <div id="best-selling-products-chart"></div>
+                    <canvas id="donutChart" width="400" height="200"></canvas>
                 </div>
             </div>
         </div>
@@ -141,62 +143,88 @@
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script>
-        var salesOptions = {
-            chart: {
-                type: 'line',
-                height: '100%',
-                width: '100%'
-            },
-            series: [{
-                name: 'Sales',
-                data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
-            }],
-            xaxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
-            }
-        }
-
-        var salesChart = new ApexCharts(document.querySelector("#sales-chart"), salesOptions);
-        //salesChart.render();
-
-        var bestSellingOptions = {
-            chart: {
-                type: 'pie',
-                height: '100%',
-                width: '100%'
-            },
-            series: [44, 55, 13, 43],
-            labels: ['Food & Beverages', 'Cosmetics', 'Nuts & Spices', 'Home Decor']
-        }
-
-        var bestSellingChart = new ApexCharts(document.querySelector("#best-selling-products-chart"), bestSellingOptions);
-       // bestSellingChart.render();
-    </script>
-
-
 
 </div>
 
 
 
+<script>
+    const ctxLine = document.getElementById('lineChart').getContext('2d');
+
+ const lineChart = new Chart(ctxLine, {
+    type: 'line',
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [{
+            label: 'Monthly Sales',
+            data: [-10, 25, 15, 30, 20, 35, 40, 23, 32, 12, 5, 20],
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderDash: [10, 5], // Dotted line (10px dash, 5px space)
+            tension: 0.4, // Makes the line curved (adjust as needed)
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: true,
+                position: 'bottom',
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        return `Sales: ${tooltipItem.raw}`;
+                    }
+                }
+            }
+        },
+        elements: {
+            line: {
+                borderDash: [10, 5], // Dotted line
+                tension: 0.4 // Makes the line folded (curved)
+            }
+        }
+    }
+    });
+    </script>
+
+<script>
+    const ctxDonut = document.getElementById('donutChart').getContext('2d');
+  const donutChart = new Chart(ctxDonut, {
+    type: 'doughnut',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green'],
+      datasets: [{
+        label: 'My First Dataset',
+        data: [300, 50, 100, 75],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      legend: {
+                    display: true,
+                    position: 'bottom',
+                },
+    }
+  });
 
 
-        {{-- <div class="bg-white p-6 rounded-lg shadow mb-6">
-            <h2 class="text-xl font-semibold">Overall Sales</h2>
-            <div id="sales-chart"></div>
-        </div>
-
-        <div class="bg-white p-6 rounded-lg shadow mb-6">
-            <h2 class="text-xl font-semibold">Best Selling Products</h2>
-            <div id="best-selling-products-chart"></div>
-        </div> --}}
-{{--
-    </div>
-
-</body>
-</html> --}}
-
+    </script>
 
 
 

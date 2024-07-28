@@ -9,6 +9,10 @@ class Vendor extends Component
 {
     public $users;
 
+    public $viewPage=1;
+
+    protected $listeners=['closeRegisterModel'=>'registerVendor'];
+
     public $enable_vendor_registration=false;
 
     function registerVendor(){
@@ -17,7 +21,11 @@ class Vendor extends Component
     public function render()
     {
         $this->users= User::where('role_id',2)->get();
-
         return view('livewire.vendor.vendor');
+    }
+
+    function viewVendor($id){
+        session()->put('vendor_id',$id);
+      $this->viewPage=2;
     }
 }

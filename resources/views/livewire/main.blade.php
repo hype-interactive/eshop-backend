@@ -26,6 +26,12 @@
            <livewire:setting.setting />
 
            @break
+
+           @case('7')
+           <livewire:transaction.transaction  />
+
+           @break
+
        @default
 
    @endswitch

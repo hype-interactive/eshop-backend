@@ -19,6 +19,12 @@ class OrderList extends Component
     public $total_orders;
 
     public $isOpen=false;
+    public $page_id=1;
+
+    function viewOrder($id){
+
+        $this->page_id=2;
+    }
     public function render()
     {
         $this->total_orders=Order::count();
@@ -43,4 +49,5 @@ class OrderList extends Component
 
         session()->flash('message','successfully updated');
     }
+
 }

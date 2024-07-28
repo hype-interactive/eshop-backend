@@ -11,6 +11,17 @@ class Customer extends Component
 
     public $total_ative_customers;
 
+    public $page_id=1;
+
+    protected $listeners=['customerId'=>'viewTransaction'];
+
+
+    function viewTransaction($id){
+
+    $this->page_id=$id;
+
+    }
+
     public function render()
 {
 
