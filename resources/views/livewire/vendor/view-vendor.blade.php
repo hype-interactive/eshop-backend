@@ -304,10 +304,10 @@
                                     <div class="text-xs text-red-500"> {{ $message }} </div>
                                 @enderror
                             </label>
-                            <input wire:model="email" {{ session('enableEditing') }}type="email" name="email"
+                            <input {{ session('enableEditing') }}   wire:model="email"    type="email" name="email"
                                 id="email"
                                 class="shadow-lg-sm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-2 focus:ring-blue-50 focus:border-blue-300 block w-full p-2.5"
-                                placeholder="example@company.com" required="">
+                                placeholder="example@company.com" >
                         </div>
                     </div>
 
@@ -391,10 +391,10 @@
         </div>
 
 
-        <div class="grid grid-cols-1 px-4 pt-6 mb-6 xl:grid-cols-2 xl:gap-6">
+        <div class="grid grid-cols-1 px-4 pt-6 mb-6 xl:grid-cols-1 xl:gap-6">
 
 
-            <div class="bg-white shadow-lg shadow-gray-200 rounded-2xl p-4 ">
+            {{-- <div class="bg-white shadow-lg shadow-gray-200 rounded-2xl p-4 ">
                 <h3 class="mb-4 text-xl font-bold">Card Details</h3>
                 <div action="#">
                     <div class="grid grid-cols-1 gap-6 mb-6 sm:grid-cols-2">
@@ -431,7 +431,7 @@
                         class="text-white bg-gradient-to-br from-blue-900 to-yellow-800 font-medium rounded-lg shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform text-sm px-5 py-2.5 text-center"
                         type="submit">Update</button>
                 </div>
-            </div>
+            </div> --}}
 
 
             <div class="bg-white shadow-lg shadow-gray-200 rounded-2xl p-4 ">
