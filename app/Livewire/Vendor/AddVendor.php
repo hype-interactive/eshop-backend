@@ -6,6 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str; // Add this import for password generation
+use Illuminate\Support\Facades\Storage;
 
 
 class AddVendor extends Component
@@ -37,7 +38,6 @@ class AddVendor extends Component
 
         $this->validate([
       'status'=>'required',
-        'role_id'=>'required',
         'last_name'=>'required',
         'middle_name'=>'required',
         'first_name'=>'required',
@@ -49,22 +49,26 @@ class AddVendor extends Component
         $password=Str::random(9);
 
          //image process here
+         if ($this->photo) {
+            $imagePath = $this->photo->store('photos/product', 'public');
+            $image_url= Storage::url($imagePath);
+        }
 
          $user=   User::create([
             'status' => $this->status,
-            'role_id' => $this->role_id,
+            'role_id' => 2,
             'last_name' => $this->last_name,
             'middle_name' => $this->middle_name,
             'first_name' => $this->first_name,
             'email' => $this->email,
             'password'=>$password,
             'phone_number' => $this->phone_number,
+            'image_url'=>$image_url
         ]);
 
-        if ($this->photo) {
-            $user->image_url = $this->photo->store('Vendor/photos');
-            $user->save();
-        }
+
+
+
 
         //send to user of the system
        // mail::to($this->email)->send($password);

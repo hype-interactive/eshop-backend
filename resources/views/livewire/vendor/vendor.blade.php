@@ -112,8 +112,8 @@
                                                                 class="flex-1 cursor-pointer  px-6 py-4 text-gray-500 whitespace-nowrap">
                                                                 <div class="flex items-center">
                                                                     <img class="object-cover w-12 h-12 rounded-full"
-                                                                        src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=880&amp;q=80"
-                                                                        alt="">
+                                                                        src=" @if($vendor->image_url) {{ asset($vendor->image_url) }} @else  https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=880&amp;q=80 @endif "
+                                                                        alt=" {{ $vendor->first_name }}">
                                                                     <div class="mx-3">
                                                                         <h2 class="font-medium text-gray-700">
                                                                             {{ $vendor->first_name . ' ' . $vendor->middle_name . ' ' . $vendor->last_name }}
