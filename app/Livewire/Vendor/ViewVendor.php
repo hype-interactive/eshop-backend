@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Vendor;
 
+use App\Models\Product;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -19,8 +20,11 @@ class ViewVendor extends Component
     public $phone_number;
     public $vendor_id;
     public $image_url;
+
+    public $products;
     public function render()
     {
+        $this->products= Product::where('vendor_id',session()->get('vendor_id'))->get();
         return view('livewire.vendor.view-vendor');
     }
 

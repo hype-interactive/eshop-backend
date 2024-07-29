@@ -464,12 +464,15 @@
                             </th>
                             <th scope="col"
                                 class="p-4 text-xs font-medium text-left text-gray-500 uppercase lg:p-5">
-                            Price (each )
+                             Final price /Vendor Price
                             </th>
                         </tr>
                     </thead>
 
                     <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach ($this->products as  $product)
+
+
                         <tr class="hover:bg-gray-100">
                             <td class="p-4 w-4 lg:p-5">
                                 <div class="flex items-center">
@@ -479,16 +482,20 @@
                                 </div>
                             </td>
                             <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                <div class="text-base font-semibold text-gray-900">Education Dashboard</div>
+                                <div class="text-base font-semibold text-gray-900"> {{ $product->name }} </div>
                                 <div class="text-sm font-normal text-gray-500">Html templates</div>
                             </td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">Angular
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5"> {{ DB::table('product_categories')->where('id',$product->product_category_id )->value('name') }}
                             </td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">#194556
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5"> {{ DB::table('inventories')->where('product_id',$product->id)->count() }}
                             </td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">$149</td>
+                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">{{  number_format($product->final_price)  }} TZS / {{  number_format($product->vendor_price) }} TZS  </td>
 
                         </tr>
+
+                        @endforeach
+
+
                         <tr class="hover:bg-gray-100">
                             <td class="p-4 w-4 lg:p-5">
                                 <div class="flex items-center">

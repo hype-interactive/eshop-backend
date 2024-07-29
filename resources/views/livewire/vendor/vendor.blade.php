@@ -3,6 +3,7 @@
 
     @switch($this->viewPage)
         @case(1)
+
             <div class="grid grid-cols-4 mt-6  mx-6  gap-4 mb-6">
                 <div class="p-4 bg-white rounded shadow">
                     <div class="text-sm text-gray-600">Total Vendors</div>
@@ -22,6 +23,8 @@
                 </div>
             </div>
 
+
+
             <div class="px-4 py-8 sm:px-6">
                 <div>
                     <div class="hidden mt-3 overflow-y-auto text-sm lg:items-center lg:flex whitespace-nowrap">
@@ -40,9 +43,10 @@
                 </div>
 
 
-                @if ($this->enable_vendor_registration)
+                @if ($this->enable_vendor_registration ==true)
                     <livewire:vendor.add-vendor />
                 @else
+
                     <div class="mt-6">
 
                         <div class="p-4 bg-white rounded-lg shadow-sm xl:p-8">
@@ -50,7 +54,7 @@
                                 <h2 class="text-lg font-medium text-gray-700 capitalize sm:text-xl md:text-2xl"> Vendors </h2>
 
                                 <a href="#"
-                                    class="flex items-center justify-center px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                                    class="flex items-center justify-center px-3 py-2 text-sm tracking-wide text-white inline-flex  bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mx-1" viewBox="0 0 20 20"
                                         fill="currentColor">
                                         <path fill-rule="evenodd"
@@ -58,7 +62,7 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
 
-                                    <span wire:click="registerVendor()" class="mx-1 cursor-pointer ">Add Vendor</span>
+                                    <span wire:click="registerVendor()" class="mx-1 cursor-pointer  ">Add Vendor</span>
                                 </a>
                             </div>
 
@@ -66,7 +70,9 @@
                                 <div class="-my-2 overflow-x-auto xl:-mx-8">
                                     <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                                         <div class="overflow-hidden">
+
                                             <table class="min-w-full divide-y divide-gray-200">
+
                                                 <thead>
                                                     <tr>
                                                         <th scope="col" class="px-6 py-3 text-left rtl:text-right">
@@ -157,7 +163,10 @@
                                                                         </svg>
                                                                     </button>
 
-                                                                    <button  wire:click ="deleteModal({{ $vendor->id }})"
+
+
+
+                                                                    <button   wire:click ="deleteActionModal({{ $vendor->id   }})"
                                                                         class="text-gray-500 focus:outline-none hover:text-indigo-500">
                                                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
                                                                             fill="none" viewBox="0 0 24 24"
@@ -203,15 +212,22 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
+
                     </div>
                 @endif
 
             </div>
+
+
         @break
 
         @case(2)
@@ -228,7 +244,7 @@
 
 
 
-    @if($this->deleteModal)
+    @if($this->delete_modal_boo)
     <div class="overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full flex"
         id="delete-product-modal" aria-modal="true" role="dialog">
         <div class="relative px-4 w-full max-w-md h-full md:h-auto">
@@ -236,7 +252,7 @@
             <div class="relative bg-white rounded-2xl shadow-lg">
 
                 <div class="flex justify-end p-2">
-                    <button type="button"
+                    <button wire:click="$toggle(delete_modal_boo)"  type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-2xl text-sm p-1.5 ml-auto inline-flex items-center"
                         data-modal-toggle="delete-product-modal">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -275,10 +291,10 @@
                     <h3 class="mt-5 mb-6 text-xl font-normal text-gray-500">Are you sure you want to delete this
                         Vendor ?</h3>
                     <a wire:click="delete()"
-                        class="text-white bg-gradient-to-br from-red-400 to-red-600 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform">
+                        class="text-white cursor-pointer  bg-gradient-to-br from-red-400 to-red-600 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform">
                         Yes, I'm sure
                     </a>
-                    <a  wire:click="$toggle(deleteModal)"
+                    <a  wire:click="$toggle(delete_modal_boo)"
                         class="text-gray-900 cursor-pointer bg-white hover:bg-gray-100 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center hover:scale-[1.02] transition-transform"
                         data-modal-toggle="delete-product-modal">
                         No, cancel

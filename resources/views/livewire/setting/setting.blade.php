@@ -15,11 +15,15 @@
        </span>
  </button>
 
+  @if(auth()->user()->role_id==2)
+
+  @else
  <button type="button" class="fi-tabs-item group flex items-center gap-x-2 rounded-lg px-3 py-2 text-sm font-medium outline-none transition duration-75 hover:bg-gray-50 @if($this->tab_id==2) fi-active fi-tabs-item-active bg-gray-50  @endif  focus-visible:bg-gray-50 s:hover:bg-white/5 s:focus-visible:bg-white/5" role="tab" wire:click="changeTab(2)">
         <span class="fi-tabs-item-label transition duration-75 text-gray-500 group-hover:text-gray-700 group-focus-visible:text-gray-700 s:text-gray-400 s:group-hover:text-gray-200 s:group-focus-visible:text-gray-200">
            Product  Category
         </span>
  </button>
+
 
 
  <button type="button" class="fi-tabs-item group flex items-center gap-x-2 rounded-lg px-3 py-2 text-sm font-medium outline-none transition duration-75 hover:bg-gray-50 @if($this->tab_id==3) fi-active fi-tabs-item-active bg-gray-50  @endif  focus-visible:bg-gray-50 s:hover:bg-white/5 s:focus-visible:bg-white/5" role="tab" wire:click="changeTab(3)" >
@@ -38,6 +42,8 @@
      </span>
 
  </button>
+
+ @endif
 
  <button type="button" class="fi-tabs-item group flex items-center gap-x-2 rounded-lg px-3 py-2 text-sm font-medium outline-none @if($this->tab_id) fi-active fi-tabs-item-active bg-gray-50  @endif  transition duration-75 hover:bg-gray-50 focus-visible:bg-gray-50 s:hover:bg-white/5 s:focus-visible:bg-white/5" role="tab" wire:click="changeTab(5)">
         <span class="fi-tabs-item-label transition duration-75 text-gray-500 group-hover:text-gray-700 group-focus-visible:text-gray-700 s:text-gray-400 s:group-hover:text-gray-200 s:group-focus-visible:text-gray-200">

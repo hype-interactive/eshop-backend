@@ -10,14 +10,17 @@ class Vendor extends Component
     public $users;
 
     public $viewPage=1;
-    public $deleteModal=false;
+    public $delete_modal_boo=false;
 
     protected $listeners=['closeRegisterModel'=>'registerVendor','closeEditForm'=>'closeEditForm'];
 
     public $enable_vendor_registration=false;
 
    function closeEditForm(){
+
     $this->viewPage=1;
+    $this->registerVendor();
+
    }
     function registerVendor(){
         $this->enable_vendor_registration=!$this->enable_vendor_registration;
@@ -42,9 +45,10 @@ class Vendor extends Component
 
 
 
-   public  function deleteModal($id){
+     function deleteActionModal($id){
+
         session()->put('vendor_id',$id);
-        $this->deleteModal=true;
+        $this->delete_modal_boo=true;
     }
 
     public function delete()
@@ -55,6 +59,9 @@ class Vendor extends Component
         ]);
 
         session()->flash('message', 'User successfully deleted.');
+
+        sleep(2);
+        $this->delete_modal_boo=false;
     }
 
 }

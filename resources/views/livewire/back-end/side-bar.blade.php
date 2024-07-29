@@ -18,6 +18,8 @@
         </div>
         <hr class="bg-white -mx-2 -mr-6">
         <ul class="text-center  mt-6 ml-4 ">
+
+
             <li class="relative px-4 py-2 mb-4 last:mb-0 cursor-pointer group">
                 <div wire:click="selectedMenu(1)" wire:loading.attr="disabled" class="flex items-center  justify-between text-white @if($this->menu_id==1)  text-[#F5AD42]  @endif   hover:text-[#F5AD42] truncate transition duration-150">
                     <div class="flex items-center">
@@ -37,6 +39,11 @@
                 <div class=" @if($this->menu_id==1)   -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r  from-[#F5AD42] to-transparent  opacity-100 transition-opacity duration-200    @endif absolute  -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-[#F5AD42] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             </li>
 
+            @if(auth()->user()->role_id==2)
+
+
+            @else
+
             <li class="relative px-4 py-2 mb-4 last:mb-0 cursor-pointer group">
                 <div wire:click="selectedMenu(4)" wire:loading.attr="disabled" class="flex items-center justify-between text-white  hover:text-[#F5AD42] truncate transition duration-150">
                     <div class="flex items-center">
@@ -55,11 +62,15 @@
                 </div>
                 <div class=" @if($this->menu_id==4)   -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r  from-[#F5AD42] to-transparent  opacity-100 transition-opacity duration-200    @endif absolute  -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-[#F5AD42] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             </li>
+          @endif
 
 
 
 
+           @if(auth()->user()->role_id==2)
 
+
+           @else
 
             <li class="relative px-4 py-2 mb-4 last:mb-0 cursor-pointer group">
                 <div wire:click="selectedMenu(2)" wire:loading.attr="disabled" class="flex items-center justify-between text-white  hover:text-[#F5AD42] truncate transition duration-150">
@@ -79,10 +90,13 @@
                 </div>
                 <div class=" @if($this->menu_id==2)   -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r  from-[#F5AD42] to-transparent  opacity-100 transition-opacity duration-200    @endif absolute  -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-[#F5AD42] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             </li>
+           @endif
 
 
+           @if(auth()->user()->role_id==2)
 
 
+           @else
             <li class="relative px-4 py-2 mb-4 last:mb-0 cursor-pointer group">
                 <div wire:click="selectedMenu(5)" wire:loading.attr="disabled" class="flex items-center justify-between text-white  hover:text-[#F5AD42] truncate transition duration-150">
                     <div class="flex items-center">
@@ -102,6 +116,9 @@
                 <div class=" @if($this->menu_id==5)   -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r  from-[#F5AD42] to-transparent  opacity-100 transition-opacity duration-200    @endif absolute  -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-[#F5AD42] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             </li>
 
+            @endif
+
+            @if(auth()->user()->role_id==2)
             <li class="relative px-4 py-2 mb-4 last:mb-0 cursor-pointer group">
                 <div wire:click="selectedMenu(3)" wire:loading.attr="disabled" class="flex items-center justify-between text-white  hover:text-[#F5AD42] truncate transition duration-150">
                     <div class="flex items-center">
@@ -120,6 +137,11 @@
                 </div>
                 <div class=" @if($this->menu_id==3)   -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r  from-[#F5AD42] to-transparent  opacity-100 transition-opacity duration-200    @endif absolute  -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-[#F5AD42] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             </li>
+
+            @else
+
+            @endif
+
 
 
 

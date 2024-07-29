@@ -6,8 +6,8 @@
 
                     <div class="flex p-4  items-center bg-white justify-between gap-x-3">
                         <div class="relative">
-                            <h2 class="text-lg  font-medium text-gray-800 s:text-white"> New  Products </h2>
-                                <h6>  Register product </h6>
+                            <h2 class="text-lg  font-medium text-gray-800 s:text-white"> Update  Products </h2>
+                                <h6>  Update product </h6>
                         </div>
                     </div>
                                     <div class="p-2 mx-2">
@@ -167,8 +167,8 @@
                                         Discard
                                         </button>
 
-                                        <button wire:click="save()" type="submit" class=" px-4  inline-flex  bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2 ">
-                                            New Product
+                                        <button wire:click="update()" type="submit" class="px-2 inline-flex  bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2 ">
+                                            Update Product
                                             </button>
                                 </div>
                             </div>
