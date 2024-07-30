@@ -20,13 +20,14 @@ class EditVendor extends Component
     public $email;
     public $phone_number;
     public $user_id;
+    public $status;
 
 
-    function closeEditForm(){
-        $this->dispatch('closeEditForm');
+    function closeEditVendorPage(){
+        $this->dispatch('closeEditVendorPage',1);
     }
 
-    function boot(){
+  public  function boot(){
         $user = User::findOrFail(session()->get('vendor_id'));
         $this->user_id = session()->get('vendor_id');
         $this->first_name = $user->first_name;
@@ -36,6 +37,7 @@ class EditVendor extends Component
         $this->phone_number = $user->phone_number;
         $this->role_id = $user->role_id;
         $this->image_url = $user->image_url;
+        $this->status=$user->status;
 
     }
     public function update()
@@ -74,15 +76,14 @@ class EditVendor extends Component
         }
 
         // Store the new photo and update the user's image_url
-        $user->image_url = $this->photo->store('photos');
+        $imagePath = $this->photo->store('photos/vendor', 'public');
+        $user->image_url= Storage::url($imagePath);
         $user->save();
     }
 
     // Flash a success message
     session()->flash('message', 'User successfully updated.');
 
-    // Reset input fields
-    $this->resetInputFields();
 }
 
 private function resetInputFields()

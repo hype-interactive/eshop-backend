@@ -2,8 +2,10 @@
 
 
     @switch($this->viewPage)
-        @case(1)
 
+    @case(1)
+
+    <div>
             <div class="grid grid-cols-4 mt-6  mx-6  gap-4 mb-6">
                 <div class="p-4 bg-white rounded shadow">
                     <div class="text-sm text-gray-600">Total Vendors</div>
@@ -43,9 +45,11 @@
                 </div>
 
 
-                @if ($this->enable_vendor_registration ==true)
-                    <livewire:vendor.add-vendor />
-                @else
+                {{-- @if ($this->enable_vendor_registration ==true)
+
+
+
+                    @else --}}
 
                     <div class="mt-6">
 
@@ -62,7 +66,7 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
 
-                                    <span wire:click="registerVendor()" class="mx-1 cursor-pointer  ">Add Vendor</span>
+                                    <span wire:click="changeSubPage(3)" class="mx-1 cursor-pointer  ">Add Vendor</span>
                                 </a>
                             </div>
 
@@ -223,10 +227,10 @@
                         </div>
 
                     </div>
-                @endif
+                {{-- @endif --}}
 
             </div>
-
+    </div>
 
         @break
 
@@ -235,6 +239,10 @@
         @break
 
         @case(3)
+        <livewire:vendor.add-vendor />
+        @break
+
+        @case(4)
             <livewire:vendor.edit-vendor />
         @break
 
@@ -252,7 +260,7 @@
             <div class="relative bg-white rounded-2xl shadow-lg">
 
                 <div class="flex justify-end p-2">
-                    <button wire:click="$toggle(delete_modal_boo)"  type="button"
+                    <button wire:click="$toggle('delete_modal_boo')"  type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-2xl text-sm p-1.5 ml-auto inline-flex items-center"
                         data-modal-toggle="delete-product-modal">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -294,7 +302,7 @@
                         class="text-white cursor-pointer  bg-gradient-to-br from-red-400 to-red-600 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform">
                         Yes, I'm sure
                     </a>
-                    <a  wire:click="$toggle(delete_modal_boo)"
+                    <a  wire:click="$toggle('delete_modal_boo')"
                         class="text-gray-900 cursor-pointer bg-white hover:bg-gray-100 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center hover:scale-[1.02] transition-transform"
                         data-modal-toggle="delete-product-modal">
                         No, cancel

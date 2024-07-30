@@ -57,7 +57,6 @@ class AddInventory extends Component
         }
 
 
-
         $product = Product::create($productData)->id;
 
         Inventory::create([

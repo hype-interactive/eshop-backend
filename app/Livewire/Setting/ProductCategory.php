@@ -14,18 +14,19 @@ class ProductCategory extends Component
     public $name;
     public $image_url;
     public $description;
+    public $photo;
 
     public $categories;
     function register(){
         $this->validate([
        'name'=>'required|unique:product_categories',
        'description'=> 'required',
-        'image_url'=>'required'
+        'photo'=>'required'
         ]);
 
 
-       if ($this->image_url) {
-        $imagePath = $this->image_url->store('productCategory/images', 'public');
+       if ($this->photo) {
+        $imagePath = $this->photo->store('productCategory/images', 'public');
         $image_path = Storage::url($imagePath);
     }
 
@@ -39,6 +40,8 @@ class ProductCategory extends Component
         session()->flash('message','successfully registered');
     }
 
+
+
     public function edit($id)
     {
         $category = ProductCategory::find($id);
@@ -49,6 +52,7 @@ class ProductCategory extends Component
             $this->image_url = $category->image_url;
         }
     }
+
 
     public function update()
     {

@@ -94,7 +94,7 @@
              </div>
 
              <div>
-                <label for="user name" class="block text-sm text-gray-700 capitalize"> Last  name @error('middle_name') <div class="text-xs text-red-500"> {{ $message }} </div>  @enderror</label>
+                <label for="user name" class="block text-sm text-gray-700 capitalize"> Middle  name @error('middle_name') <div class="text-xs text-red-500"> {{ $message }} </div>  @enderror</label>
                 <input  wire:model="middle_name" placeholder=" Melo" type="text" class="block w-full px-4 py-2.5 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
             </div>
 
@@ -150,7 +150,7 @@
         </button>
 
 
-        <button wire:click="register()" class="flex items-center justify-center  px-2 py-2 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md md:w-auto md:mt-0 hover:bg-indigo-400 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+        <button wire:click="register()" class="flex items-center justify-center  px-2 py-2 mt-4 bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2 ">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
             </svg>

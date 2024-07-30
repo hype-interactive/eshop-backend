@@ -32,7 +32,7 @@
 
 {{-- modal start --}}
 <div x-data="{ modelOpen: false }">
-    <button @click="modelOpen =!modelOpen" class="flex items-center justify-center px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+    <button @click="modelOpen =!modelOpen" class="flex items-center justify-center px-3 py-2 text-sm bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2 ">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mx-1.5" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
         </svg>
@@ -62,18 +62,47 @@
 
              <div class="mt-5">
 
+                <section class="bg-white-300 mt-10 flex flex-col items-center rounded-ls justify-center  mx-auto" style="width: 200px; height: 200px;">
+                    @if ($this->photo)
+                        <img class="object-fill rounded-full " src="{{ $photo->temporaryUrl() }}" style="width: 200px; height: 200px;">
+                    @else
+                        @if ($this->image_url)
+                            <img class="object-fill  rounded-full " src="{{$this->image_url}}" style="width: 200px; height: 200px;">
+                        @else
+                            <img class="object-fill   rounded-full" src="{{ asset('product/product_image.jpeg')  }}" style="width: 300px; height: 200px;" >
+                        @endif
 
-                <label class="flex flex-col items-center justify-center w-full h-32 mt-2 text-gray-500 border-2 border-dashed rounded-md cursor-pointer hover:text-gray-600 md:h-64">
+                    @endif
+                </section>
+                <label class="flex flex-col cursor-pointer hover:bg-gray-100 hover:border-gray-300 rounded-full mx-auto mt-4 pt-2" style="width: 200px;">
+                    <div class="flex flex-col items-center justify-center ">
 
-                    <svg class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"></path>
-                    </svg>
+                        <div wire:loading wire:target="photo" class="" >
 
-                    <span class="mt-4">Select Image</span>
-                    <input wire:model="image_url" type="file" class="hidden">
-                     @error('image_url') <div class="text-xs text-red-500"> {{ $message }} </div> @enderror
+                            <svg style="width: 50%; margin: 0 auto;" xmlns="http://www.w3.org/2000/svg" class="animate-spin  w-8 h-8 text-gray-400 group-hover:text-gray-600" fill="white" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
 
+                            </svg>
+                            <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">Please wait...</p>
+
+                        </div>
+
+                        <div wire:loading.remove wire:target="photo" class="flex flex-col items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-400 group-hover:text-gray-600"
+                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                            </svg>
+                            <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                Select new image</p>
+                        </div>
+                    </div>
+                    <input type="file" class="opacity-0" wire:model="photo"/>
                 </label>
+                @error('photo') <span class="error text-red-500 text-xs mx-auto">{{ $message }}</span> @enderror
+
+
+
 
              </div>
 
@@ -91,7 +120,7 @@
                     </div>
 
                     <div class="flex justify-end mt-6">
-                        <button  wire:click="register " type="button" class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                        <button  wire:click="register " type="button" class="px-3 py-2 text-sm tracking-wide text-white  bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2">
                             Register
                         </button>
                     </div>
@@ -218,6 +247,9 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                             </svg>
                             </button>
+
+
+
 
                             <button class="text-gray-500 focus:outline-none hover:text-indigo-500">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

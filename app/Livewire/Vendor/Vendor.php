@@ -12,7 +12,7 @@ class Vendor extends Component
     public $viewPage=1;
     public $delete_modal_boo=false;
 
-    protected $listeners=['closeRegisterModel'=>'registerVendor','closeEditForm'=>'closeEditForm'];
+    protected $listeners=['closeRegisterModel'=>'registerVendor','closeEditVendorPage'=>'changeSubPage'];
 
     public $enable_vendor_registration=false;
 
@@ -23,7 +23,8 @@ class Vendor extends Component
 
    }
     function registerVendor(){
-        $this->enable_vendor_registration=!$this->enable_vendor_registration;
+     $this->viewPage=1;
+
     }
     public function render()
     {
@@ -31,11 +32,19 @@ class Vendor extends Component
         return view('livewire.vendor.vendor');
     }
 
+    function changeSubPage($id){
+
+
+        $this->viewPage=$id;
+
+
+    }
+
 
     function editVendor($id){
          session()->put('vendor_id',$id);
          $this->enable_vendor_registration=false;
-        $this->viewPage=3;
+        $this->viewPage=4;
     }
 
     function viewVendor($id){

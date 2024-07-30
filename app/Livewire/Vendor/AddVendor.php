@@ -31,7 +31,7 @@ class AddVendor extends Component
 
     function closeRegisterForm()
  {
-    $this->dispatch('closeRegisterModel');
+    $this->dispatch('closeRegisterModel',1);
  }
 
     public function register(){
