@@ -23,6 +23,7 @@ class OrderList extends Component
 
     function viewOrder($id){
 
+        session()->put('order_id',$id);
         $this->page_id=2;
     }
     public function render()

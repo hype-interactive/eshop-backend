@@ -95,6 +95,9 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach ($orders as $order )
+
+
                         <tr>
                             <td class="py-4 px-6 whitespace-nowrap">
                                 <div class="flex items-center">
@@ -105,36 +108,30 @@
                                 </div>
                             </td>
                             <td class="py-4 px-6 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">John Kivuli</div>
+                                <div class="text-sm text-gray-900">{{ $order->customer }}</div>
                             </td>
                             <td class="py-4 px-6 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">Tsh 12,000</div>
+                                <div class="text-sm text-gray-900">Tsh {{ number_format($order->total,2) }}</div>
                             </td>
                             <td class="py-4 px-6 whitespace-nowrap">
                                 <div class="text-sm text-gray-900">9 pcs</div>
                             </td>
                             <td class="py-4 px-6 whitespace-nowrap">
+                                @if($order->status=="cancelled")
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                    Cancelled
+                                     {{ $order->status }}
                                 </span>
+                                @else
+
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-white-800">
+                                    {{ $order->status }}
+                               </span>
+
+                                @endif
                             </td>
                         </tr>
-                        <tr>
-                            <td class="py-4 px-6 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/50" alt="Coconut Oil">
-                                    <div class="ml-4">
-                                        <div class="text-sm font-medium text-gray-900">Coconut Oil</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="py-4 px-6 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">Aisha Juma</div>
-                            </td>
-                            <td class="py-4 px-6 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">Tsh 34,000</div>
-                            </td>
-                        </tr>
+
+                        @endforeach
 
                     </table >
             </div>

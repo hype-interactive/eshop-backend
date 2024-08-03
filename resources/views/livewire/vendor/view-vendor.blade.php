@@ -391,7 +391,7 @@
         </div>
 
 
-        <div class="grid grid-cols-1 px-4 pt-6 mb-6 xl:grid-cols-1 xl:gap-6">
+        <div class="grid grid-cols-1  pt-6 mb-6 xl:grid-cols-1 xl:gap-6">
 
 
             {{-- <div class="bg-white shadow-lg shadow-gray-200 rounded-2xl p-4 ">
@@ -434,7 +434,7 @@
             </div> --}}
 
 
-            <div class="bg-white shadow-lg shadow-gray-200 rounded-2xl p-4 ">
+            <div class="bg-white shadow-lg shadow-gray-200 rounded-2xl  p-4 ">
                 <h3 class="mb-4 text-xl font-bold"> Product List  </h3>
                 <div class="overflow-x-auto rounded-2xl">
                     <div class="inline-block min-w-full align-middle">
@@ -483,7 +483,7 @@
                             </td>
                             <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
                                 <div class="text-base font-semibold text-gray-900"> {{ $product->name }} </div>
-                                <div class="text-sm font-normal text-gray-500">Html templates</div>
+                                <div class="text-sm font-normal text-gray-500"> </div>
                             </td>
                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5"> {{ DB::table('product_categories')->where('id',$product->product_category_id )->value('name') }}
                             </td>
@@ -494,46 +494,6 @@
                         </tr>
 
                         @endforeach
-
-
-                        <tr class="hover:bg-gray-100">
-                            <td class="p-4 w-4 lg:p-5">
-                                <div class="flex items-center">
-                                    <input id="checkbox-623232" aria-describedby="checkbox-1" type="checkbox"
-                                        class="w-5 h-5 rounded border-gray-300 focus:ring-0 checked:bg-dark-900">
-                                    <label for="checkbox-623232" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                <div class="text-base font-semibold text-gray-900">Flowbite UI Kit</div>
-                                <div class="text-sm font-normal text-gray-500">Html templates</div>
-                            </td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">FlowbiteJS
-                            </td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">#623232
-                            </td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">$129</td>
-
-                        </tr>
-                        <tr class="hover:bg-gray-100">
-                            <td class="p-4 w-4 lg:p-5">
-                                <div class="flex items-center">
-                                    <input id="checkbox-194356" aria-describedby="checkbox-1" type="checkbox"
-                                        class="w-5 h-5 rounded border-gray-300 focus:ring-0 checked:bg-dark-900">
-                                    <label for="checkbox-194356" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                <div class="text-base font-semibold text-gray-900">Education Dashboard</div>
-                                <div class="text-sm font-normal text-gray-500">Html templates</div>
-                            </td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">Angular
-                            </td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">#194356
-                            </td>
-                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">$149</td>
-
-                        </tr>
 
 
                     </tbody>

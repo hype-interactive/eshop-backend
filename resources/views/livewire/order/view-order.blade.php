@@ -9,9 +9,8 @@
             <div class="mt-7 border border-gray-300 pt-9">
                 <div class="flex max-md:flex-col items-center justify-between px-3 md:px-11">
                     <div class="data">
-                        <p class="font-medium text-lg leading-8 text-black whitespace-nowrap">Order : #10234987</p>
-                        <p class="font-medium text-lg leading-8 text-black mt-3 whitespace-nowrap">Order Payment : 18th
-                            march 2021</p>
+                        <p class="font-medium text-lg leading-8 text-black whitespace-nowrap">Order : {{ $order_id }}</p>
+                        <p class="font-medium text-lg leading-8 text-black mt-3 whitespace-nowrap">Order Payment : {{ $date->format('Y-m-d') }}</p>
                     </div>
                     <div class="flex items-center gap-3 max-md:mt-5">
                         <button
@@ -23,90 +22,63 @@
 
                     </div>
                 </div>
+
                 <svg class="my-9 w-full" xmlns="http://www.w3.org/2000/svg" width="1216" height="2" viewBox="0 0 1216 2"
                     fill="none">
                     <path d="M0 1H1216" stroke="#D1D5DB" />
                 </svg>
 
+
+
+                @foreach ($products  as $product )
+
+
                 <div class="flex max-lg:flex-col items-center gap-8 lg:gap-24 px-3 md:px-11">
+
                     <div class="grid grid-cols-4 w-full">
                         <div class="col-span-4 sm:col-span-1">
-                            <img src="https://pagedone.io/asset/uploads/1705474774.png" alt="" class="max-sm:mx-auto">
+                            <img src="@if($product ->image_url ) {{ asset($product->image_url) }} @else  https://pagedone.io/asset/uploads/1705474774.png @endif " alt="" class="max-sm:mx-auto">
                         </div>
                         <div
                             class="col-span-4 sm:col-span-3 max-sm:mt-4 sm:pl-8 flex flex-col justify-center max-sm:items-center">
                             <h6 class="font-manrope font-semibold text-2xl leading-9 text-black mb-3 whitespace-nowrap">
-                                Decoration Flower
-                                port</h6>
-                            <p class="font-normal text-lg leading-8 text-gray-500 mb-8 whitespace-nowrap">By: Dust
-                                Studios</p>
+                                {{ $product->name }}</h6>
+                            <p class="font-normal text-lg leading-8 text-gray-500 mb-8 whitespace-nowrap">
+                                By: Dust Studios</p>
                             <div class="flex items-center max-sm:flex-col gap-x-10 gap-y-3">
-                                <span class="font-normal text-lg leading-8 text-gray-500 whitespace-nowrap">Size:
-                                    s</span>
-                                <span class="font-normal text-lg leading-8 text-gray-500 whitespace-nowrap">Qty:
-                                    1</span>
-                                <p class="font-semibold text-xl leading-8 text-black whitespace-nowrap">Price $80.00</p>
+                                <span class="font-normal text-lg leading-8 text-gray-500 whitespace-nowrap">
+                                    Size: none </span>
+                                <span class="font-normal text-lg leading-8 text-gray-500 whitespace-nowrap">
+                                    Qty:{{ DB::table('order_products')->where('order_id', $order_id)->value('quantity') }}  </span>
+                                <p class="font-semibold text-xl leading-8 text-black whitespace-nowrap">Price {{ number_format($product->final_price ,2) }} TZS </p>
                             </div>
                         </div>
                     </div>
+
                     <div class="flex items-center justify-around w-full  sm:pl-28 lg:pl-0">
                         <div class="flex flex-col justify-center items-start max-sm:items-center">
                             <p class="font-normal text-lg text-gray-500 leading-8 mb-2 text-left whitespace-nowrap">
                                 Status</p>
                             <p class="font-semibold text-lg leading-8 text-green-500 text-left whitespace-nowrap">
-                                Delivered</p>
+                                {{ $status }}</p>
                         </div>
                         <div class="flex flex-col justify-center items-start max-sm:items-center">
                             <p class="font-normal text-lg text-gray-500 leading-8 mb-2 text-left whitespace-nowrap">
                                 Delivery Expected by</p>
-                            <p class="font-semibold text-lg leading-8 text-black text-left whitespace-nowrap">23rd March
-                                2021</p>
+                            <p class="font-semibold text-lg leading-8 text-black text-left whitespace-nowrap">
+                                {{ $product->created_at->format('Y-M-d') }} </p>
                         </div>
                     </div>
 
                 </div>
+
 
                 <svg class="my-9 w-full" xmlns="http://www.w3.org/2000/svg" width="1216" height="2" viewBox="0 0 1216 2"
                     fill="none">
                     <path d="M0 1H1216" stroke="#D1D5DB" />
                 </svg>
+                @endforeach
 
-                <div class="flex max-lg:flex-col items-center gap-8 lg:gap-24 px-3 md:px-11">
-                    <div class="grid grid-cols-4 w-full">
-                        <div class="col-span-4 sm:col-span-1">
-                            <img src="https://pagedone.io/asset/uploads/1705474672.png" alt="" class="max-sm:mx-auto">
-                        </div>
-                        <div
-                            class="col-span-4 sm:col-span-3 max-sm:mt-4 sm:pl-8 flex flex-col justify-center max-sm:items-center">
-                            <h6 class="font-manrope font-semibold text-2xl leading-9 text-black mb-3 whitespace-nowrap">
-                                Decoration’s Item</h6>
-                            <p class="font-normal text-lg leading-8 text-gray-500 mb-8 whitespace-nowrap">By: Dust
-                                Studios</p>
-                            <div class="flex items-center max-sm:flex-col gap-x-10 gap-y-3">
-                                <span class="font-normal text-lg leading-8 text-gray-500 whitespace-nowrap">Size:
-                                    s</span>
-                                <span class="font-normal text-lg leading-8 text-gray-500 whitespace-nowrap">Qty:
-                                    1</span>
-                                <p class="font-semibold text-xl leading-8 text-black whitespace-nowrap">Price $80.00</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-around w-full sm:pl-28 lg:pl-0">
-                        <div class="flex flex-col justify-center items-start max-sm:items-center">
-                            <p class="font-normal text-lg text-gray-500 leading-8 mb-2 text-left whitespace-nowrap">
-                                Status</p>
-                            <p class="font-semibold text-lg leading-8 text-red-500 text-left whitespace-nowrap">
-                                Cancelled</p>
-                        </div>
-                        <div class="flex flex-col justify-center items-start max-sm:items-center">
-                            <p class="font-normal text-lg text-gray-500 leading-8 mb-2 text-left whitespace-nowrap">
-                                Delivery Expected by</p>
-                            <p class="font-semibold text-lg leading-8 text-black text-left whitespace-nowrap">23rd March
-                                2021</p>
-                        </div>
-                    </div>
-
-                </div>
                 <svg class="mt-9 w-full" xmlns="http://www.w3.org/2000/svg" width="1216" height="2" viewBox="0 0 1216 2"
                     fill="none">
                     <path d="M0 1H1216" stroke="#D1D5DB" />
@@ -124,10 +96,10 @@
                             </svg>
                             cancel order
                         </button>
-                        <p class="font-normal text-xl leading-8 text-gray-500 sm:pl-8">Payment Is Succesfull</p>
+                        <p class="font-normal text-xl leading-8 text-gray-500 sm:pl-8">Payment Is {{ $order->payment_status }}</p>
                     </div>
                     <p class="font-medium text-xl leading-8 text-black max-sm:py-4"> <span class="text-gray-500">Total
-                            Price: </span> &nbsp;$200.00</p>
+                            Price: </span> &nbsp; {{ number_format($total,2) }} TZS </p>
                 </div>
             </div>
         </div>

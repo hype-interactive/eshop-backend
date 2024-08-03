@@ -94,97 +94,33 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr class="hover:bg-gray-100">
-                                        <td class="p-4 w-4 lg:p-5">
-                                            1
-                                        </td>
-                                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                            <div class="text-base font-semibold text-gray-900">Education Dashboard
-                                            </div>
-                                            <div class="text-sm font-normal text-gray-500">Html templates</div>
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            20,000 /
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            #194556
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            22- july </td>
-                                        <td class="p-4 space-x-2 whitespace-nowrap lg:p-5">
-                                            Successfully
-                                        </td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-100">
-                                        <td class="p-4 w-4 lg:p-5">
-                                            1
-                                        </td>
-                                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                            <div class="text-base font-semibold text-gray-900">Education Dashboard
-                                            </div>
-                                            <div class="text-sm font-normal text-gray-500">Html templates</div>
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            20,000.00 Tzs
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            #194556
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            22- july </td>
-                                        <td class="p-4 space-x-2 whitespace-nowrap lg:p-5">
-                                            Successfully
-                                        </td>
-                                    </tr>
+                                    @foreach ($customer_order as $order )
+
 
                                     <tr class="hover:bg-gray-100">
                                         <td class="p-4 w-4 lg:p-5">
-                                            1
+                                            {{ $order->id }}
                                         </td>
                                         <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                            <div class="text-base font-semibold text-gray-900">Education Dashboard
+                                            <div class="text-base font-semibold text-gray-900"> {{ $order->order_id }}
                                             </div>
-                                            <div class="text-sm font-normal text-gray-500">Html templates</div>
                                         </td>
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            20,000.00 TZS
+                                            {{ number_format( $order->total,2) }} TZS
                                         </td>
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            #194556
+                                            {{ $order->payment_method }}
                                         </td>
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            22- july </td>
+                                            {{ $order->updated_at->format("Y-M-d") }} </td>
                                         <td class="p-4 space-x-2 whitespace-nowrap lg:p-5">
-                                            Successfully
+                                            {{ $order->payment_status }}
                                         </td>
                                     </tr>
 
-                                    <tr class="hover:bg-gray-100">
-                                        <td class="p-4 w-4 lg:p-5">
-                                            1
-                                        </td>
-                                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                            <div class="text-base font-semibold text-gray-900">Education Dashboard
-                                            </div>
-                                            <div class="text-sm font-normal text-gray-500">Html templates</div>
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            20,000.00 TZS
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            #194556
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            22- july </td>
-                                        <td class="p-4 space-x-2 whitespace-nowrap lg:p-5">
-                                            Successfully
-                                        </td>
-                                    </tr>
-
-
+                                    @endforeach
 
                             </table>
-
 
                         </div>
                     </div>
