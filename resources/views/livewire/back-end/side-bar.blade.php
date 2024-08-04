@@ -200,7 +200,10 @@
                 </div>
                 <div class=" @if($this->menu_id==6)   -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r  from-[#F5AD42] to-transparent  opacity-100 transition-opacity duration-200    @endif absolute  -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-[#F5AD42] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             </li>
+            @if(auth()->user()->role_id==2)
 
+
+            @else
 
 
             <li class="relative px-4 py-2 mb-4 last:mb-0 cursor-pointer group">
@@ -224,7 +227,7 @@
                 <div class=" @if($this->menu_id==8)   -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r  from-[#F5AD42] to-transparent  opacity-100 transition-opacity duration-200    @endif absolute  -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-[#F5AD42] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
             </li>
 
-
+  @endif
 
         </ul>
 

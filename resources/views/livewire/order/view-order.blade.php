@@ -12,6 +12,7 @@
                         <p class="font-medium text-lg leading-8 text-black whitespace-nowrap">Order : {{ $order_id }}</p>
                         <p class="font-medium text-lg leading-8 text-black mt-3 whitespace-nowrap">Order Payment : {{ $date->format('Y-m-d') }}</p>
                     </div>
+
                     <div class="flex items-center gap-3 max-md:mt-5">
                         <button
                             class="rounded-full px-7 py-3 bg-white text-gray-900 border border-gray-300 font-semibold text-sm shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-400">
@@ -44,12 +45,12 @@
                             <h6 class="font-manrope font-semibold text-2xl leading-9 text-black mb-3 whitespace-nowrap">
                                 {{ $product->name }}</h6>
                             <p class="font-normal text-lg leading-8 text-gray-500 mb-8 whitespace-nowrap">
-                                By: Dust Studios</p>
+                                By: {{ DB::table('users')->where('id',$product->customer_id)->value('first_name') }}</p>
                             <div class="flex items-center max-sm:flex-col gap-x-10 gap-y-3">
                                 <span class="font-normal text-lg leading-8 text-gray-500 whitespace-nowrap">
-                                    Size: none </span>
+                                    Unit: {{ $product->unit }} </span>
                                 <span class="font-normal text-lg leading-8 text-gray-500 whitespace-nowrap">
-                                    Qty:{{ DB::table('order_products')->where('order_id', $order_id)->value('quantity') }}  </span>
+                                    Qty:{{ DB::table('order_products')->where('product_id', $product->id)->value('quantity') }}  </span>
                                 <p class="font-semibold text-xl leading-8 text-black whitespace-nowrap">Price {{ number_format($product->final_price ,2) }} TZS </p>
                             </div>
                         </div>
@@ -86,7 +87,7 @@
 
                 <div class="px-3 md:px-11 flex items-center justify-between max-sm:flex-col-reverse">
                     <div class="flex max-sm:flex-col-reverse items-center">
-                        <button
+                        <button wire:click="cancelOrder({{ $order_id }})"
                             class="flex items-center gap-3 py-10 pr-8 sm:border-r border-gray-300 font-normal text-xl leading-8 text-gray-500 group transition-all duration-500 hover:text-indigo-600">
                             <svg width="40" height="41" viewBox="0 0 40 41" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">

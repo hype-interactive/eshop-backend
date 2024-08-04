@@ -132,8 +132,7 @@ function discard(){
     $this->dispatch('closeForm');
 }
 
-
-    public function render()
+public function render()
     {
         return view('livewire.inventory.edit-inventory');
     }
