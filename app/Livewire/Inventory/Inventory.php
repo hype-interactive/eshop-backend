@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Inventory;
 
+use App\Models\Inventory as ModelsInventory;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Livewire\Component;
@@ -23,6 +24,7 @@ class Inventory extends Component
      public $final_price;
      public $enable_edit_final_price_modal=false;
      public $product_id;
+     public $enable_edit_final_price=false;
 
     protected $listeners=['closeForm'=>'closeForm'];
 
@@ -41,6 +43,21 @@ class Inventory extends Component
 
         $this->selected_product_id=$id;
     }
+    public function editProductFinalPriceModal($id =null ){
+       $this-> enable_edit_final_price=!$this->enable_edit_final_price;
+       session()->put('product_id',$id);
+       $this->final_price= Product::where('id',$id)->value('final_price');
+
+    }
+
+    public function editFinalPrice(){
+        Product::where('id',session('product_id'))->update(['final_price'=>$this->final_price]);
+
+        $this->reset();
+        $this->enable_edit_final_price=false;
+    }
+
+
 
     public function switchView(){
         $this->istable=!$this->istable;
@@ -76,11 +93,22 @@ public function delete()
         $this->vendor_price= Product::where('id',$this->product_id)->value('vendor_price') ? : 0;
 
 
-        $vendor_id=auth()->user()->id;
+        $vendor_id='';
+        if(auth()->user()->role_id ==1){
+
+            $vendor_id=session('vendor_id');
+
+        }else{
+            $vendor_id=auth()->user()->id;
+        }
+
         $this->total_product=Product::where('vendor_id',$vendor_id)->count();
         $this->total_category= ProductCategory::count();
 
         $this->products=Product::where('vendor_id',$vendor_id)->get();
+        foreach($this->products as $var){
+          $var['quantity']=  ModelsInventory::where('product_id',$var->id)->value('quantity');
+        }
 
         return view('livewire.inventory.inventory');
     }

@@ -32,6 +32,12 @@
 
            @break
 
+           @case('8')
+           <livewire:approval.approvals  />
+
+           @break
+
+
        @default
 
    @endswitch

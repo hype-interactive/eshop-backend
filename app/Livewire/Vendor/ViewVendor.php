@@ -20,12 +20,28 @@ class ViewVendor extends Component
     public $phone_number;
     public $vendor_id;
     public $image_url;
-
+    public $section_page=1;
     public $products;
     public function render()
     {
         $this->products= Product::where('vendor_id',session()->get('vendor_id'))->get();
+
         return view('livewire.vendor.view-vendor');
+    }
+
+    function direction($id){
+        $this->section_page=$id;
+
+        if($id==1){
+            $this->dispatch('vendorList');
+        }
+    }
+
+    function viewInventory(){
+
+        $this->section_page=2;
+
+
     }
 
     public function enableEditing(){
@@ -46,6 +62,7 @@ class ViewVendor extends Component
           $this->photo= $vendor->photo;
           $this->email= $vendor->email;
           $this->phone_number= $vendor->phone_number;
+          $this->image_url= $vendor->image_url;
 
         }
 

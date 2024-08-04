@@ -5,6 +5,10 @@
         @case(1)
 
         <div class="container mx-auto p-6">
+           @if(session('vendor_id'))
+
+           @else
+
             <div class="flex justify-between mb-4">
                 <div class="text-xl font-semibold">Inventory</div>
                 <select class="border-gray-200 rounded p-2">
@@ -33,6 +37,9 @@
                     <div class="text-xl font-semibold">571</div>
                 </div>
             </div>
+
+            @endif
+
                 <section class="container mx-auto">
 
 
@@ -74,6 +81,7 @@
                                                     </button>
                                                 </th>
 
+                                                @if(auth()->user()->role_id==1)
                                                 <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
                                                     <button class="flex items-center gap-x-2">
                                                         <span> Set final price </span>
@@ -83,10 +91,13 @@
                                                         </svg>
                                                     </button>
                                                 </th>
+                                                @endif
 
                                                 <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Unit </th>
                                                 <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Expire Date </th>
+                                                @if(auth()->user()->role_id==1)
                                                 <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Final Price  </th>
+                                                @endif
                                                 <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Vendor  Price  </th>
 
 
@@ -126,7 +137,7 @@
 
                                                     </div>
                                                 </td>
-
+                                                @if(auth()->user()->role_id==1)
                                                 <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
                                                     @if($product->final_price <= 1)
                                                     <div class=" w-10 h-10 ">
@@ -140,11 +151,30 @@
                                                     </div>
 
                                                         @else
+
+
+                                                        @if(auth()->user()->role_id==1)
+
+                                                                <div class=" w-10 h-10 ">
+
+                                                                <span wire:click="editProductFinalPriceModal({{ $product->id }})" class=" w-4 h-4 cursor-pointer">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                                        </svg>
+                                                                    </span>
+
+                                                                </div>
+                                                        @endif
+
                                                          @endif
                                                     </td>
-                                                <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"> {{ $product->unit }}</td>
+
+                                                    @endif
+                                                    <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"> {{ $product->quantity }} {{ $product->unit }}</td>
                                                 <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"> {{ $product->expire_date }}</td>
+                                                @if(auth()->user()->role_id==1)
                                                 <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"> {{  number_format($product->final_price ,2) }} TZS </td>
+                                                @endif
                                                 <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"> {{ number_format( $product->vendor_price ,2 ) }} TZS</td>
 
 
@@ -162,11 +192,13 @@
                                                 </td>
                                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                                     <div class="flex items-center gap-x-6">
+                                                        @if(auth()->user()->role_id==1)
                                                         <button wire:click="editActionModal({{ $product->id }})"  class="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                                             </svg>
                                                         </button>
+                                                        @endif  
 
                                                         <button wire:click="enableEditPage({{ $product->id }})"  >
 
@@ -351,6 +383,85 @@
         </div>
     </div>
 </div>
+@endif
+
+
+@if($this->enable_edit_final_price)
+
+<div class="overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full flex"
+    id="delete-product-modal" aria-modal="true" role="dialog">
+    <div class="relative px-4 w-full max-w-md h-full md:h-auto">
+
+        <div class="relative bg-white rounded-2xl shadow-lg">
+
+            <div class="flex justify-end p-2">
+                <button wire:click="editFinalPriceModal(2)" type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-2xl text-sm p-1.5 ml-auto inline-flex items-center"
+                    data-modal-toggle="delete-product-modal">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="p-6 pt-0 text-center">
+                <svg class="mx-auto w-20 h-20 text-red-500" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+
+                @if (session()->has('message'))
+                    <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
+                        <div class="flex">
+                            <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                            <div>
+                                <p class="font-bold">The process is completed</p>
+                                <p class="text-sm">{{ session('message') }} </p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                <h3 class="mt-5 mb-6 text-xl font-normal text-gray-500">Update Final Price</h3>
+
+                <div>
+                    <div class="mb-4">
+                        <label for="vendor_price" class="block text-sm font-medium text-gray-700">Vendor Price</label>
+                        <div class=""> {{ number_format($this->vendor_price ,2) }} TZS  </div>
+
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="final_price" class="block text-sm font-medium text-gray-700">Final Price</label>
+                        <input wire:model="final_price" type="number" id="final_price" name="final_price" wire:model="final_price"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-gray-900 sm:text-sm"
+                            min="{{ $vendor_price }}" step="0.01">
+                        @error('final_price') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                    </div>
+
+                    <button type="button" wire:click="$toggle('enable_edit_final_price')"
+                    class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 font-medium rounded-lg text-base px-3 py-2.5 text-center hover:scale-[1.02] transition-transform">
+                    Cancel
+                </button>
+
+                    <button  wire:click="editFinalPrice()" type="submit"
+                        class="tw-full inline-flex  bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2">
+                        Update
+                    </button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @endif
 
 

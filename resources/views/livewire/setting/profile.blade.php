@@ -29,7 +29,7 @@
 
 <div class="-mt-20">
 <div class="flex flex-col items-center">
-    <img class="w-24 h-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=880&amp;q=80" alt="">
+    <img class="w-24 h-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src=" @if(auth()->user()->image_url)  {{ asset(auth()->user()->image_url) }}  @else {{ asset('profile/customer-profile.png') }}" @endif  alt="">
 
     <div class="mt-4 text-center">
         <h1 class="text-2xl font-bold text-gray-700 truncate">

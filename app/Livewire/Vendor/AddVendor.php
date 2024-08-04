@@ -43,6 +43,7 @@ class AddVendor extends Component
         'first_name'=>'required',
         'email'=>'required|unique:users',
          'phone_number'=>'required',
+         'photo'=>'required',
         ]);
 
         //generate passowrd
@@ -75,7 +76,9 @@ class AddVendor extends Component
 
 
         session()->flash('message','has been registered successfully ');
+        $this->reset();
 
+        $this->closeRegisterForm();
     }
 
 

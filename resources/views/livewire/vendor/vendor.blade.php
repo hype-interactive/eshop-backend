@@ -9,41 +9,25 @@
             <div class="grid grid-cols-4 mt-6  mx-6  gap-4 mb-6">
                 <div class="p-4 bg-white rounded shadow">
                     <div class="text-sm text-gray-600">Total Vendors</div>
-                    <div class="text-xl font-semibold">1</div>
+                    <div class="text-xl font-semibold"> {{ $this->total_vendor }} </div>
                 </div>
                 <div class="p-4 bg-white rounded shadow">
                     <div class="text-sm text-gray-600"> Active Vendors</div>
-                    <div class="text-xl font-semibold">1</div>
+                    <div class="text-xl font-semibold">{{ $this->active_vendor }}</div>
                 </div>
                 <div class="p-4 bg-white rounded shadow">
                     <div class="text-sm text-gray-600"> Total Products </div>
-                    <div class="text-xl font-semibold"> 75 </div>
+                    <div class="text-xl font-semibold"> {{ $this->total_product }} </div>
                 </div>
                 <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600"> Total out Products</div>
-                    <div class="text-xl font-semibold">571</div>
+                    <div class="text-sm text-gray-600">  Active/onsale Products</div>
+                    <div class="text-xl font-semibold">{{ $this->total_onsale_product }}</div>
                 </div>
             </div>
 
 
 
             <div class="px-4 py-8 sm:px-6">
-                <div>
-                    <div class="hidden mt-3 overflow-y-auto text-sm lg:items-center lg:flex whitespace-nowrap">
-                        <a href="#" class="text-gray-600 hover:underline">
-                            vendor
-                        </a>
-
-                        <span class="mx-1 text-gray-500">
-                            /
-                        </span>
-
-                        <a href="#" class="text-indigo-600 hover:underline">
-                            vendor-list
-                        </a>
-                    </div>
-                </div>
-
 
                 {{-- @if ($this->enable_vendor_registration ==true)
 

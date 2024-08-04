@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Inventory;
 
+use App\Models\Approval;
 use App\Models\Inventory;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
@@ -77,21 +78,50 @@ public function update()
         if ($this->photo) {
             // Delete old image file if it exists
             if ($product->image_url) {
-                Storage::disk('public')->delete(str_replace('/storage/', '', $product->image_url));
+               //  Storage::disk('public')->delete(str_replace('/storage/', '', $product->image_url));
             }
             $imagePath = $this->photo->store('photos/product', 'public');
             $productData['image_url'] = Storage::url($imagePath);
         }
 
-        $product->update($productData);
+         $edit_package=json_encode($productData);
+        //send for approval
+        Approval::create([
+           'table_name'=>'products',
+            'row_id'=> $this->editProductId,
+            'edit_package'=>$edit_package,
+            'description'=>auth()->user()->first_name.' '.auth()->user()->last_name.' has edited product information please privew for uprovals',
+            'status'=>'pending',
+            'initiator'=>auth()->user()->id,
+            'action_name'=>'edit Product',
+
+        ]);
+
+       // $product->update($productData);
 
         // Update the associated inventory
-        Inventory::updateOrCreate(
-            ['product_id' => $this->editProductId],
-            ['quantity' => $this->quantity]
-        );
 
-        session()->flash('message', 'Product successfully updated.');
+      $edit_package_2=[
+            'product_id' => $this->editProductId,
+            'quantity' => $this->quantity
+      ];
+  $edit_package_2=json_encode($edit_package_2);
+       $row_id = Inventory::where('product_id',$this->editProductId)->value('id');
+
+        Approval::create([
+            'table_name'=>'inventories',
+             'row_id'=> $row_id,
+             'edit_package'=>$edit_package_2,
+             'description'=>auth()->user()->first_name.' '.auth()->user()->last_name.' has edited inventory information please privew for uprovals',
+             'status'=>'pending',
+             'initiator'=>auth()->user()->id,
+             'action_name'=>'edit Inventory ',
+
+         ]);
+
+
+        $this->discard();
+        session()->flash('message', 'action is waiting for approvals');
     } catch (\Exception $e) {
         session()->flash('message_fail', 'Failed to update product. ' . $e->getMessage());
     }

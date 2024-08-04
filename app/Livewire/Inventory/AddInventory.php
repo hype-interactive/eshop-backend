@@ -37,8 +37,17 @@ class AddInventory extends Component
     {
         $this->validate();
 
+        if(auth()->user()->role_id== 1){
+            $vendor_id = session('vendor_id');
+        }
+        else{
+
+         $vendor_id=auth()->user()->id;
+        }
+
 
         try{
+
         $productData = [
             'name' => $this->name,
             'unit' => $this->unit,
@@ -46,7 +55,7 @@ class AddInventory extends Component
             'product_category_id' => $this->product_category_id,
             'expire_date' => $this->expire_date,
             'visibility' => $this->visibility ? 1 : 0,
-             'vendor_id'=>auth()->user()->id,
+             'vendor_id'=>$vendor_id,
             'featured' => $this->featured ? 1 : 0,
         ];
 
@@ -64,6 +73,7 @@ class AddInventory extends Component
             'product_id' => $product,
         ]);
 
+        $this->discard();
 
         session()->flash('message', 'Product successfully registered.');
     }

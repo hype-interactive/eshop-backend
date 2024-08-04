@@ -7,13 +7,13 @@
         <div class="container mx-auto p-6">
             <div class="flex justify-between mb-4">
                 <div class="text-xl font-semibold"> Orders </div>
-                <select class="border-gray-200 rounded p-2">
+                {{-- <select class="border-gray-200 rounded p-2">
                     <option>Jan - Jul, 2024</option>
                     <option>Jan - Jul, 2024</option>
                     <option>Jan - Jul, 2024</option>
                     <option>Jan - Jul, 2024</option>
 
-                </select>
+                </select> --}}
             </div>
             <div class="grid grid-cols-4 gap-4 mb-6">
                 <div class="p-4 bg-white rounded shadow">
@@ -29,8 +29,8 @@
                     <div class="text-xl font-semibold">{{ $this->product_out_of_stocks }}</div>
                 </div>
                 <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600">Low Stock Products</div>
-                    <div class="text-xl font-semibold"> {{ $this->product_low_stock }}</div>
+                    <div class="text-sm text-gray-600">In Stock Products</div>
+                    <div class="text-xl font-semibold"> {{ $this->product_onstock_stock }}</div>
                 </div>
             </div>
 

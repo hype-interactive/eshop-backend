@@ -15,7 +15,7 @@ class OrderList extends Component
     public  $product_out_of_stocks;
     public $product_low_stock;
     public $selected_id;
-
+    public $product_onstock_stock;
     public $total_orders;
 
     public $isOpen=false;
@@ -29,9 +29,9 @@ class OrderList extends Component
     public function render()
     {
         $this->total_orders=Order::count();
-        $this->cancelled_order=Order::count();
-        $this->product_out_of_stocks= Product::count();
-         $this->product_low_stock= Product::count();
+        $this->cancelled_order=Order::where('status','cancelled')->count();
+        $this->product_out_of_stocks= Product::where('status','out_of_stock')->count();
+         $this->product_onstock_stock= Product::where('status','in_stock')->count();
 
         $this->orders= Order::get();
         $this->order_products= OrderProduct::get();

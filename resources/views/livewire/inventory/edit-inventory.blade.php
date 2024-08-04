@@ -162,7 +162,7 @@
                                     </div>
 
                                 </div>
-                                <div class=" flex w-full px-8 bg-white  -mt-8 mb-3 justify-end shadow-b  item-end ">
+                                <div class=" flex w-full px-8 bg-white   mx-auto  -mt-4  justify-between    mb-3  shadow-b  item-end ">
                                     <button wire:click="discard()" type="submit" class="inline-flex items-end justify-end  px-4 py-2 bg-gray-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-800 focus:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition ease-in-out duration-150 ms-4">
                                         Discard
                                         </button>

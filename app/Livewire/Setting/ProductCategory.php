@@ -16,7 +16,15 @@ class ProductCategory extends Component
     public $description;
     public $photo;
 
+    public $edit_modal_boolean=false;
+
     public $categories;
+
+    function editModalAction($id){
+
+        $this->edit_modal_boolean= !$this->edit_modal_boolean;
+        session()->put('product_category_id',$id);
+    }
     function register(){
         $this->validate([
        'name'=>'required|unique:product_categories',
@@ -24,12 +32,10 @@ class ProductCategory extends Component
         'photo'=>'required'
         ]);
 
-
        if ($this->photo) {
         $imagePath = $this->photo->store('productCategory/images', 'public');
         $image_path = Storage::url($imagePath);
     }
-
 
         ModelsProductCategory::create([
             'name'=>$this->name,
@@ -38,6 +44,8 @@ class ProductCategory extends Component
         ]);
 
         session()->flash('message','successfully registered');
+        $this->reset();
+
     }
 
 
@@ -45,7 +53,6 @@ class ProductCategory extends Component
     public function edit($id)
     {
         $category = ProductCategory::find($id);
-
         if ($category) {
             $this->name = $category->name;
             $this->description = $category->description;
