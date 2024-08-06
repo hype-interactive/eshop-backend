@@ -17,6 +17,7 @@ class EditInventory extends Component
     use WithFileUploads;
     public $photo;
     public $image_url;
+    public $final_price;
     public $name;
     public $unit;
     public $vendor_price;
@@ -26,15 +27,6 @@ class EditInventory extends Component
     public $visibility;
     public $featured;
 
-    protected $rules = [
-        'name' => 'required|string|max:255',
-        'unit' => 'required|string|max:255',
-        'vendor_price' => 'required|numeric|min:0',
-        'product_category_id' => 'required',
-        'expire_date' => 'required|date',
-        'quantity' => 'required|numeric|min:0',
-       // 'photo' => 'required|image|max:1024', // max 1MB
-    ];
 
 
 public function boot()
@@ -46,7 +38,7 @@ public function boot()
     $this->vendor_price = $product->vendor_price;
     $this->product_category_id = $product->product_category_id;
     $this->expire_date = $product->expire_date;
-
+    $this->final_price=$product->final_price;
     $this->visibility = $product->visibility;
     $this->featured = $product->featured;
     $this->image_url = $product->image_url;
@@ -60,7 +52,17 @@ public function boot()
 
 public function update()
 {
-    $this->validate();
+    $this->validate([
+        'name' => 'required|string|max:255',
+        'unit' => 'required|string|max:255',
+        'vendor_price' =>'required|numeric|max:' . $this->final_price,
+        'product_category_id' => 'required',
+        'expire_date' => 'required|date',
+        'quantity' => 'required|numeric|min:0',
+       // 'photo' => 'required|image|max:1024', // max 1MB
+    ]);
+
+    DB::beginTransaction();
 
     try {
         $product = Product::findOrFail($this->editProductId);
@@ -119,10 +121,11 @@ public function update()
 
          ]);
 
-
+      DB::commit();
         $this->discard();
         session()->flash('message', 'action is waiting for approvals');
     } catch (\Exception $e) {
+        DB::rollBack();
         session()->flash('message_fail', 'Failed to update product. ' . $e->getMessage());
     }
 }

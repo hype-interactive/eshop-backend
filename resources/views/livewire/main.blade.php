@@ -33,7 +33,8 @@
            @break
 
            @case('8')
-           <livewire:approval.approvals  />
+
+           <livewire:approval.approval-list  />
 
            @break
 

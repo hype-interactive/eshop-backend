@@ -46,9 +46,6 @@
 
 
     <div class="flex w-full  p-3 ">
-
-
-
         <div class="w-3/4  ">
 
             <div class="flex flex-col my-6 mx-4 bg-white rounded-2xl shadow-xl shadow-gray-200 p-6">

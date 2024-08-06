@@ -13,7 +13,7 @@ class Approvals extends Component
     public $approval_id;
     public $approval_modal_bool=false;
 
-     function approvalModalAction($id){
+     public function approvalModalAction($id){
         $this->approval_modal_bool=!$this->approval_modal_bool;
         $this->approval_id=$id;
     }
@@ -27,8 +27,6 @@ class Approvals extends Component
 
 public function update()
 {
-
-
     try {
 
         $approvals= Approval::find($this->approval_id);
@@ -45,16 +43,5 @@ public function update()
     }
 }
 
-
-function decline($id){
-
-    Approval::where('id',$id)->update([
-   'status'=>'declined',
-    'approved_by'=>auth()->user()->id
-    ]);
-
-    session()->flash('message', 'processes is completed ');
-
-}
 
 }
