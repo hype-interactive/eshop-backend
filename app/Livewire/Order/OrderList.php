@@ -21,6 +21,11 @@ class OrderList extends Component
     public $isOpen=false;
     public $page_id=1;
 
+    protected $listeners=['closeOrderView'=>'closeOrderView'];
+
+    function closeOrderView(){
+        $this->page_id=1;
+    }
     function viewOrder($id){
 
         session()->put('order_id',$id);

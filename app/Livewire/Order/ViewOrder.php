@@ -28,7 +28,27 @@ class ViewOrder extends Component
         ]);
     }
 
-    function cancelOrder($order_id){
-        Order::where('order_id',$order_id)->update([ 'status', 'cancelled']);
+   public  function cancelOrder($order_id){
+
+        Order::where('order_id',$order_id)->update([ 'status'=>'cancelled']);
+
+        $this->dispatch('closeOrderView');
     }
+
+    function close(){
+        $this->dispatch('closeOrderView');
+
+    }
+
+
+
+   // for transaction
+
+    function transaction (){
+
+
+    }
+
+
+
 }

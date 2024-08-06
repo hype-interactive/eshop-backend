@@ -1,6 +1,44 @@
 <div>
 
 
+    @if($this->priview)
+
+    <!-- Modal Container -->
+    <div class="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32 image-height transparent-0">
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
+
+        <!-- Background Image -->
+        <img src="{{ asset( $this->image ) }}" alt="Billboard Background"
+            class="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center">
+
+        <!-- Content -->
+        <div class="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+            <!-- Cancel Button -->
+            <button wire:click="$toggle('priview')" type="button" class="absolute top-4 right-4 bg-yellow-900 text-white  py-2 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600">
+                Cancel
+            </button>
+
+            <div class="mx-auto max-w-2xl lg:mx-0">
+                <h4 class="font-bold uppercase text-yellow-400">UP TO 30% OFF TODAY</h4>
+                <h2 class="text-4xl font-bold tracking-tight text-white sm:text-6xl"> {{  $this->title  }}</h2>
+                <p class="mt-6 text-lg leading-8 text-gray-300">
+              {{   $this->content  }}
+                </p>
+            </div>
+            <div class="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
+                <div class="grid grid-cols-1 gap-x-8 gap-y-6 text-base font-semibold leading-7 text-white sm:grid-cols-2 md:flex lg:gap-x-10">
+                    <button type="button"
+                        class="text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-400 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                        Shop Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endif
+
     <div class="flex flex-col">
         <div class="overflow-x-auto">
             <div class="inline-block min-w-full align-middle">
@@ -8,7 +46,7 @@
                     <div class="flex justify-start items-start px-4 mb-6 space-x-6">
                         <div class="min-w-20">
                             <div class="py-4 text-base font-semibold text-gray-900"> Active </div>
-                            <div id="kanban-list-1" class="p-4 mb-6 space-y-6 bg-gray-200 rounded-xl min-w-20">
+                            <div id="kanban-list" class="p-4 mb-6 space-y-6 bg-gray-200 rounded-xl min-w-20">
 
 
                                 @foreach ( $this->billboards as $billboard)
@@ -58,7 +96,7 @@
 
 
                                         </div>
-                                        <div
+                                        <div wire:click="priviewBillboard({{$billboard->id }})"
                                             class="flex justify-center items-center px-3 text-xs font-bold uppercase text-white bg-gradient-to-br from-blue-900 to-yellow-800 rounded-2xl">
                                             <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +104,7 @@
                                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                                                     clip-rule="evenodd"></path>
                                             </svg>
-                                            {{ $billboard->created_at->diffForHumans() }}
+                                            {{ $billboard->created_at->diffForHumans() }}  Preview
                                         </div>
                                     </div>
                                 </div>

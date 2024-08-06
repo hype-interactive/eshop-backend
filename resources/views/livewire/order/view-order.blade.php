@@ -14,9 +14,9 @@
                     </div>
 
                     <div class="flex items-center gap-3 max-md:mt-5">
-                        <button
+                        <button wire:click="close()"
                             class="rounded-full px-7 py-3 bg-white text-gray-900 border border-gray-300 font-semibold text-sm shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-400">
-                            Pending   </button>
+                            Close    </button>
                         <button
                             class="rounded-full px-7 py-3 bg-indigo-600 shadow-sm shadow-transparent text-white font-semibold text-sm transition-all duration-500 hover:shadow-indigo-400 hover:bg-indigo-700">
                            Confirm   </button>
@@ -87,7 +87,7 @@
 
                 <div class="px-3 md:px-11 flex items-center justify-between max-sm:flex-col-reverse">
                     <div class="flex max-sm:flex-col-reverse items-center">
-                        <button wire:click="cancelOrder({{ $order_id }})"
+                        <button wire:click="cancelOrder('{{ $order_id }}')"
                             class="flex items-center gap-3 py-10 pr-8 sm:border-r border-gray-300 font-normal text-xl leading-8 text-gray-500 group transition-all duration-500 hover:text-indigo-600">
                             <svg width="40" height="41" viewBox="0 0 40 41" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">

@@ -17,10 +17,12 @@ class Billboard extends Component
     public $description;
     public $image_url;
     public $visibility;
-
+    public $priview=false;
     public $image;
     public $billboards;
-
+    public $title;
+    public $content;
+    public $subtitle;
     public $enableRegisterModalboolean=false;
 
 
@@ -37,6 +39,16 @@ class Billboard extends Component
         }
         $item->delete();
         $this->items = ModelsBillboard::all();
+    }
+
+    function priviewBillboard($id){
+
+        $this->priview=!$this->priview;
+        $item = ModelsBillboard::find($id);
+        $this->title = $item->name;
+        $this->content = $item->description;
+        $this->image = $item->image_url;
+        $this->subtitle=$item->name;
     }
 
     public function update()

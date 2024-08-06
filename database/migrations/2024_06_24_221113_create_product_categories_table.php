@@ -16,7 +16,10 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->string('image_url')->nullable();
+            $table->enum('status',['active','pending'])->default('active');
             $table->timestamps();
+
+
         });
     }
 

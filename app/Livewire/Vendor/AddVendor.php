@@ -2,11 +2,15 @@
 
 namespace App\Livewire\Vendor;
 
+use App\Mail\GetPassword;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str; // Add this import for password generation
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 
 class AddVendor extends Component
@@ -46,8 +50,15 @@ class AddVendor extends Component
          'photo'=>'required',
         ]);
 
+        DB::beginTransaction();
+
+        try{
+
+
         //generate passowrd
-        $password=Str::random(9);
+
+        $password = Str::random(8);
+        $hashedPassword = Hash::make($password);
 
          //image process here
          if ($this->photo) {
@@ -62,23 +73,32 @@ class AddVendor extends Component
             'middle_name' => $this->middle_name,
             'first_name' => $this->first_name,
             'email' => $this->email,
-            'password'=>$password,
+            'password'=>$hashedPassword,
             'phone_number' => $this->phone_number,
             'image_url'=>$image_url
         ]);
 
+        $user['password2']=$password;
 
+        Mail::to($this->email)->send( new  GetPassword($user));
 
 
 
         //send to user of the system
        // mail::to($this->email)->send($password);
 
-
+    DB::commit();
         session()->flash('message','has been registered successfully ');
         $this->reset();
 
         $this->closeRegisterForm();
+    }
+    catch(\Exception $e){
+
+        DB::rollBack();
+        session()->flash('message_fail','process fail '.$e->getMessage());
+
+    }
     }
 
 

@@ -19,11 +19,12 @@ class ProductCategory extends Component
     public $edit_modal_boolean=false;
 
     public $categories;
+    public $delete_modal_boo=false;
 
     function editModalAction($id){
-
         $this->edit_modal_boolean= !$this->edit_modal_boolean;
         session()->put('product_category_id',$id);
+        $this->edit($id);
     }
     function register(){
         $this->validate([
@@ -52,7 +53,7 @@ class ProductCategory extends Component
 
     public function edit($id)
     {
-        $category = ProductCategory::find($id);
+        $category = ModelsProductCategory::find($id);
         if ($category) {
             $this->name = $category->name;
             $this->description = $category->description;
@@ -66,18 +67,25 @@ class ProductCategory extends Component
         $this->validate([
             'name'=>'required',
             'description'=> 'required',
-             'image_url'=>'required'
+           //  'photo'=>'required'
              ]);
 
-        $category = ProductCategory::find($this->categoryId);
+             $id=session('product_category_id');
+        $category = ModelsProductCategory::find($id);
 
         if ($category) {
-            $image_path = $this->image_url ? $this->image_url->store('images', 'public') : $category->image_url;
+
+            if ($this->photo) {
+                $imagePath = $this->photo->store('productCategory/images', 'public');
+                $this->image_url= Storage::url($imagePath);
+            }
+
+        //    $image_path = $this->image_url ? $this->image_url->store('images', 'public') : $category->image_url;
 
             $category->update([
                 'name' => $this->name,
                 'description' => $this->description,
-                'image_url' => $image_path,
+                'image_url' => $this->image_url,
             ]);
 
             session()->flash('message', 'Category successfully updated');
@@ -88,14 +96,20 @@ class ProductCategory extends Component
     }
 
     // Delete operation
-    public function delete($id)
+
+    function deleteModal($id){
+        session()->put('delete_id',$id);
+        $this->delete_modal_boo=!$this->delete_modal_boo;
+    }
+    public function delete()
     {
-        $category = ProductCategory::find($id);
+        $id=session('delete_id');
+        $category = ModelsProductCategory::find($id);
 
         if ($category) {
 
             // add status
-            $category->delete();
+            $category->update(['status'=>'pending']);
             session()->flash('message', 'Category successfully deleted');
         }
 

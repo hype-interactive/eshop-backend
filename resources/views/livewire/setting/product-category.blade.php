@@ -1,5 +1,160 @@
 <div>
 
+    @if($this->delete_modal_boo)
+    <div class="overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full flex"
+        id="delete-product-modal" aria-modal="true" role="dialog">
+        <div class="relative px-4 w-full max-w-md h-full md:h-auto">
+
+            <div class="relative bg-white rounded-2xl shadow-lg">
+
+                <div class="flex justify-end p-2">
+                    <button wire:click="editActionModal(2)"  type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-2xl text-sm p-1.5 ml-auto inline-flex items-center"
+                        data-modal-toggle="delete-product-modal">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="p-6 pt-0 text-center">
+                    <svg class="mx-auto w-20 h-20 text-red-500" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+
+
+                    @if (session()->has('message'))
+
+                    {{-- @if (session('alert-class') == 'alert-success') --}}
+                        <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
+                            <div class="flex">
+                                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                                <div>
+                                    <p class="font-bold">The process is completed</p>
+                                    <p class="text-sm">{{ session('message') }} </p>
+                                </div>
+                            </div>
+                        </div>
+                    {{-- @endif --}}
+                @endif
+
+
+                    <h3 class="mt-5 mb-6 text-xl font-normal text-gray-500">Are you sure you want to disable this
+                       Product Category  ?
+
+                    </h3>
+                    <div class="text-xs text-red-500"> you will only change the the status and customer will not be able to see this product   </div>
+                    <a wire:click="delete()"
+                        class="text-white cursor-pointer  bg-gradient-to-br from-red-400 to-red-600 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform">
+                        Yes, I'm sure
+                    </a>
+                    <a  wire:click="$toggle('delete_modal_boo')"
+                        class="text-gray-900 cursor-pointer bg-white hover:bg-gray-100 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center hover:scale-[1.02] transition-transform"
+                        data-modal-toggle="delete-product-modal">
+                        No, cancel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ @endif
+
+
+    @if($this->edit_modal_boolean)
+    <div class="max-w-lg mx-auto p-4 bg-white rounded-lg shadow-lg">
+        <!-- Card Header -->
+        <div class="flex items-center justify-between">
+            <h1 class="text-xl font-medium text-gray-800">Edit Category</h1>
+            <button wire:click="$toggle('edit_modal_boolean')" type="button" class="text-gray-400 hover:bg-gray-200 hover:text-gray-900 rounded-full p-1.5">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Success Message -->
+        @if (session()->has('message'))
+            <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mt-4" role="alert">
+                <div class="flex">
+                    <div class="py-1">
+                        <svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-bold">The process is completed</p>
+                        <p class="text-sm">{{ session('message') }}</p>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        <!-- Card Content -->
+        <div class="mt-6">
+            <p class="text-sm text-gray-500">Add a new product category to your inventory to organize and manage your products</p>
+
+            <section class="bg-gray-100 mt-6 flex flex-col items-center rounded-lg p-4 mx-auto" style="width: 200px; height: 200px;">
+                @if ($this->photo)
+                    <img class="object-cover rounded-full" src="{{ $photo->temporaryUrl() }}" style="width: 200px; height: 200px;">
+                @else
+                    @if ($this->image_url)
+                        <img class="object-cover rounded-full" src="{{ $this->image_url }}" style="width: 200px; height: 200px;">
+                    @else
+                        <img class="object-cover rounded-full" src="{{ asset('product/product_image.jpeg') }}" style="width: 200px; height: 200px;">
+                    @endif
+                @endif
+            </section>
+
+            <label class="flex flex-col cursor-pointer hover:bg-gray-100 hover:border-gray-300 rounded-full mx-auto mt-4 pt-2" style="width: 200px;">
+                <div class="flex flex-col items-center justify-center">
+                    <div wire:loading wire:target="photo" class="">
+                        <svg style="width: 50%; margin: 0 auto;" xmlns="http://www.w3.org/2000/svg" class="animate-spin w-8 h-8 text-gray-400" fill="white" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <p class="pt-1 text-sm tracking-wider text-gray-400">Please wait...</p>
+                    </div>
+                    <div wire:loading.remove wire:target="photo" class="flex flex-col items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                        <p class="pt-1 text-sm tracking-wider text-gray-400">Select new image</p>
+                    </div>
+                </div>
+                <input type="file" class="opacity-0" wire:model="photo"/>
+            </label>
+            @error('photo') <span class="error text-red-500 text-xs mx-auto">{{ $message }}</span> @enderror
+
+            <div class="mt-4">
+                <label for="name" class="block text-sm text-gray-700">Category Name</label>
+                <input wire:model="name" placeholder="Nyanya" type="text" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                @error('name') <div class="text-red-500 text-xs">{{ $message }}</div> @enderror
+            </div>
+
+            <div class="mt-4">
+                <label for="description" class="block text-sm text-gray-700">Category Description</label>
+                <textarea wire:model="description" class="block w-full h-32 px-3 py-2 mt-2 text-gray-600 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40"></textarea>
+                @error('description') <div class="text-red-500 text-xs">{{ $message }}</div> @enderror
+            </div>
+
+            <div class="flex justify-end mt-6">
+                <button wire:click="update" type="button" class="px-4 py-2 text-sm font-medium text-white bg-gradient-to-br from-blue-800 to-yellow-500 rounded-md shadow-sm hover:scale-105 transition-transform">
+                    Update
+                </button>
+            </div>
+        </div>
+    </div>
+    @else
+
+
+
+
+
     <div class="px-4 py-4 sm:px-6">
         <div>
             <h1 class="text-2xl font-medium text-gray-700 sm:text-3xl">    Category
@@ -193,7 +348,7 @@
                         </svg>
                         </button>
 
-                        <span class="mx-3"> Updated Date </span>
+                        <span class="mx-3"> status </span>
                     </div>
                     </th>
 
@@ -231,13 +386,13 @@
                     </td>
 
                     <td class="px-6 py-4 text-gray-500 whitespace-nowrap">
-                       {{ $category->updated_at->format('Y-m-d') }}
+                       {{ $category->status}}
                     </td>
 
 
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center">
-                            <button class="mx-4 text-gray-500  focus:outline-none hover:text-indigo-500" wire:click = "editModalAction(2)">
+                            <button class="mx-4 text-gray-500  focus:outline-none hover:text-indigo-500" wire:click = "editModalAction({{ $category->id }})">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                             </svg>
@@ -247,7 +402,7 @@
 
 
                             <button class="text-gray-500 focus:outline-none hover:text-indigo-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" wire:click="deleteModal({{ $category->id }})">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                             </svg>
                             </button>
@@ -293,155 +448,9 @@
     </div>
 
 
-    @if($this->edit_modal_boolean)
-    <div class="overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full flex"
-    id="delete-product-modal" aria-modal="true" role="dialog">
-    <div class="relative px-4 w-full max-w-md h-full md:h-auto">
-        <div class="relative bg-white rounded-2xl shadow-lg">
-            <div class="flex justify-end p-2">
-                <button wire:click="$toggle('delete_modal_boo')"  type="button"
-                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-2xl text-sm p-1.5 ml-auto inline-flex items-center"
-                    data-modal-toggle="delete-product-modal">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-            </div>
-
-            <div class="p-6 pt-0 text-center">
-                <svg class="mx-auto w-20 h-20 text-red-500" fill="none" stroke="currentColor"
-                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-
-
-                @if (session()->has('message'))
-
-                {{-- @if (session('alert-class') == 'alert-success') --}}
-                    <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
-                        <div class="flex">
-                            <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
-                            <div>
-                                <p class="font-bold">The process is completed</p>
-                                <p class="text-sm">{{ session('message') }} </p>
-                            </div>
-                        </div>
-                    </div>
-                {{-- @endif --}}
-            @endif
 
 
 
 
-                <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true" style="">
-                    <div class="flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0">
-                    <div x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200 transform" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true" style=""></div>
-
-                        <div x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="transition ease-in duration-200 transform" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl rtl:text-right 2xl:max-w-2xl" style="">
-                            <div class="flex items-center justify-between">
-                                <h1 class="text-xl font-medium text-gray-800 "> Edit Category</h1>
-
-
-
-                            <p class="mt-2 text-sm text-gray-500 ">
-
-                                Add a new product category to your inventory to organize and manage your products
-                            </p>
-
-                         <div class="mt-5">
-
-                            <section class="bg-white-300 mt-10 flex flex-col items-center rounded-ls justify-center  mx-auto" style="width: 200px; height: 200px;">
-                                @if ($this->photo)
-                                    <img class="object-fill rounded-full " src="{{ $photo->temporaryUrl() }}" style="width: 200px; height: 200px;">
-                                @else
-                                    @if ($this->image_url)
-                                        <img class="object-fill  rounded-full " src="{{$this->image_url}}" style="width: 200px; height: 200px;">
-                                    @else
-                                        <img class="object-fill   rounded-full" src="{{ asset('product/product_image.jpeg')  }}" style="width: 300px; height: 200px;" >
-                                    @endif
-
-                                @endif
-                            </section>
-                            <label class="flex flex-col cursor-pointer hover:bg-gray-100 hover:border-gray-300 rounded-full mx-auto mt-4 pt-2" style="width: 200px;">
-                                <div class="flex flex-col items-center justify-center ">
-
-                                    <div wire:loading wire:target="photo" class="" >
-
-                                        <svg style="width: 50%; margin: 0 auto;" xmlns="http://www.w3.org/2000/svg" class="animate-spin  w-8 h-8 text-gray-400 group-hover:text-gray-600" fill="white" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-
-                                        </svg>
-                                        <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">Please wait...</p>
-
-                                    </div>
-
-                                    <div wire:loading.remove wire:target="photo" class="flex flex-col items-center justify-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-400 group-hover:text-gray-600"
-                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                        </svg>
-                                        <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                                            Select new image</p>
-                                    </div>
-                                </div>
-                                <input type="file" class="opacity-0" wire:model="photo"/>
-                            </label>
-                            @error('photo') <span class="error text-red-500 text-xs mx-auto">{{ $message }}</span> @enderror
-                         </div>
-                                <div>
-                                    <label for="user name" class="block text-sm text-gray-700 capitalize">Category  name @error('name') <div class="text-red-500 text-xs "> {{ $message }} </div> @enderror  </label>
-                                    <input wire:model="name" placeholder=" Nyanya " type="text" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
-                                </div>
-
-                                <div class="mt-4">
-                                    <p class="text-sm text-gray-500">
-                                    Category  Description  @error('description')  <div class="text-red-500 text-xs"> {{ $message }} </div> @enderror
-                                    </p>
-
-                                    <textarea wire:model="description" class="block w-full h-32 px-3 py-2 mt-3 text-gray-600 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40"></textarea>
-                                </div>
-
-                                <div class="flex justify-end mt-6">
-                                    <button  wire:click="register " type="button" class="px-3 py-2 text-sm tracking-wide text-white  bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2">
-                                        Register
-                                    </button>
-                                </div>
-
-                        </div>
-
-
-                    </div>
-
-
-                 </div>
-
-
-
-            </div>
-
-
-
-                <a wire:click="delete()"
-                    class="text-white cursor-pointer  bg-gradient-to-br from-red-400 to-red-600 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform">
-                    Yes, I'm sure
-                </a>
-                <a  wire:click="$toggle('edit_modal_boolean')"
-                    class="text-gray-900 cursor-pointer bg-white hover:bg-gray-100 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center hover:scale-[1.02] transition-transform"
-                    data-modal-toggle="delete-product-modal">
-                    No, cancel
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-    @endif
-
-
+@endif
 </div>

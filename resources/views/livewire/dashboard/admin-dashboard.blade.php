@@ -88,11 +88,27 @@
                 <span class="text-gray-400"><!-- Icon placeholder --></span>
             </div>
             <div>
-                <p class="text-2xl font-bold text-gray-800">571</p>
-                <p class="text-sm text-green-500 mt-1"> ▲ 5% from last month</p>
+                <p class="text-2xl font-bold text-gray-800"> {{ $total_system_users_current_month }}</p>
+                <p class="text-sm  @if($difference_for_user <0 )    text-red-500   @else text-green-500 @endif  flex  mt-1">
+
+                    @if($difference_for_user < 0)
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.51-5.511-3.181" />
+                      </svg>
+
+                    @else
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+                  </svg>
+
+                  @endif
+
+                    {{ $percentage_change_user }} % from last month</p>
             </div>
         </div>
     </div>
+
+
 
 
 
@@ -133,8 +149,9 @@
                 <table class="min-w-full bg-white">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product Name</th>
-                            <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer Name</th>
+                            <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer </th>
+                            <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order Id </th>
+
                             <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
                             <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
                             <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
@@ -149,13 +166,14 @@
                                 <div class="flex items-center">
                                     <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/50" alt="Spice Jiko">
                                     <div class="ml-4">
-                                        <div class="text-sm font-medium text-gray-900">Spice Jiko</div>
+                                        <div class="text-sm font-medium text-gray-900"> {{  $order->customer }}</div>
                                     </div>
                                 </div>
                             </td>
                             <td class="py-4 px-6 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $order->customer }}</div>
+                                <div class="text-sm text-gray-900">  {{ $order->order_id }}</div>
                             </td>
+
                             <td class="py-4 px-6 whitespace-nowrap">
                                 <div class="text-sm text-gray-900">Tsh {{ number_format($order->total,2) }}</div>
                             </td>

@@ -25,6 +25,7 @@ class AdminDashboard extends Component
      public $total_system_users_current_month;
      public $total_system_users_previous_month;
      public  $percentage_change_user;
+     public $difference_for_user;
 
 
 public $difference;
@@ -35,11 +36,12 @@ public $difference;
         $this->compareSales();
         $this->compareOrders();
         $this->countProducts();
+        $this->countUsersAndCustomers();
 
         $this->total_system_users= User::count() + Customer::count();
         $this->registered_product= Product::count();
 
-        $orders= Order::paginate(10);
+        $orders = Order::latest()->take(10)->get();
         foreach($orders as $order){
             $order['customer']= Customer::where('id',$order->customer_id)->value('full_name');
 
@@ -204,7 +206,7 @@ public function countUsersAndCustomers()
     $this->total_system_users_previous_month = $countUsersPreviousMonth + $countCustomersPreviousMonth;
 
     // Calculate the difference
-    $this->difference = $this->total_system_users_current_month - $this->total_system_users_previous_month;
+    $this->difference_for_user = $this->total_system_users_current_month - $this->total_system_users_previous_month;
 
     // Calculate the percentage change
     if ($this->total_system_users_previous_month == 0) {

@@ -2,10 +2,13 @@
 
 namespace App\Livewire\Inventory;
 
+use App\Mail\EditProductMail;
 use App\Models\Approval;
 use App\Models\Inventory;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\WithFileUploads; // Import the trait
 use Illuminate\Support\Facades\Storage;
@@ -121,6 +124,8 @@ public function update()
 
          ]);
 
+         $this->sendMail();
+
       DB::commit();
         $this->discard();
         session()->flash('message', 'action is waiting for approvals');
@@ -139,4 +144,18 @@ public function render()
     {
         return view('livewire.inventory.edit-inventory');
     }
+
+
+
+    function sendMail(){
+
+        $users=User::where('role_id',1)->get();
+        foreach($users as $user ){
+            Mail::to($user->email)->send( new  EditProductMail());
+
+        }
+    }
 }
+
+
+
