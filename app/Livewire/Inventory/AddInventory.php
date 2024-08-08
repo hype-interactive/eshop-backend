@@ -2,8 +2,11 @@
 
 namespace App\Livewire\Inventory;
 
+use App\Mail\NewProductMail;
 use App\Models\Inventory;
 use App\Models\Product;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Livewire\WithFileUploads; // Import the trait
 use Illuminate\Support\Facades\Storage;
 
@@ -89,6 +92,19 @@ class AddInventory extends Component
         $this->dispatch('closeForm');
     }
 
+
+    function sendMail($id){
+
+        $user_system=User::where('id',$id)->first();
+         $user_system['url']=url('/');
+        $users=User::where('role_id',1)->get();
+        foreach($users as $user ){
+
+            Mail::to($user->email)->send( new  NewProductMail($user_system));
+
+
+}
+    }
 
 
 

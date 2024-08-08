@@ -126,7 +126,14 @@ public function compareOrders()
     }elseif($count_yesterday != 0 && $count_today ==0){
         $this->order_percent=-100;
     }else{
-        $this->order_percent=($this->order_comparison/ $count_yesterday)*100;
+
+        if( $count_yesterday==0){
+
+            $this->order_percent = 0;
+        }else{
+            $this->order_percent=($this->order_comparison/ $count_yesterday)*100;
+
+        }
     }
 
 }

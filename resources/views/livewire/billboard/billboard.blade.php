@@ -39,6 +39,80 @@
 
 @endif
 
+
+
+@if($this->delete_modal_boo)
+<div class="overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full flex"
+    id="delete-product-modal" aria-modal="true" role="dialog">
+    <div class="relative px-4 w-full max-w-md h-full md:h-auto">
+
+        <div class="relative bg-white rounded-2xl shadow-lg">
+
+            <div class="flex justify-end p-2">
+                <button wire:click="$toggle('delete_modal_boo')"  type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-2xl text-sm p-1.5 ml-auto inline-flex items-center"
+                    data-modal-toggle="delete-product-modal">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="p-6 pt-0 text-center">
+
+                @if (session()->has('message'))
+
+                {{-- @if (session('alert-class') == 'alert-success') --}}
+                    <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
+                        <div class="flex">
+                            <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                            <div>
+                                <p class="font-bold">The process is completed</p>
+                                <p class="text-sm">{{ session('message') }} </p>
+                            </div>
+                        </div>
+                    </div>
+                {{-- @endif --}}
+            @endif
+
+
+                <h3 class="mt-5 mb-6 text-xl font-normal text-gray-500">
+                    Assign Status
+                    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 ws:text-white">Select an option  @error('status')
+                         <div class="text-red-500 font-bold text-xs">  {{ $message }} </div>
+                    @enderror
+                </label>
+                    <select  wire:model="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ws:bg-gray-700 ws:border-gray-600 ws:placeholder-gray-400 ws:text-white ws:focus:ring-blue-500 ws:focus:border-blue-500">
+                      <option selected>Choose a status</option>
+                      <option value="inactive"> In active States</option>
+                      <option value="active"> Active</option>
+
+                    </select>
+
+                </h3>
+                <div class="text-xs text-red-500">  Onchange status to inactive, the item will not be vissible to the dahsboard  </div>
+
+                <a  wire:click="$toggle('delete_modal_boo')"
+                    class="text-gray-900 cursor-pointer bg-white hover:bg-gray-100 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center hover:scale-[1.02] transition-transform"
+                    data-modal-toggle="delete-product-modal">
+                   cancel
+                </a>
+
+                <a wire:click="blockBillboard()"
+                class="text-white cursor-pointer  bg-gradient-to-br from-blue-800 to-yellow-800 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform">
+                Set Inactive
+            </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endif
+
+
     <div class="flex flex-col">
         <div class="overflow-x-auto">
             <div class="inline-block min-w-full align-middle">
@@ -55,7 +129,7 @@
                                 class="flex flex-col p-5 max-w-md bg-white rounded-2xl shadow-sm transform cursor-move">
                                 <div class="flex justify-between items-center pb-4">
                                     <div class="text-base font-semibold text-gray-900"> {{ $billboard->name }} </div>
-                                    <button type="button" data-modal-toggle="kanban-card-modal"
+                                    <button wire:click="disableBillboard({{$billboard->id }})" type="button" data-modal-toggle="kanban-card-modal"
                                         class="p-1 text-gray-500 hover:text-gray-900">
                                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -133,6 +207,68 @@
                             <div class="py-4 text-base font-semibold text-gray-900">Inactive </div>
                             <div id="kanban-list-2" class="p-4 mb-6 space-y-6 bg-gray-200 rounded-xl min-w-20">
 
+                                @foreach ( $this->billboard2 as $billboard)
+
+                                <div
+                                class="flex flex-col p-5 max-w-md bg-white rounded-2xl shadow-sm transform cursor-move">
+                                <div class="flex justify-between items-center pb-4">
+                                    <div class="text-base font-semibold text-gray-900"> {{ $billboard->name }} </div>
+                                    <button wire:click="disableBillboard({{$billboard->id }})" type="button" data-modal-toggle="kanban-card-modal"
+                                        class="p-1 text-gray-500 hover:text-gray-900">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z">
+                                            </path>
+                                            <path fill-rule="evenodd"
+                                                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
+
+                                </div>
+                                <div class="flex justify-center items-center pb-4">
+                                    <img class="bg-contain rounded-2xl"
+                                        src=" @if($billboard->image_url) {{ asset($billboard->image_url) }} @else  https://demos.creative-tim.com/soft-ui-flowbite-pro/images/kanban/task-3.jpg @endif "
+                                        alt="{{ $billboard->name }}" style="height: 200px; width:100%; ">
+                                </div>
+                                <div class="flex flex-col">
+                                    <div class="pb-4 text-sm font-normal text-gray-700">
+
+                                        {{ $billboard->description }}
+
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <div class="flex justify-start items-center">
+
+                                            <a wire:click="delete({{ $billboard->id }})">
+                                                <svg data-slot="icon" class="w-6 h-6 " fill="none"
+                                                    stroke-width="1.5" stroke="red " viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z">
+                                                    </path>
+                                                </svg>
+
+                                            </a>
+
+
+                                        </div>
+                                        <div wire:click="priviewBillboard({{$billboard->id }})"
+                                            class="flex justify-center items-center px-3 text-xs font-bold uppercase text-white bg-gradient-to-br from-blue-900 to-yellow-800 rounded-2xl">
+                                            <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                            {{ $billboard->created_at->diffForHumans() }}  Preview
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                @endforeach
                                 {{-- <div
                                     class="flex flex-col p-5 max-w-md bg-white rounded-2xl shadow-sm transform cursor-move">
                                     <div class="flex justify-between items-center pb-4">

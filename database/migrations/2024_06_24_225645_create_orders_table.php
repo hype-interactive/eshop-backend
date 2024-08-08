@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('payment_method')->nullable();
              $table->string('payment_status')->nullable();
              $table->string('status')->nullable();
-
+            $table->string('payment_number')->nullable();
              $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
 
             $table->timestamps();

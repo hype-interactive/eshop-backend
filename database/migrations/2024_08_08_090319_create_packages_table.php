@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscription_plans', function (Blueprint $table) {
+        Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('package_id')->nullable();
-            $table->string('unit')->nullable();
+            $table->string('name');
             $table->double('price')->nullable();
-            $table->string('duration')->nullable();
+            $table->enum('status',['active','pending','blocked'])->default('active');
+            $table->string('description')->nullable();
             $table->timestamps();
-            $table->foreign('packag_id')->references('id')->on('packages')->onDelete('cascade');
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscription_plans');
+        Schema::dropIfExists('packages');
     }
 };

@@ -2,10 +2,14 @@
 
 namespace App\Livewire\Approval;
 
+use App\Mail\CustomMail;
 use Livewire\Component;
 use App\Models\Approval;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+
 class ApprovalList extends Component
 {
 
@@ -14,18 +18,35 @@ class ApprovalList extends Component
     public $edit_package;
     public $actual_package;
     public $approval_modal_bool=false;
+    public $disapproval_modal_bool=false;
+    public $selected_id;
+    public $comment;
 
 
+    function enableDeclineModal($id){
+        $this->selected_id=$id;
+        $this->disapproval_modal_bool=!$this->disapproval_modal_bool;
+    }
 
-public  function decline($id){
+public  function decline(){
 
-    Approval::where('id',$id)->update([
+    $this->validate([
+  'comment'=>'required'
+    ]);
+    Approval::where('id',$this->selected_id)->update([
    'status'=>'declined',
     'approved_by'=>auth()->user()->id
     ]);
 
+    $user=User::where('id',Approval::where('id',$this->selected_id)->value('initiator'))->first();
+
+    $user['comment']=$this->comment;
+
+    //send email
+    Mail::to($user->email)->send( new CustomMail($user));
     session()->flash('message', 'processes is completed ');
 
+    $this->disapproval_modal_bool=false;
 }
 
 

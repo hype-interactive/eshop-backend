@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Billboard extends Model
+class PackageHasService extends Model
 {
     use HasFactory;
-
-    protected $fillable =['name','description','image_url','visibility','status'];
+    protected $fillable=['package_id','service_id'];
 }

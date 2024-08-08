@@ -41,7 +41,7 @@
                             <div class="space-y-3 sm:flex sm:items-start sm:space-y-0 sm:justify-between">
                                 <h2 class="text-lg font-medium text-gray-700 capitalize sm:text-xl md:text-2xl"> Vendors </h2>
 
-                                <a href="#"
+                                <a  wire:click="changeSubPage(3)"
                                     class="flex items-center justify-center px-3 py-2 text-sm tracking-wide text-white inline-flex  bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mx-1" viewBox="0 0 20 20"
                                         fill="currentColor">
@@ -50,7 +50,7 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
 
-                                    <span wire:click="changeSubPage(3)" class="mx-1 cursor-pointer  ">Add Vendor</span>
+                                    <span  class="mx-1 cursor-pointer  ">Add Vendor</span>
                                 </a>
                             </div>
 

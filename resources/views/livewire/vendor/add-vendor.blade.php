@@ -47,6 +47,16 @@
             @error('photo') <span class="error text-red-500 text-xs mx-auto">{{ $message }}</span> @enderror
 
 
+            <div>
+                <label for="Disabled" class="block text-sm text-gray-700 capitalize"> Subscription Plan   @error('package_id') <div class="text-xs text-red-500"> {{ $message }} </div>  @enderror </label>
+                <select  wire:model="package_id" class="block w-full px-4 py-2.5 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                    <option value= ""> select Package </option>
+                    @foreach (DB::table('packages')->where('status','active')->get() as $package )
+                    <option value= "{{ $package->id }}"> {{ $package->name }} Price {{  number_format($package->price,2) }} TZS </option>
+                    @endforeach
+                </select>
+            </div>
+
 
 
         </div>
@@ -134,6 +144,9 @@
                     <option value ="blocked"> Blocked </option>
                 </select>
             </div>
+
+
+
 
 
 

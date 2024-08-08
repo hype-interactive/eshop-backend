@@ -6,7 +6,7 @@
     <div class="bg-gray-2">
         <div class="container mx-auto p-6">
             <div class="flex justify-between mb-4">
-                <div class="text-xl font-semibold"> Approvals </div>
+                <div class="text-xl font-semibold"> Approvals   </div>
 
             </div>
             <div class="grid grid-cols-2 gap-4 mb-6">
@@ -134,7 +134,7 @@
 
                                     </button>
 
-                                    <div wire:click="decline({{ $approval->id }})" class="text-gray-500 bg-red-200 rounded-full transition-colors duration-200  hover:text-blue-500 focus:outline-none">
+                                    <div wire:click="enableDeclineModal({{ $approval->id }})" class="text-gray-500 bg-red-200 rounded-full transition-colors duration-200  hover:text-blue-500 focus:outline-none">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                           </svg>
@@ -303,5 +303,87 @@
 
 
 @endif
+
+
+
+@if($this->disapproval_modal_bool)
+  <!-- Main modal -->
+  <div id="select-modal"  class="fixed inset-0 flex items-center justify-center z-50 overflow-y-auto overflow-x-hidden">
+    <div class="relative w-full max-w-4xl bg-white rounded-lg shadow-lg">
+        <!-- Modal content -->
+        <div class="relative bg-white">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-900">
+                    Disagree changes
+                </h3>
+                <button wire:click="$toggle('disapproval_modal_bool')" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm h-8 w-8 inline-flex justify-center items-center hover:bg-gray-200 focus:outline-none" data-modal-toggle="select-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5">
+                <p class="text-gray-500 mb-4"> Provide comment on your reaction </p>
+
+                <div>
+                    @if (session()->has('message'))
+
+                        {{-- @if (session('alert-class') == 'alert-success') --}}
+                            <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
+                                <div class="flex">
+                                    <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                                    <div>
+                                        <p class="font-bold">The process is completed</p>
+                                        <p class="text-sm">{{ session('message') }} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {{-- @endif --}}
+                    @endif
+
+                    @if (session()->has('message_fail'))
+
+                        <div class="bg-red-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
+                            <div class="flex">
+                                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                                <div>
+                                    <p class="font-bold">The process fail</p>
+                                    <p class="text-sm">{{ session('message_fail') }} </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+
+
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+
+                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Provide Feedback
+                @error('comment')
+                    <div class="text-red-500 text-xs">  {{ $message }} </div>
+
+                        @enderror
+                </label>
+                <textarea wire:model="comment" id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your comment  here..."></textarea>
+                <div class="flex gap-4 space-x-4">
+                <button wire:click="$toggle('disapproval_modal_bool')"  class="text-blue-900 inline-flex w-full justify-center bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-4">
+                    Close
+                </button>
+                <button wire:click="decline()" class="text-white inline-flex w-full justify-center bg-gradient-to-br from-blue-800 to-yellow-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-4">
+                    Confirm
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@endif
+
+
 
 </div>

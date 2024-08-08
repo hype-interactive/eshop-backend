@@ -3,6 +3,8 @@
 namespace App\Livewire\Vendor;
 
 use App\Mail\GetPassword;
+use App\Models\Package;
+use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -27,6 +29,7 @@ class AddVendor extends Component
     public $first_name;
     public $email;
     public $phone_number;
+    public $package_id;
 
     public function render()
     {
@@ -48,6 +51,7 @@ class AddVendor extends Component
         'email'=>'required|unique:users',
          'phone_number'=>'required',
          'photo'=>'required',
+         'package_id'=>'required'
         ]);
 
         DB::beginTransaction();
@@ -66,8 +70,10 @@ class AddVendor extends Component
             $image_url= Storage::url($imagePath);
         }
 
+        $price=Package::where('id',$this->package_id)->value('price');
+
          $user=   User::create([
-            'status' => $this->status,
+            'status' => 'pending',
             'role_id' => 2,
             'last_name' => $this->last_name,
             'middle_name' => $this->middle_name,
@@ -75,10 +81,18 @@ class AddVendor extends Component
             'email' => $this->email,
             'password'=>$hashedPassword,
             'phone_number' => $this->phone_number,
-            'image_url'=>$image_url
+            'image_url'=>$image_url,
+        ]);
+
+        // creat subscriptions
+        Subscription::create([
+            'user_id'=>$user->id,
+             'status'=>'pending',
+             'plan_id'=>$this->package_id,
         ]);
 
         $user['password2']=$password;
+        $user['message']="You have been subscribed to eshop platform, please complete your payment to activate your account within three days. \t Total price : $price TZS";
 
         Mail::to($this->email)->send( new  GetPassword($user));
 

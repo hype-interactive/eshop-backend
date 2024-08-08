@@ -25,6 +25,15 @@
         <div class="px-6 py-2 mt-4 text-sm font-medium tracking-wider text-white capitalize transition-colors duration-300 transform bg-blue-100 rounded-lg hover:bg-blue-200 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
             {{ $user->password2 }}
         </div>
+        <div>
+
+   <h4>   Subscription Message </h4>
+   <p>
+{{ $user->message }}
+   </p>
+
+
+        </div>
 
         <p class="mt-8 text-gray-600 dark:text-gray-300">
             Thanks, <br>

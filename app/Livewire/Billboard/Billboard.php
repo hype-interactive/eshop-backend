@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class Billboard extends Component
 {
     use WithFileUploads;
-
+public $billboard2;
     public $items;
     public $name;
     public $description;
@@ -23,9 +23,28 @@ class Billboard extends Component
     public $title;
     public $content;
     public $subtitle;
+    public $selected_id;
+public $status;
     public $enableRegisterModalboolean=false;
 
+    public $delete_modal_boo=false;
 
+
+    public function disableBillboard($id){
+        $this->selected_id=$id;
+        $this->delete_modal_boo=!$this->delete_modal_boo;
+
+    }
+
+    function blockBillboard(){
+    $this->validate([
+        'status'=>'required'
+    ]);
+        ModelsBillboard::where('id',$this->selected_id)
+         ->update(['status'=>$this->status]);
+
+         $this->delete_modal_boo=false;
+    }
     function registerModal(){
         $this->enableRegisterModalboolean=true;
     }
@@ -117,6 +136,7 @@ class Billboard extends Component
             'description' => $this->description,
             'image_url' => $this->image_url,
             'visibility' => $this->visibility,
+            'status'=>'active'
         ]);
 
         $this->resetFields();
@@ -146,7 +166,9 @@ class Billboard extends Component
 
     public function render()
     {
-        $this->billboards=ModelsBillboard::get();
+        $this->billboards=ModelsBillboard::where('status','active')->get();
+        $this->billboard2=ModelsBillboard::where('status','!=','active')->get();
+
         return view('livewire.billboard.billboard');
     }
 }
