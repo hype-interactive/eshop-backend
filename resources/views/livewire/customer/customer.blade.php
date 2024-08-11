@@ -44,6 +44,10 @@
 
             @break
 
+            @case(3)
+                view orders
+            @break
+
         @default
 
     @endswitch

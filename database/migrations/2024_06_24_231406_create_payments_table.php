@@ -18,9 +18,10 @@ return new class extends Migration
             $table->double('amount')->nullable();
             $table->date('date')->nullable();
             $table->string('narration')->nullable();
-            $table->unsignedBigInteger('order_id')->nullable();
+            $table->string('order_id')->nullable();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

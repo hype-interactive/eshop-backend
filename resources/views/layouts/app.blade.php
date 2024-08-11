@@ -21,6 +21,15 @@
 
   <body class="font-sans antialiased relative">
 
+    @php
+        $status=auth()->user()->status;
+    @endphp
+
+    @if($status != 'active')
+
+    @include('pending-user',['status'=>$status])
+
+    @else
 <livewire:back-end.side-bar />
 
 <!-- Page Content -->
@@ -35,6 +44,8 @@
 </div>
 
 @stack('modals')
+
+@endif
 
         @livewireScripts
     </body>

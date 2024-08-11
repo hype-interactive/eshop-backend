@@ -78,13 +78,6 @@
             </div>
 
 
-
-
-
-
-
-
-
             <div class="flex flex-col my-6 mx-4  bg-white  rounded-2xl shadow-xl shadow-gray-200">
                 <div class="flex justify-between mx-4  ">
 
@@ -128,7 +121,7 @@
                                     @foreach ($customer_order as $order )
 
 
-                                    <tr class="hover:bg-gray-100">
+                                    <tr wire:click="viewCustomerOrders({{ $order->id }})" class="hover:bg-gray-100 cursor-pointer ">
                                         <td class="p-4 w-4 lg:p-5">
                                             {{ $order->id }}
                                         </td>
@@ -157,6 +150,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div class="w-1/3">
@@ -168,28 +162,28 @@
                     <!-- Start Date Filter -->
                     <div>
                         <label for="start-date" class="block text-sm font-medium text-gray-700">Start Date</label>
-                        <input type="date" id="start-date" name="start-date"
+                        <input wire:model="start_date" type="date" id="start-date" name="start-date"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     </div>
 
                     <!-- End Date Filter -->
                     <div>
                         <label for="end-date" class="block text-sm font-medium text-gray-700">End Date</label>
-                        <input type="date" id="end-date" name="end-date"
+                        <input wire:model="end_date" type="date" id="end-date" name="end-date"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     </div>
 
                     <!-- Amount Filter -->
                     <div>
                         <label for="amount" class="block text-sm font-medium text-gray-700">Amount</label>
-                        <input type="number" id="amount" name="amount"
+                        <input wire:model="amount" type="number" id="amount" name="amount"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             placeholder="Enter Amount">
                     </div>
 
                     <!-- Submit Button -->
                     <div>
-                        <button type="submit"
+                        <button wire:click="search()" type="submit"
                             class="w-full inline-flex  bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2    ">
                             Apply Filters
                         </button>

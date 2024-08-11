@@ -20,7 +20,7 @@ return new class extends Migration
             $table->id();
             $table->double('amount')->nullable();
             $table->string('date')->nullable();
-            $table->unsignedBigInteger('order_id')->nullable();
+            $table->string('order_id')->nullable();
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->unsignedBigInteger('payment_id')->nullable();
             $table->string('status')->nullable();

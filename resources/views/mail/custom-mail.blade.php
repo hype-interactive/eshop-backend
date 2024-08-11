@@ -37,6 +37,10 @@
             line-height: 1.5;
             color: #333333;
         }
+        .name{
+            font-weight: bold;
+
+        }
         .footer {
             background: #f1f1f1;
             padding: 10px;
@@ -49,23 +53,29 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>Company Name</h1>
-        </div>
+
         <!-- Title -->
         <div class="title">
             <h2> </h2>
         </div>
         <!-- Body -->
         <div class="body">
-            <p>Dear {{ $user->first_name.' '.$user->middle_name }},</p>
-            <p>
+            <div> Dear,<p class="name"> {{ $user->first_name.' '.$user->middle_name }},</p>
+                <p> </div>
+
                 {{ $user->comment }}
             </p>
-        
-            <p>Best regards,</p>
-            <p>The Team</p>
+
+
+             @if($user->sender_name)
+             <p> From: <p class="name">  {{$user->sender_name  }} </p>
+            </p>
+
+             @else
+             <p>Best regards,</p>
+            <p>  The Team</p>
+
+            @endif
         </div>
         <!-- Footer -->
         <div class="footer">

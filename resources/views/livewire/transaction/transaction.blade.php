@@ -44,95 +44,32 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
+
+                                   @foreach ($transactions as $data )
+
+
                                     <tr class="hover:bg-gray-100">
                                         <td class="p-4  ">
-                                            28-july
+                                           {{ $data->created_at->format('Y-M-d') }}
                                         </td>
                                         <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                            juma alli husein  /order id
+                                            {{ $data->customer }}
                                         </td>
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            Vendor name
+                                           {{ $data->vendor_name }}
                                         </td>
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                           Nyanya
+                                            {{ $data->product_name }}
+
                                         </td>
                                         <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                           1,000.00 TZS  </td>
+                                           {{  number_format( $data->amount,2)  }} TZS  </td>
                                         <td class="p-4 space-x-2 whitespace-nowrap lg:p-5">
-                                            Successfully
+                                            {{ $data->status }}
                                         </td>
                                     </tr>
-
-                                    <tr class="hover:bg-gray-100">
-                                        <td class="p-4  lg:p-5">
-                                            28-july
-                                        </td>
-                                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                            juma alli husein  /order id
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            Vendor name
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                           Nyanya
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                           1,000.00 TZS  </td>
-                                        <td class="p-4 space-x-2 whitespace-nowrap lg:p-5">
-                                            Successfully
-                                        </td>
-                                    </tr>
-
-
-                                    <tr class="hover:bg-gray-100">
-                                        <td class="p-4  lg:p-5">
-                                            28-july
-                                        </td>
-                                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                            juma alli husein  /order id
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            Vendor name
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                           Nyanya
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                           1,000.00 TZS  </td>
-                                        <td class="p-4 space-x-2 whitespace-nowrap lg:p-5">
-                                            Successfully
-                                        </td>
-                                    </tr>
-
-
-                                    <tr class="hover:bg-gray-100">
-                                        <td class="p-4 lg:p-5">
-                                            28-july
-                                        </td>
-                                        <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                            juma alli husein  /order id
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                            Vendor name
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                           Nyanya
-                                        </td>
-                                        <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                           1,000.00 TZS  </td>
-                                        <td class="p-4 space-x-2 whitespace-nowrap lg:p-5">
-                                            Successfully
-                                        </td>
-                                    </tr>
-
-
-
-
-
+                                    @endforeach
                             </table>
-
-
                         </div>
                     </div>
                 </div>
@@ -148,34 +85,34 @@
                     <!-- Start Date Filter -->
                     <div>
                         <label for="start-date" class="block text-sm font-medium text-gray-700">Start Date</label>
-                        <input type="date" id="start-date" name="start-date"
+                        <input wire:model="start_date" type="date" id="start-date" name="start-date"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     </div>
 
                     <!-- End Date Filter -->
                     <div>
                         <label for="end-date" class="block text-sm font-medium text-gray-700">End Date</label>
-                        <input type="date" id="end-date" name="end-date"
+                        <input wire:model="end_date" type="date" id="end-date" name="end-date"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     </div>
                      <!-- Customer ID Filter -->
               <div>
                 <label for="customer-id" class="block text-sm font-medium text-gray-700">Customer ID</label>
-                <input type="text" id="customer-id" name="customer-id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Enter Customer ID">
+                <input wire:model="customer_id" type="text" id="customer-id" name="customer-id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Enter Customer ID">
               </div>
 
 
                     <!-- Amount Filter -->
                     <div>
                         <label for="amount" class="block text-sm font-medium text-gray-700">Amount</label>
-                        <input type="number" id="amount" name="amount"
+                        <input wire:model="amount" type="number" id="amount" name="amount"
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             placeholder="Enter Amount">
                     </div>
 
                     <!-- Submit Button -->
                     <div>
-                        <button type="submit"
+                        <button wire:click="search()" type="submit"
                             class="w-full inline-flex  bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2    ">
                             Apply Filters
                         </button>

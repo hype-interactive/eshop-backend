@@ -4,8 +4,37 @@
         <div class="w-full max-w-7xl mx-auto px-4 md:px-8 bg-white rounded-lg  p-4 ">
 
             <div class="flex sm:flex-col lg:flex-row sm:items-center justify-between">
+                <div>
+                    @if (session()->has('message_success'))
 
+                        {{-- @if (session('alert-class') == 'alert-success') --}}
+                            <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
+                                <div class="flex">
+                                    <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                                    <div>
+                                        <p class="font-bold">The process is completed</p>
+                                        <p class="text-sm">{{ session('message_success') }} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {{-- @endif --}}
+                    @endif
+
+                    @if (session()->has('message_fail'))
+
+                        <div class="bg-red-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
+                            <div class="flex">
+                                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                                <div>
+                                    <p class="font-bold">The process fail</p>
+                                    <p class="text-sm">{{ session('message_fail') }} </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div>
             </div>
+
             <div class="mt-7 border border-gray-300 pt-9">
                 <div class="flex max-md:flex-col items-center justify-between px-3 md:px-11">
                     <div class="data">
@@ -17,9 +46,19 @@
                         <button wire:click="close()"
                             class="rounded-full px-7 py-3 bg-white text-gray-900 border border-gray-300 font-semibold text-sm shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:bg-gray-50 hover:border-gray-400">
                             Close    </button>
-                        <button
+
+                            @if($order->payment_method=="selcom")
+
+                            @else
+                            @if($order->status!="pending")
+
+                            @else
+                        <button wire:click="confirmCashOrders('{{ $order_id  }}')"
                             class="rounded-full px-7 py-3 bg-indigo-600 shadow-sm shadow-transparent text-white font-semibold text-sm transition-all duration-500 hover:shadow-indigo-400 hover:bg-indigo-700">
                            Confirm   </button>
+                           @endif
+
+                           @endif
 
                     </div>
                 </div>
@@ -87,16 +126,24 @@
 
                 <div class="px-3 md:px-11 flex items-center justify-between max-sm:flex-col-reverse">
                     <div class="flex max-sm:flex-col-reverse items-center">
+                        @if($order->status=="pending")
+
                         <button wire:click="cancelOrder('{{ $order_id }}')"
-                            class="flex items-center gap-3 py-10 pr-8 sm:border-r border-gray-300 font-normal text-xl leading-8 text-gray-500 group transition-all duration-500 hover:text-indigo-600">
-                            <svg width="40" height="41" viewBox="0 0 40 41" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path class="stroke-gray-600 transition-all duration-500 group-hover:stroke-indigo-600"
-                                    d="M14.0261 14.7259L25.5755 26.2753M14.0261 26.2753L25.5755 14.7259" stroke=""
-                                    stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            cancel order
-                        </button>
+                        class="flex items-center gap-3 py-10 pr-8 sm:border-r border-gray-300 font-normal text-xl leading-8 text-gray-500 group transition-all duration-500 hover:text-indigo-600">
+                        <svg width="40" height="41" viewBox="0 0 40 41" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path class="stroke-gray-600 transition-all duration-500 group-hover:stroke-indigo-600"
+                                d="M14.0261 14.7259L25.5755 26.2753M14.0261 26.2753L25.5755 14.7259" stroke=""
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        cancel order
+                    </button>
+
+                        @else
+
+
+                        @endif
+
                         <p class="font-normal text-xl leading-8 text-gray-500 sm:pl-8">Payment Is {{ $order->payment_status }}</p>
                     </div>
                     <p class="font-medium text-xl leading-8 text-black max-sm:py-4"> <span class="text-gray-500">Total

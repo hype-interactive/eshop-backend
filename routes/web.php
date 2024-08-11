@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserFeedBackController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,3 +38,17 @@ Route::fallback(function () {
 Route::get('/pending-user',function(){
     return view('pending-user');
 })->name('pending_user');
+
+Route::post('user-feedback',[UserFeedBackController::class,'createFeedBack'])->name('user-feedback');
+Route::get('user-logout',function(){
+    Auth::logout();
+
+    // Optionally, invalidate the session
+    request()->session()->invalidate();
+
+    // Regenerate the CSRF token
+    request()->session()->regenerateToken();
+
+    return redirect('/login');
+
+})->name('user-logout');

@@ -56,4 +56,6 @@ class OrderList extends Component
         session()->flash('message','successfully updated');
     }
 
+ 
+
 }

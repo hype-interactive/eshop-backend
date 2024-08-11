@@ -49,7 +49,6 @@
                                 <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Completed  </th>
 
                                 <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Total  </th>
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Scores </th>
 
                                 {{-- <th scope="col" class="relative py-3.5 px-4">
                                     <span class=" font-normal text-gray-600 ">Edit</span>
@@ -60,6 +59,7 @@
                             @foreach ($customers as $customer )
 
                             <tr class="cursor-pointer hover:bg-gray-50 " wire:click="viewCustomerTransactions( {{ $customer->id }})">
+
                                 <td class="px-4 py-2 text-sm font-medium text-gray-700 whitespace-nowrap">
                                     <div class="inline-flex items-center gap-x-3">
                                         <input type="checkbox" class="text-blue-500 border-gray-300 rounded ">
@@ -91,18 +91,9 @@
                                     </div>
                                 </td>
                                 <td class="px-4 py-2 text-sm text-gray-500  whitespace-nowrap"> Customer </td>
-                                <td class="px-4 py-2 text-sm text-gray-500  whitespace-nowrap"> 10 </td>
-                                <td class="px-4 py-2 text-sm text-gray-500  whitespace-nowrap"> 4 </td>
-                                <td class="px-4 py-2 text-sm text-gray-500  whitespace-nowrap"> 6 </td>
-
-
-                                <td class="px-4 py-2 text-sm whitespace-nowrap">
-                                    <div class="flex items-center gap-x-2">
-                                        <p class="px-3 py-1 text-xs text-indigo-500 rounded-full  bg-indigo-100/60"> good </p>
-                                        <p class="px-3 py-1 text-xs text-blue-500 rounded-full  bg-blue-100/60">modelate </p>
-                                        <p class="px-3 py-1 text-xs text-pink-500 rounded-full  bg-pink-100/60"> normal </p>
-                                    </div>
-                                </td>
+                                <td class="px-4 py-2 text-sm text-gray-500  whitespace-nowrap"> {{ DB::table('orders')->where('customer_id',$customer->id)->where('status','pending')->count() }}</td>
+                                <td class="px-4 py-2 text-sm text-gray-500  whitespace-nowrap"> {{ DB::table('orders') ->where('customer_id',$customer->id)->where('status','completed')->count() }} </td>
+                                <td class="px-4 py-2 text-sm text-gray-500  whitespace-nowrap"> {{ DB::table('orders') ->where('customer_id',$customer->id)->count() }} </td>
 
                                 {{-- <td class="px-4 py-2 text-sm whitespace-nowrap">
                                     <div class="flex items-center gap-x-6">
