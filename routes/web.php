@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserFeedBackController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -52,3 +53,7 @@ Route::get('user-logout',function(){
     return redirect('/login');
 
 })->name('user-logout');
+
+Route::get('update-user-status',function(){
+    DB::table('users')->where('status','pending')->update(['status'=>'active']);
+});
