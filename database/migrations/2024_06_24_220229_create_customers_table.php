@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('password');
             $table->string('image_url')->nullable();
             $table->timestamps();
-            $table->timestamps();
         });
     }
 
