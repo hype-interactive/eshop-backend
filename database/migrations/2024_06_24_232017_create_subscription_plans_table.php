@@ -18,7 +18,7 @@ return new class extends Migration
             $table->double('price')->nullable();
             $table->string('duration')->nullable();
             $table->timestamps();
-            $table->foreign('packag_id')->references('id')->on('packages')->onDelete('cascade');
+            $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
         });
     }
 
