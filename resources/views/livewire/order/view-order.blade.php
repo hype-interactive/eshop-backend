@@ -89,7 +89,7 @@
                                 <span class="font-normal text-lg leading-8 text-gray-500 whitespace-nowrap">
                                     Unit: {{ $product->unit }} </span>
                                 <span class="font-normal text-lg leading-8 text-gray-500 whitespace-nowrap">
-                                    Qty:{{ DB::table('order_products')->where('product_id', $product->id)->value('quantity') }}  </span>
+                                    Qty:{{ DB::table('order_products')->where('product_id', $product->id)->where('order_id', $order_id )->value('quantity') }}  </span>
                                 <p class="font-semibold text-xl leading-8 text-black whitespace-nowrap">Price {{ number_format($product->final_price ,2) }} TZS </p>
                             </div>
                         </div>
