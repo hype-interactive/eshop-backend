@@ -38,6 +38,13 @@
 
            @break
 
+           @case('10')
+
+           <livewire:subscription.subscription-list />
+
+           @break
+
+
 
        @default
 

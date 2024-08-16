@@ -66,6 +66,7 @@ class EditVendor extends Component
         'email' => $this->email,
         'phone_number' => $this->phone_number,
         'role_id' => $this->role_id,
+        'status'=>$this->status
     ]);
 
     // Check if a new photo is uploaded

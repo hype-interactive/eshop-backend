@@ -1,6 +1,6 @@
 <div>
 
-    <div class=" bg-gay-100 grid grid-cols-1 md:grid-cols-4 mx-4 mt-4 lg:grid-cols-4 gap-4 mb-6">
+    <div class=" bg-gay-100 grid grid-cols-1 md:grid-cols-3 mx-4 mt-4 lg:grid-cols-3 gap-4 mb-6">
         <!-- Total Sales Card -->
         <div class="bg-white shadow-md rounded-lg p-6 flex flex-col justify-between">
             <div class="flex justify-between items-center mb-3">
@@ -9,43 +9,44 @@
             </div>
 
             <div>
-                <p class="text-2xl font-bold text-gray-800">Tsh 390,751.95</p>
+                <p class="text-2xl font-bold text-gray-800">{{ number_format($total_sales,2) }} </p>
                 <p class="text-sm text-green-500 mt-1">▲ 15% from last month</p>
             </div>
         </div>
         <!-- New Orders Card -->
         <div class="bg-white shadow-md rounded-lg p-6 flex flex-col justify-between">
             <div class="flex justify-between items-center mb-3">
-                <h3 class="text-sm font-semibold text-gray-500">New Orders</h3>
+                <h3 class="text-sm font-semibold text-gray-500"> Poducts On Market</h3>
                 <span class="text-gray-400"><!-- Icon placeholder --></span>
             </div>
             <div>
-                <p class="text-2xl font-bold text-gray-800">76,243</p>
+                <p class="text-2xl font-bold text-gray-800">{{ $onstock_product }}</p>
                 <p class="text-sm text-red-500 mt-1">▼ 10% from Yesterday</p>
             </div>
         </div>
         <!-- Total Products Card -->
         <div class="bg-white shadow-md rounded-lg p-6 flex flex-col justify-between">
             <div class="flex justify-between items-center mb-3">
-                <h3 class="text-sm font-semibold text-gray-500">Total Products</h3>
+                <h3 class="text-sm font-semibold text-gray-500">Products Out the  Market</h3>
                 <span class="text-gray-400"><!-- Icon placeholder --></span>
             </div>
             <div>
-                <p class="text-2xl font-bold text-gray-800">751.95</p>
+                <p class="text-2xl font-bold text-gray-800">{{ $outstock_product }}</p>
                 <p class="text-sm text-green-500 mt-1">▲ 15% from last month</p>
             </div>
         </div>
         <!-- Total Users Card -->
-        <div class="bg-white shadow-md rounded-lg p-6 flex flex-col justify-between">
+        {{-- <div class="bg-white shadow-md rounded-lg p-6 flex flex-col justify-between">
             <div class="flex justify-between items-center mb-3">
-                <h3 class="text-sm font-semibold text-gray-500">Total Users</h3>
+                <h3 class="text-sm font-semibold text-gray-500">  </h3>
                 <span class="text-gray-400"><!-- Icon placeholder --></span>
             </div>
             <div>
                 <p class="text-2xl font-bold text-gray-800">571</p>
                 <p class="text-sm text-green-500 mt-1"> ▲ 5% from last month</p>
             </div>
-        </div>
+        </div> --}}
+
     </div>
 
 
@@ -55,7 +56,7 @@
         <!-- Overview Section -->
 
         <!-- Charts Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <div class="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-6">
             <!-- Overall Sales Chart -->
             <div class="bg-white shadow-md rounded-lg p-6 col-span-2">
 
@@ -69,14 +70,14 @@
                     </div>
             </div>
             <!-- Best Selling Products Chart -->
-            <div class="bg-white shadow-md rounded-lg p-6">
+            {{-- <div class="bg-white shadow-md rounded-lg p-6">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-lg font-semibold text-gray-700">Best Selling Products</h3>
                 </div>
                 <div class="chart-container" style="position: relative; height:40vh; width:100%">
                     <canvas id="donutChart" width="400" height="200"></canvas>
                 </div>
-            </div>
+            </div> --}}
         </div>
 
 

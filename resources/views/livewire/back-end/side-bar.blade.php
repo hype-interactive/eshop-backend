@@ -146,7 +146,29 @@
 
 
 
+            <li class="relative px-4 py-2 mb-4 last:mb-0 cursor-pointer group">
+                <div wire:click="selectedMenu(10)" wire:loading.attr="disabled" class="flex items-center justify-between text-white  hover:text-[#F5AD42] truncate transition duration-150">
+                    <div class="flex items-center">
+                        <div wire:loading wire:target="selectedMenu(10)">
+                            <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m9 14.25 6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0c1.1.128 1.907 1.077 1.907 2.185ZM9.75 9h.008v.008H9.75V9Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm4.125 4.5h.008v.008h-.008V13.5Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"></path>
+                            </svg>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m9 14.25 6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0c1.1.128 1.907 1.077 1.907 2.185ZM9.75 9h.008v.008H9.75V9Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm4.125 4.5h.008v.008h-.008V13.5Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"></path>
+                        </svg>
 
+
+
+                        <span class="text-base  hover:text-[#F5AD42] text-white font-bold ml-3"> Subscriptions </span>
+                    </div>
+
+
+
+                    <div class="flex shrink-0 ml-2 duration-200"></div>
+                </div>
+                <div class=" @if($this->menu_id==10)   -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r  from-[#F5AD42] to-transparent  opacity-100 transition-opacity duration-200    @endif absolute  -ml-6 left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-[#F5AD42] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+            </li>
 
 
 
