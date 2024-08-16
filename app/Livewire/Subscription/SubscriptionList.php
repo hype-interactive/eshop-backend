@@ -23,7 +23,7 @@ class SubscriptionList extends Component
     {
         EndOfDay::dispatch();
 
-        
+
         $this->sub_menu_id = 2;
         session()->put('user_id', $id);
     }
@@ -71,7 +71,6 @@ class SubscriptionList extends Component
         // subascription id
 
         DB::transaction(function () use ($id) {
-
             Subscription::where('id', $id)->update([
 
                 'start_date' => now()->format('Y-m-d'),
@@ -80,6 +79,8 @@ class SubscriptionList extends Component
             ]);
 
             $data = Subscription::find($id);
+            // update status
+            User::where('id',$data->user_id)->update(['status'=>'active']);
 
             $amount = Package::where('id', $data->plan_id)->value('price');
 
