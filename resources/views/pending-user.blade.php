@@ -14,6 +14,14 @@
 
 <body class="antialiased">
 
+  
+
+
+    <livewire:component.subscription />
+
+
+
+
     <main class="grid min-h-full place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
         <div class="text-center">
             @if(session('message_sucess'))
@@ -112,6 +120,7 @@
         </div>
     </main>
 
+    
 
     <script src="{{ mix('js/app.js') }}"></script>
 </body>
