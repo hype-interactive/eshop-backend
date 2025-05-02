@@ -22,6 +22,7 @@ return new class extends Migration
              $table->string('payment_status')->nullable();
              $table->string('status')->nullable();
             $table->string('payment_number')->nullable();
+            $table->unsignedBigInteger('vendor_id')->nullable();
              $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
 
             $table->timestamps();
