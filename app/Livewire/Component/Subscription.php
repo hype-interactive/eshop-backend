@@ -60,8 +60,22 @@ class Subscription extends Component
     /**
      * Initiate payment process
      */
-    public function initiatePayment()
+
+
+     public function closePaymentModal(){
+      $this->showPaymentModal=!$this->showPaymentModal;
+
+     }  
+
+     public function retryPayment(){
+
+        $this->paymentError=false;
+     }
+     
+     public function initiatePayment()
     {
+        $this->processingPayment = true;
+
         // Validate input
         $this->validate([
             'paymentPhone' => 'required|regex:/^[0-9]{10,12}$/',
@@ -73,7 +87,6 @@ class Subscription extends Component
             'paymentNetwork.in' => 'Please select a valid payment network'
         ]);
 
-        $this->processingPayment = true;
 
         sleep(2);
         
