@@ -3,7 +3,7 @@
     <div class="max-w-full">
         <div class="flex justify-between h-16  mx-4">
             <div class="flex  w-2/3">
-                <form class="w-full mx-full mt-3 ">
+                <!-- <form class="w-full mx-full mt-3 ">
                     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -13,19 +13,19 @@
                         </div>
                         <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-50 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500   " placeholder="Search Mockups, Logos..." required />
                     </div>
-                </form>
+                </form> -->
 
             </div>
 
             <div class="flex items-center space-x-6 ">
                 <!-- Notification Icon -->
-                <div class="relative ">
+                <!-- <div class="relative ">
                     <button class="text-gray-500  hover:text-gray-700  focus:outline-none">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4.05-5.658A2 2 0 1010 6.342 6.002 6.002 0 006 11v3.159c0 .53-.21 1.04-.595 1.436L4 17h5m0 0v1a3 3 0 006 0v-1m-6 0h6"></path>
                         </svg>
                     </button>
-                </div>
+                </div> -->
 
                 <!-- Settings Dropdown -->
                 <div class="relative">
