@@ -1,470 +1,406 @@
-<div class="bg-gray-2" >
-
-
+<div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
     @switch($this->sub_page)
         @case(1)
-
-        <div class="container mx-auto p-6">
-           @if(session('vendor_id'))
-
-           @else
-
-            <div class="flex justify-between mb-4">
-                <div class="text-xl font-semibold">Inventory</div>
-                <select class="border-gray-200 rounded p-2">
-                    <option>Jan - Jul, 2024</option>
-                    <option>Jan - Jul, 2024</option>
-                    <option>Jan - Jul, 2024</option>
-                    <option>Jan - Jul, 2024</option>
-
-                </select>
-            </div>
-            <div class="grid grid-cols-4 gap-4 mb-6">
-                <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600">Total Products</div>
-                    <div class="text-xl font-semibold"> {{ $this->total_product }} </div>
+        <div class="container mx-auto p-6 space-y-8">
+            @if(session('vendor_id'))
+            @else
+            <!-- Header Section -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">Inventory Management</h1>
+                    <p class="text-gray-600">Manage your products, track stock levels, and monitor performance</p>
                 </div>
-                <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600">Total Categories</div>
-                    <div class="text-xl font-semibold"> {{  $this->total_category}} </div>
-                </div>
-                <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600">Out of Stock Products</div>
-                    <div class="text-xl font-semibold"> 75 </div>
-                </div>
-                <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600">Low Stock Products</div>
-                    <div class="text-xl font-semibold">571</div>
+                <div class="flex items-center gap-4">
+                    <select class="px-4 py-2 border border-gray-200 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
+                        <option>Jan - Jul, 2024</option>
+                        <option>Aug - Dec, 2024</option>
+                        <option>Jan - Jul, 2025</option>
+                    </select>
                 </div>
             </div>
 
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Total Products</p>
+                            <p class="text-2xl font-bold text-gray-900">{{ $this->total_product }}</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Total Categories</p>
+                            <p class="text-2xl font-bold text-gray-900">{{ $this->total_category }}</p>
+                        </div>
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Out of Stock</p>
+                            <p class="text-2xl font-bold text-red-600">75</p>
+                        </div>
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.314 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600 mb-1">Low Stock</p>
+                            <p class="text-2xl font-bold text-orange-600">571</p>
+                        </div>
+                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @endif
 
-                <section class="container mx-auto">
-
-
-                    <div class="flex flex-col mt-6">
-                        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                            <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-
-                                <div class="flex p-4  items-center bg-white justify-between gap-x-3">
-                                    <div class="relative">
-                                        <h2 class="text-lg  font-medium text-gray-800 s:text-white"> Products </h2>
-                                         <h6>  List of products  </h6>
-                                    </div>
-
-                                    <x-button wire:click="changeSubPage(2)" class="ms-4  inline-flex  bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2 ">
-                                        {{ __(' New Product') }}
-                                    </x-button>
-                                </div>
-
-                                <div class="overflow-hidden border border-gray-200  md:rounded-lg">
-                                    <table class="min-w-full divide-y divide-gray-200 ">
-                                        <thead class="bg-white ">
-                                            <tr>
-                                                <th scope="col" class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 ">
-                                                    <div class="flex items-center gap-x-3">
-                                                        <input type="checkbox" class="text-blue-500 border-gray-300 rounded  ">
-                                                        <span>Name</span>
-                                                    </div>
-                                                </th>
-
-                                                <th scope="col" class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 ">
-                                                    <button class="flex items-center gap-x-2">
-                                                        <span>Status</span>
-
-                                                        <svg class="h-3" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M2.13347 0.0999756H2.98516L5.01902 4.79058H3.86226L3.45549 3.79907H1.63772L1.24366 4.79058H0.0996094L2.13347 0.0999756ZM2.54025 1.46012L1.96822 2.92196H3.11227L2.54025 1.46012Z" fill="currentColor" stroke="currentColor" stroke-width="0.1" />
-                                                            <path d="M0.722656 9.60832L3.09974 6.78633H0.811638V5.87109H4.35819V6.78633L2.01925 9.60832H4.43446V10.5617H0.722656V9.60832Z" fill="currentColor" stroke="currentColor" stroke-width="0.1" />
-                                                            <path d="M8.45558 7.25664V7.40664H8.60558H9.66065C9.72481 7.40664 9.74667 7.42274 9.75141 7.42691C9.75148 7.42808 9.75146 7.42993 9.75116 7.43262C9.75001 7.44265 9.74458 7.46304 9.72525 7.49314C9.72522 7.4932 9.72518 7.49326 9.72514 7.49332L7.86959 10.3529L7.86924 10.3534C7.83227 10.4109 7.79863 10.418 7.78568 10.418C7.77272 10.418 7.73908 10.4109 7.70211 10.3534L7.70177 10.3529L5.84621 7.49332C5.84617 7.49325 5.84612 7.49318 5.84608 7.49311C5.82677 7.46302 5.82135 7.44264 5.8202 7.43262C5.81989 7.42993 5.81987 7.42808 5.81994 7.42691C5.82469 7.42274 5.84655 7.40664 5.91071 7.40664H6.96578H7.11578V7.25664V0.633865C7.11578 0.42434 7.29014 0.249976 7.49967 0.249976H8.07169C8.28121 0.249976 8.45558 0.42434 8.45558 0.633865V7.25664Z" fill="currentColor" stroke="currentColor" stroke-width="0.3" />
-                                                        </svg>
-                                                    </button>
-                                                </th>
-
-                                                @if(auth()->user()->role_id==1)
-                                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
-                                                    <button class="flex items-center gap-x-2">
-                                                        <span> Set final price </span>
-
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
-                                                        </svg>
-                                                    </button>
-                                                </th>
-                                                @endif
-
-                                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Unit </th>
-                                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Expire Date </th>
-                                                @if(auth()->user()->role_id==1)
-                                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Final Price  </th>
-                                                @endif
-                                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Vendor  Price  </th>
-
-
-
-                                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Feature & Visibility  </th>
-
-                                                <th scope="col" class="relative py-3.5 px-4">
-                                                    <span class="sr-only">Edit</span>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="bg-white divide-y divide-gray-200  ">
-
-                                            @foreach ($this->products as  $product)
-
-
-                                            <tr>
-                                                <td class="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                                    <div class="inline-flex items-center gap-x-3">
-                                                        <input type="checkbox" class="text-blue-500 border-gray-300 rounded ">
-
-                                                        <div class="flex items-center gap-x-2">
-                                                            <img class="object-cover w-16 h-16 rounded-lg" src=" @if($product->image_url)  {{ asset($product->image_url) }}  @else  {{ asset('public/product/inventoryImage.jpeg') }} @endif  " alt="inventory image ">
-                                                            <div>
-                                                                <h2 class="font-medium text-gray-800  "> {{ $product->name }}</h2>
-                                                                <p class="text-sm font-normal text-gray-600 ">{{ DB::table('product_categories')->where('id',$product->product_category_id)->value('name') }} </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                                    <div class=" inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 ">
-
-
-                                                        <h2 class="text-sm font-normal text-emerald-500"> {{ $product->status }}</h2>
-
-
-                                                    </div>
-                                                </td>
-                                                @if(auth()->user()->role_id==1)
-                                                <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                                                    @if($product->final_price <= 1)
-                                                    <div class=" w-10 h-10 ">
-
-                                                    <span wire:click="editFinalPriceModal({{ $product->id }})" class=" w-4 h-4">
-                                                            <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
-                                                              </svg>
-                                                        </span>
-
-                                                    </div>
-
-                                                        @else
-
-
-                                                        @if(auth()->user()->role_id==1)
-
-                                                                <div class=" w-10 h-10 ">
-
-                                                                <span wire:click="editProductFinalPriceModal({{ $product->id }})" class=" w-4 h-4 cursor-pointer">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                                                                        </svg>
-                                                                    </span>
-
-                                                                </div>
-                                                        @endif
-
-                                                         @endif
-                                                    </td>
-
-                                                    @endif
-                                                    <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"> {{ $product->quantity }} {{ $product->unit }}</td>
-                                                <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"> {{ $product->expire_date }}</td>
-                                                @if(auth()->user()->role_id==1)
-                                                <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"> {{  number_format($product->final_price ,2) }} TZS </td>
-                                                @endif
-                                                <td class="px-4 py-4 text-sm text-gray-500  whitespace-nowrap"> {{ number_format( $product->vendor_price ,2 ) }} TZS</td>
-
-
-
-                                                <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                                    <div class="relative items-center gap-x-2">
-                                                        @if($product->visibility)
-                                                        <p class="px-3 py-1 text-xs text-indigo-500 rounded-full  bg-indigo-100/60"> Visible </p>
-                                                         @endif
-                                                         @if($product->featured)
-                                                        <p class="px-3 py-1 text-xs text-indigo-500 rounded-full  bg-yellow-100/60"> Featured </p>
-                                                        @endif
-
-                                                    </div>
-                                                </td>
-                                                <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                                    <div class="flex items-center gap-x-6">
-                                                        @if(auth()->user()->role_id==1)
-                                                        <button wire:click="editActionModal({{ $product->id }})"  class="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                                            </svg>
-                                                        </button>
-                                                        @endif  
-
-                                                        <button wire:click="enableEditPage({{ $product->id }})"  >
-
-                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                                            </svg>
-
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div>
+            <!-- Products Table Section -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                <!-- Table Header -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 border-b border-gray-100">
+                    <div>
+                        <h2 class="text-xl font-semibold text-gray-900 mb-1">Products</h2>
+                        <p class="text-gray-600">Manage your product inventory</p>
                     </div>
+                    <button wire:click="changeSubPage(2)" class="mt-4 sm:mt-0 inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg shadow-sm hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        New Product
+                    </button>
+                </div>
 
-
-                </section>
-
-
+                <!-- Table -->
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                        <span>Product</span>
+                                    </div>
+                                </th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Status
+                                </th>
+                                @if(auth()->user()->role_id==1)
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Set Final Price
+                                </th>
+                                @endif
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Unit</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Expire Date</th>
+                                @if(auth()->user()->role_id==1)
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Final Price</th>
+                                @endif
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vendor Price</th>
+                                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Features</th>
+                                <th scope="col" class="relative px-6 py-4">
+                                    <span class="sr-only">Actions</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach ($this->products as $product)
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center space-x-4">
+                                        <input type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="h-12 w-12 flex-shrink-0">
+                                                <img class="h-12 w-12 rounded-lg object-cover border-2 border-gray-100" 
+                                                     src="@if($product->image_url){{ asset($product->image_url) }}@else{{ asset('public/product/inventoryImage.jpeg') }}@endif" 
+                                                     alt="Product image">
+                                            </div>
+                                            <div>
+                                                <div class="text-sm font-medium text-gray-900">{{ $product->name }}</div>
+                                                <div class="text-sm text-gray-500">{{ DB::table('product_categories')->where('id',$product->product_category_id)->value('name') }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        {{ $product->status }}
+                                    </span>
+                                </td>
+                                @if(auth()->user()->role_id==1)
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @if($product->final_price <= 1)
+                                    <button wire:click="editFinalPriceModal({{ $product->id }})" 
+                                            class="inline-flex items-center p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </button>
+                                    @else
+                                    <button wire:click="editProductFinalPriceModal({{ $product->id }})" 
+                                            class="inline-flex items-center p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                    @endif
+                                </td>
+                                @endif
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $product->quantity }} {{ $product->unit }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $product->expire_date }}</td>
+                                @if(auth()->user()->role_id==1)
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ number_format($product->final_price, 2) }} TZS</td>
+                                @endif
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ number_format($product->vendor_price, 2) }} TZS</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex flex-wrap gap-1">
+                                        @if($product->visibility)
+                                        <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-blue-100 text-blue-800">
+                                            Visible
+                                        </span>
+                                        @endif
+                                        @if($product->featured)
+                                        <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-yellow-100 text-yellow-800">
+                                            Featured
+                                        </span>
+                                        @endif
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <div class="flex items-center justify-end space-x-2">
+                                        @if(auth()->user()->role_id==1)
+                                        <button wire:click="editActionModal({{ $product->id }})" 
+                                                class="inline-flex items-center p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                            </svg>
+                                        </button>
+                                        @endif
+                                        <button wire:click="enableEditPage({{ $product->id }})" 
+                                                class="inline-flex items-center p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-            @break
+        @break
 
-            @case(2)
-            <livewire:inventory.add-inventory />
-            @break
+        @case(2)
+        <livewire:inventory.add-inventory />
+        @break
 
-            @case(3)
-            <livewire:inventory.edit-inventory />
-            @break
+        @case(3)
+        <livewire:inventory.edit-inventory />
+        @break
 
         @default
-
     @endswitch
 
-
-
-
-
+    <!-- Delete Modal -->
     @if($this->delete_modal_boo)
-    <div class="overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full flex"
-        id="delete-product-modal" aria-modal="true" role="dialog">
-        <div class="relative px-4 w-full max-w-md h-full md:h-auto">
-
-            <div class="relative bg-white rounded-2xl shadow-lg">
-
-                <div class="flex justify-end p-2">
-                    <button wire:click="editActionModal(2)"  type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-2xl text-sm p-1.5 ml-auto inline-flex items-center"
-                        data-modal-toggle="delete-product-modal">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="p-6 pt-0 text-center">
-                    <svg class="mx-auto w-20 h-20 text-red-500" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-
-
-                    @if (session()->has('message'))
-
-                    {{-- @if (session('alert-class') == 'alert-success') --}}
-                        <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
-                            <div class="flex">
-                                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
-                                <div>
-                                    <p class="font-bold">The process is completed</p>
-                                    <p class="text-sm">{{ session('message') }} </p>
-                                </div>
-                            </div>
-                        </div>
-                    {{-- @endif --}}
-                @endif
-
-
-                    <h3 class="mt-5 mb-6 text-xl font-normal text-gray-500">Are you sure you want to disable this
-                       Product ?
-
-                    </h3>
-                    <div class="text-xs text-red-500"> you will only change the the status and customer will not be able to see this product   </div>
-                    <a wire:click="delete()"
-                        class="text-white cursor-pointer  bg-gradient-to-br from-red-400 to-red-600 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform">
-                        Yes, I'm sure
-                    </a>
-                    <a  wire:click="editActionModal(2)"
-                        class="text-gray-900 cursor-pointer bg-white hover:bg-gray-100 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center hover:scale-[1.02] transition-transform"
-                        data-modal-toggle="delete-product-modal">
-                        No, cancel
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
- @endif
-
-
-
- @if($this->enable_edit_final_price_modal)
-<div class="overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full flex"
-    id="delete-product-modal" aria-modal="true" role="dialog">
-    <div class="relative px-4 w-full max-w-md h-full md:h-auto">
-
-        <div class="relative bg-white rounded-2xl shadow-lg">
-
-            <div class="flex justify-end p-2">
-                <button wire:click="editFinalPriceModal(2)" type="button"
-                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-2xl text-sm p-1.5 ml-auto inline-flex items-center"
-                    data-modal-toggle="delete-product-modal">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                            clip-rule="evenodd">
-                        </path>
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">Disable Product</h3>
+                <button wire:click="editActionModal(2)" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </button>
             </div>
 
-            <div class="p-6 pt-0 text-center">
-                <svg class="mx-auto w-20 h-20 text-red-500" fill="none" stroke="currentColor"
-                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-
-                @if (session()->has('message'))
-                    <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
-                        <div class="flex">
-                            <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
-                            <div>
-                                <p class="font-bold">The process is completed</p>
-                                <p class="text-sm">{{ session('message') }} </p>
-                            </div>
-                        </div>
+            @if (session()->has('message'))
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                <div class="flex">
+                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <div>
+                        <h4 class="text-sm font-medium text-green-800">Success</h4>
+                        <p class="text-sm text-green-700">{{ session('message') }}</p>
                     </div>
-                @endif
+                </div>
+            </div>
+            @endif
 
-                <h3 class="mt-5 mb-6 text-xl font-normal text-gray-500">Update Final Price</h3>
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.314 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                    </svg>
+                </div>
+                <p class="text-lg text-gray-900 mb-2">Are you sure you want to disable this product?</p>
+                <p class="text-sm text-gray-600">This will change the status and customers won't be able to see this product.</p>
+            </div>
 
-                <div>
-                    <div class="mb-4">
-                        <label for="vendor_price" class="block text-sm font-medium text-gray-700">Vendor Price</label>
-                        <div class=""> {{ number_format($this->vendor_price ,2) }} TZS  </div>
-
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="final_price" class="block text-sm font-medium text-gray-700">Final Price</label>
-                        <input wire:model="final_price" type="number" id="final_price" name="final_price" wire:model="final_price"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-gray-900 sm:text-sm"
-                            min="{{ $vendor_price }}" step="0.01">
-                        @error('final_price') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                    </div>
-
-                    <button type="button" wire:click="editFinalPriceModal(2)"
-                    class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 font-medium rounded-lg text-base px-3 py-2.5 text-center hover:scale-[1.02] transition-transform">
+            <div class="flex space-x-3">
+                <button wire:click="editActionModal(2)" 
+                        class="flex-1 px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium transition-colors">
                     Cancel
                 </button>
-
-                    <button  wire:click="setFinalPrice()" type="submit"
-                        class="tw-full inline-flex  bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2">
-                        Save
-                    </button>
-
-
-                </div>
+                <button wire:click="delete()" 
+                        class="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors">
+                    Yes, Disable
+                </button>
             </div>
         </div>
     </div>
-</div>
-@endif
+    @endif
 
-
-@if($this->enable_edit_final_price)
-
-<div class="overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full flex"
-    id="delete-product-modal" aria-modal="true" role="dialog">
-    <div class="relative px-4 w-full max-w-md h-full md:h-auto">
-
-        <div class="relative bg-white rounded-2xl shadow-lg">
-
-            <div class="flex justify-end p-2">
-                <button wire:click="editFinalPriceModal(2)" type="button"
-                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-2xl text-sm p-1.5 ml-auto inline-flex items-center"
-                    data-modal-toggle="delete-product-modal">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                            clip-rule="evenodd">
-                        </path>
+    <!-- Set Final Price Modal -->
+    @if($this->enable_edit_final_price_modal)
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-semibold text-gray-900">Set Final Price</h3>
+                <button wire:click="editFinalPriceModal(2)" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </button>
             </div>
 
-            <div class="p-6 pt-0 text-center">
-                <svg class="mx-auto w-20 h-20 text-red-500" fill="none" stroke="currentColor"
-                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-
-                @if (session()->has('message'))
-                    <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
-                        <div class="flex">
-                            <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
-                            <div>
-                                <p class="font-bold">The process is completed</p>
-                                <p class="text-sm">{{ session('message') }} </p>
-                            </div>
-                        </div>
+            @if (session()->has('message'))
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                <div class="flex">
+                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <div>
+                        <h4 class="text-sm font-medium text-green-800">Success</h4>
+                        <p class="text-sm text-green-700">{{ session('message') }}</p>
                     </div>
-                @endif
+                </div>
+            </div>
+            @endif
 
-                <h3 class="mt-5 mb-6 text-xl font-normal text-gray-500">Update Final Price</h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Vendor Price</label>
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-gray-900 font-medium">
+                        {{ number_format($this->vendor_price, 2) }} TZS
+                    </div>
+                </div>
 
                 <div>
-                    <div class="mb-4">
-                        <label for="vendor_price" class="block text-sm font-medium text-gray-700">Vendor Price</label>
-                        <div class=""> {{ number_format($this->vendor_price ,2) }} TZS  </div>
+                    <label for="final_price" class="block text-sm font-medium text-gray-700 mb-2">Final Price</label>
+                    <input wire:model="final_price" 
+                           type="number" 
+                           id="final_price" 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           min="{{ $vendor_price }}" 
+                           step="0.01">
+                    @error('final_price') 
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
 
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="final_price" class="block text-sm font-medium text-gray-700">Final Price</label>
-                        <input wire:model="final_price" type="number" id="final_price" name="final_price" wire:model="final_price"
-                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm text-gray-900 sm:text-sm"
-                            min="{{ $vendor_price }}" step="0.01">
-                        @error('final_price') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
-                    </div>
-
-                    <button type="button" wire:click="$toggle('enable_edit_final_price')"
-                    class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 font-medium rounded-lg text-base px-3 py-2.5 text-center hover:scale-[1.02] transition-transform">
+            <div class="flex space-x-3 mt-6">
+                <button wire:click="editFinalPriceModal(2)" 
+                        class="flex-1 px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium transition-colors">
                     Cancel
                 </button>
-
-                    <button  wire:click="editFinalPrice()" type="submit"
-                        class="tw-full inline-flex  bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2">
-                        Update
-                    </button>
-
-
-                </div>
+                <button wire:click="setFinalPrice()" 
+                        class="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                    Save Price
+                </button>
             </div>
         </div>
     </div>
-</div>
+    @endif
 
+    <!-- Edit Final Price Modal -->
+    @if($this->enable_edit_final_price)
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-lg font-semibold text-gray-900">Update Final Price</h3>
+                <button wire:click="editFinalPriceModal(2)" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
 
-@endif
+            @if (session()->has('message'))
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                <div class="flex">
+                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <div>
+                        <h4 class="text-sm font-medium text-green-800">Success</h4>
+                        <p class="text-sm text-green-700">{{ session('message') }}</p>
+                    </div>
+                </div>
+            </div>
+            @endif
 
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Vendor Price</label>
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-gray-900 font-medium">
+                        {{ number_format($this->vendor_price, 2) }} TZS
+                    </div>
+                </div>
 
+                <div>
+                    <label for="final_price" class="block text-sm font-medium text-gray-700 mb-2">Final Price</label>
+                    <input wire:model="final_price" 
+                           type="number" 
+                           id="final_price" 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           min="{{ $vendor_price }}" 
+                           step="0.01">
+                    @error('final_price') 
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
 
-
+            <div class="flex space-x-3 mt-6">
+                <button wire:click="$toggle('enable_edit_final_price')" 
+                        class="flex-1 px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium transition-colors">
+                    Cancel
+                </button>
+                <button wire:click="editFinalPrice()" 
+                        class="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors">
+                    Update Price
+                </button>
+            </div>
+        </div>
+    </div>
+    @endif
 </div>

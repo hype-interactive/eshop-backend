@@ -33,10 +33,10 @@ class ProductCategory extends Component
         'photo'=>'required'
         ]);
 
-       if ($this->photo) {
-        $imagePath = $this->photo->store('productCategory/images', 'public');
-        $image_path = Storage::url($imagePath);
-    }
+        if ($this->photo) {
+            $imagePath = $this->photo->store('productCategory/images', 'public');
+            $image_path = url(Storage::url($imagePath));
+        }
 
         ModelsProductCategory::create([
             'name'=>$this->name,

@@ -65,8 +65,9 @@ class AddInventory extends Component
 
         if ($this->photo) {
             $imagePath = $this->photo->store('photos/product', 'public');
-            $productData['image_url'] = Storage::url($imagePath);
+            $productData['image_url'] = url(Storage::url($imagePath));
         }
+        
 
 
         $product = Product::create($productData)->id;

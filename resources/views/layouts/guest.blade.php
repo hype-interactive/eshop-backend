@@ -81,7 +81,7 @@
 
 
         <!-- Left side: Form area -->
-        <div class="form-container w-full md:w-1/2  flex flex-col">
+        <div class="form-container w-full bg-white md:w-1/2  flex flex-col">
             <!-- Mobile header with logo (visible only on mobile) -->
             <div class="md:hidden bg-[#1C70CD] p-4 flex items-center">
                 <img src="{{ asset('/loginSlider/eshop-icon.png') }}" alt="Logo" class="h-10">
@@ -89,7 +89,7 @@
             </div>
             
             <!-- Main content area with scrolling -->
-            <div class="flex-1 overflow-y-auto py-6 px-4 sm:px-6 lg:px-8 content-area">
+            <div class="flex-1 bg-white  overflow-y-auto py-6 px-4 sm:px-6 lg:px-8 content-area">
                 <div class="w-full max-w-md mx-auto">
                     {{ $slot }}
                 </div>

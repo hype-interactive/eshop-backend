@@ -1,302 +1,317 @@
-<div>
-
-
+<div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
     @switch($this->viewPage)
-
     @case(1)
+    <div class="container mx-auto p-6 space-y-8">
+        <!-- Header Section -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Vendor Management</h1>
+                <p class="text-gray-600">Manage your vendors, track their status, and monitor performance</p>
+            </div>
+        </div>
 
-    <div>
-            <div class="grid grid-cols-4 mt-6  mx-6  gap-4 mb-6">
-                <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600">Total Vendors</div>
-                    <div class="text-xl font-semibold"> {{ $this->total_vendor }} </div>
-                </div>
-                <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600"> Active Vendors</div>
-                    <div class="text-xl font-semibold">{{ $this->active_vendor }}</div>
-                </div>
-                <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600"> Total Products </div>
-                    <div class="text-xl font-semibold"> {{ $this->total_product }} </div>
-                </div>
-                <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600">  onsale Products</div>
-                    <div class="text-xl font-semibold">{{ $this->total_onsale_product }}</div>
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Total Vendors</p>
+                        <p class="text-2xl font-bold text-gray-900">{{ $this->total_vendor }}</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background-color: #305AA3; opacity: 0.1;">
+                        <svg class="w-6 h-6" style="color: #305AA3;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
 
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Active Vendors</p>
+                        <p class="text-2xl font-bold text-green-600">{{ $this->active_vendor }}</p>
+                    </div>
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
 
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Total Products</p>
+                        <p class="text-2xl font-bold" style="color: #305AA3;">{{ $this->total_product }}</p>
+                    </div>
+                    <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background-color: #305AA3; opacity: 0.1;">
+                        <svg class="w-6 h-6" style="color: #305AA3;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
 
-            <div class="px-4 py-8 sm:px-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">On Sale Products</p>
+                        <p class="text-2xl font-bold text-orange-600">{{ $this->total_onsale_product }}</p>
+                    </div>
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                {{-- @if ($this->enable_vendor_registration ==true)
+        <!-- Vendors Table Section -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <!-- Table Header -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-6 border-b border-gray-100">
+                <div>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-1">Vendors</h2>
+                    <p class="text-gray-600">Manage your vendor network</p>
+                </div>
+                <button wire:click="changeSubPage(3)" 
+                        class="mt-4 sm:mt-0 inline-flex items-center px-4 py-2 text-white font-medium rounded-lg shadow-sm hover:shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                        style="background-color: #305AA3; focus:ring-color: #305AA3;"
+                        onmouseover="this.style.backgroundColor='#2A4F8F'" 
+                        onmouseout="this.style.backgroundColor='#305AA3'">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Add Vendor
+                </button>
+            </div>
 
-
-
-                    @else --}}
-
-                    <div class="mt-6">
-
-                        <div class="p-4 bg-white rounded-lg shadow-sm xl:p-8">
-                            <div class="space-y-3 sm:flex sm:items-start sm:space-y-0 sm:justify-between">
-                                <h2 class="text-lg font-medium text-gray-700 capitalize sm:text-xl md:text-2xl"> Vendors </h2>
-
-                                <a  wire:click="changeSubPage(3)"
-                                    class="flex items-center justify-center px-3 py-2 text-sm tracking-wide text-white inline-flex  bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2 ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mx-1" viewBox="0 0 20 20"
-                                        fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-
-                                    <span  class="mx-1 cursor-pointer  ">Add Vendor</span>
-                                </a>
-                            </div>
-
-                            <div class="flex flex-col mt-8">
-                                <div class="-my-2 overflow-x-auto xl:-mx-8">
-                                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                        <div class="overflow-hidden">
-
-                                            <table class="min-w-full divide-y divide-gray-200">
-
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col" class="px-6 py-3 text-left rtl:text-right">
-                                                            <input class="text-indigo-500 rounded-md focus:ring-indigo-500 "
-                                                                type="checkbox">
-                                                        </th>
-
-                                                        <th scope="col"
-                                                            class="px-6 py-3 pr-16 text-sm font-medium tracking-wider text-left text-gray-700 uppercase rtl:text-right whitespace-nowrap">
-                                                            Name
-                                                        </th>
-
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-sm font-medium tracking-wider text-left text-gray-700 uppercase rtl:text-right whitespace-nowrap">
-                                                            Phone Number
-                                                        </th>
-
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-sm font-medium tracking-wider text-left text-gray-700 uppercase rtl:text-right whitespace-nowrap">
-                                                            Status
-                                                        </th>
-
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-sm font-medium tracking-wider text-left text-gray-700 uppercase rtl:text-right whitespace-nowrap">
-                                                            Role
-                                                        </th>
-
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-sm font-medium tracking-wider text-left text-gray-700 uppercase rtl:text-right whitespace-nowrap">
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody class="bg-white divide-y divide-gray-200">
-
-                                                    @foreach ($this->users as $vendor)
-                                                        <tr class="hover:bg-gray-50">
-                                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                                <input class="text-indigo-500 rounded-md focus:ring-indigo-500 "
-                                                                    type="checkbox">
-                                                            </td>
-                                                            <td wire:click="viewVendor({{ $vendor->id }})"
-                                                                class="flex-1 cursor-pointer  px-6 py-4 text-gray-500 whitespace-nowrap">
-                                                                <div class="flex items-center">
-                                                                    <img class="object-cover w-12 h-12 rounded-full"
-                                                                        src=" @if($vendor->image_url) {{ asset($vendor->image_url) }} @else  https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=880&amp;q=80 @endif "
-                                                                        alt=" {{ $vendor->first_name }}">
-                                                                    <div class="mx-3">
-                                                                        <h2 class="font-medium text-gray-700">
-                                                                            {{ $vendor->first_name . ' ' . $vendor->middle_name . ' ' . $vendor->last_name }}
-                                                                        </h2>
-                                                                        <p class="text-gray-500"> {{ $vendor->email }} </p>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-
-                                                            <td class="px-6 py-4 text-gray-500 whitespace-nowrap">
-                                                                {{ $vendor->phone_number }}
-                                                            </td>
-
-                                                            <td class="px-6 py-4 text-gray-500 whitespace-nowrap">
-                                                                <div class="flex items-center">
-                                                                    <span class="p-1.5 rounded-full bg-green-500"></span>
-
-                                                                    <span class="mx-4">
-                                                                        {{ $vendor->status }}
-                                                                    </span>
-                                                                </div>
-                                                            </td>
-
-                                                            <td class="px-6 py-4 text-gray-500 whitespace-nowrap">
-                                                                {{ DB::table('roles')->where('id', $vendor->role_id)->value('name') }}
-                                                            </td>
-
-                                                            <td class="px-6 py-4 whitespace-nowrap"></td>
-
-                                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                                <div class="flex items-center">
-                                                                    <button  wire:click="editVendor({{ $vendor->id }})"
-                                                                        class="mx-4 text-gray-500 focus:outline-none hover:text-indigo-500">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
-                                                                            fill="none" viewBox="0 0 24 24"
-                                                                            stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                                stroke-width="2"
-                                                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                                                                            </path>
-                                                                        </svg>
-                                                                    </button>
-
-
-
-
-                                                                    <button   wire:click ="deleteActionModal({{ $vendor->id   }})"
-                                                                        class="text-gray-500 focus:outline-none hover:text-indigo-500">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
-                                                                            fill="none" viewBox="0 0 24 24"
-                                                                            stroke="currentColor">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
-
-                                                                        </svg>
-
-                                                                    </button>
-
-
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-
-                                                </tbody>
-                                            </table>
-
-                                            <div class="w-full mt-8 bg-white">
-                                                <div
-                                                    class="container flex flex-col items-center mx-auto space-y-6 sm:flex-row sm:justify-between sm:space-y-0 ">
-                                                    <div class="-mx-2">
-                                                        <a href="#"
-                                                            class="inline-flex items-center justify-center px-4 py-1 mx-2 text-gray-700 transition-colors duration-200 transform bg-gray-100 rounded-lg">
-                                                            1
-                                                        </a>
-
-                                                        <a href="#"
-                                                            class="inline-flex items-center justify-center px-4 py-1 mx-2 text-gray-700 transition-colors duration-200 transform rounded-lg hover:bg-gray-100">
-                                                            2
-                                                        </a>
-
-                                                        <a href="#"
-                                                            class="inline-flex items-center justify-center px-4 py-1 mx-2 text-gray-700 transition-colors duration-200 transform rounded-lg hover:bg-gray-100">
-                                                            3
-                                                        </a>
-                                                    </div>
-
-                                                    <div class="text-gray-500">
-                                                        <span class="font-medium text-gray-700">1 - 25</span> of 77 records
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
+            <!-- Table -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-4 text-left">
+                                <input type="checkbox" class="h-4 w-4 border-gray-300 rounded transition-colors" style="color: #305AA3; focus:ring-color: #305AA3;">
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Vendor Details
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Contact
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Role
+                            </th>
+                            <th scope="col" class="relative px-6 py-4">
+                                <span class="sr-only">Actions</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach ($this->users as $vendor)
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <input type="checkbox" class="h-4 w-4 border-gray-300 rounded transition-colors" style="color: #305AA3;">
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div wire:click="viewVendor({{ $vendor->id }})" class="flex items-center cursor-pointer group">
+                                    <div class="h-12 w-12 flex-shrink-0">
+                                        <img class="h-12 w-12 rounded-full object-cover border-2 border-gray-100 transition-colors" 
+                                             style="group-hover:border-color: #305AA3;"
+                                             src="@if($vendor->image_url){{ asset($vendor->image_url) }}@else https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80 @endif" 
+                                             alt="{{ $vendor->first_name }}">
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900 group-hover:text-gray-700 transition-colors">
+                                            {{ $vendor->first_name . ' ' . $vendor->middle_name . ' ' . $vendor->last_name }}
                                         </div>
+                                        <div class="text-sm text-gray-500">{{ $vendor->email }}</div>
                                     </div>
                                 </div>
-                            </div>
-
-
-                        </div>
-
-                    </div>
-                {{-- @endif --}}
-
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center text-sm text-gray-900">
+                                    <svg class="w-4 h-4 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                    </svg>
+                                    {{ $vendor->phone_number }}
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
+                                    {{ $vendor->status }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium text-white" style="background-color: #305AA3;">
+                                    {{ DB::table('roles')->where('id', $vendor->role_id)->value('name') }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <div class="flex items-center justify-end space-x-2">
+                                    <button wire:click="editVendor({{ $vendor->id }})" 
+                                            class="inline-flex items-center p-2 text-gray-400 hover:bg-blue-50 rounded-lg transition-colors"
+                                            style="hover:color: #305AA3;">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                    <button wire:click="deleteActionModal({{ $vendor->id }})" 
+                                            class="inline-flex items-center p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-    </div>
 
-        @break
+            <!-- Enhanced Pagination -->
+            <div class="bg-white px-6 py-4 border-t border-gray-200">
+                <div class="flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0">
+                    <!-- Left side - Results info -->
+                    <div class="flex items-center text-sm text-gray-700">
+                        <span>Showing</span>
+                        <select class="mx-2 px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1" style="focus:ring-color: #305AA3; focus:border-color: #305AA3;">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        <span>of <strong>{{ $this->total_vendor }}</strong> vendors</span>
+                    </div>
 
-        @case(2)
-            <livewire:vendor.view-vendor />
-        @break
+                    <!-- Center - Page navigation -->
+                    <div class="flex items-center space-x-1">
+                        <!-- Previous Button -->
+                        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                            Previous
+                        </button>
 
-        @case(3)
-        <livewire:vendor.add-vendor />
-        @break
+                        <!-- Page Numbers -->
+                        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-white border border-gray-300 transition-colors"
+                                style="background-color: #305AA3; border-color: #305AA3;">
+                            1
+                        </button>
+                        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 transition-colors">
+                            2
+                        </button>
+                        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 transition-colors">
+                            3
+                        </button>
+                        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 transition-colors">
+                            4
+                        </button>
+                        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 transition-colors">
+                            5
+                        </button>
 
-        @case(4)
-            <livewire:vendor.edit-vendor />
-        @break
+                        <!-- Next Button -->
+                        <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 transition-colors">
+                            Next
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
 
-        @default
-    @endswitch
-
-
-
-
-    @if($this->delete_modal_boo)
-    <div class="overflow-y-auto overflow-x-hidden fixed right-0 left-0 top-4 z-50 justify-center items-center md:inset-0 h-modal sm:h-full flex"
-        id="delete-product-modal" aria-modal="true" role="dialog">
-        <div class="relative px-4 w-full max-w-md h-full md:h-auto">
-
-            <div class="relative bg-white rounded-2xl shadow-lg">
-
-                <div class="flex justify-end p-2">
-                    <button wire:click="$toggle('delete_modal_boo')"  type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-2xl text-sm p-1.5 ml-auto inline-flex items-center"
-                        data-modal-toggle="delete-product-modal">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
+                    <!-- Right side - Jump to page -->
+                    <div class="flex items-center text-sm text-gray-700">
+                        <span class="mr-2">Go to page:</span>
+                        <input type="number" min="1" max="10" 
+                               class="w-16 px-2 py-1 border border-gray-300 rounded-md text-sm text-center focus:outline-none focus:ring-1"
+                               style="focus:ring-color: #305AA3; focus:border-color: #305AA3;"
+                               placeholder="1">
+                    </div>
                 </div>
 
-                <div class="p-6 pt-0 text-center">
-                    <svg class="mx-auto w-20 h-20 text-red-500" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-
-
-                    @if (session()->has('message'))
-
-                    {{-- @if (session('alert-class') == 'alert-success') --}}
-                        <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
-                            <div class="flex">
-                                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
-                                <div>
-                                    <p class="font-bold">The process is completed</p>
-                                    <p class="text-sm">{{ session('message') }} </p>
-                                </div>
-                            </div>
-                        </div>
-                    {{-- @endif --}}
-                @endif
-
-
-                    <h3 class="mt-5 mb-6 text-xl font-normal text-gray-500">Are you sure you want to delete this
-                        Vendor ?</h3>
-                    <a wire:click="delete()"
-                        class="text-white cursor-pointer  bg-gradient-to-br from-red-400 to-red-600 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2 shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform">
-                        Yes, I'm sure
-                    </a>
-                    <a  wire:click="$toggle('delete_modal_boo')"
-                        class="text-gray-900 cursor-pointer bg-white hover:bg-gray-100 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center hover:scale-[1.02] transition-transform"
-                        data-modal-toggle="delete-product-modal">
-                        No, cancel
-                    </a>
+                <!-- Mobile pagination info -->
+                <div class="sm:hidden mt-3 text-center text-sm text-gray-500">
+                    Page 1 of 10 ({{ $this->total_vendor }} total vendors)
                 </div>
             </div>
         </div>
     </div>
+    @break
 
- @endif
+    @case(2)
+    <livewire:vendor.view-vendor />
+    @break
 
+    @case(3)
+    <livewire:vendor.add-vendor />
+    @break
 
+    @case(4)
+    <livewire:vendor.edit-vendor />
+    @break
 
+    @default
+    @endswitch
+
+    <!-- Delete Modal -->
+    @if($this->delete_modal_boo)
+    <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">Delete Vendor</h3>
+                <button wire:click="$toggle('delete_modal_boo')" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+
+            @if (session()->has('message'))
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-4">
+                <div class="flex">
+                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <div>
+                        <h4 class="text-sm font-medium text-green-800">Success</h4>
+                        <p class="text-sm text-green-700">{{ session('message') }}</p>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.5 0L4.314 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                    </svg>
+                </div>
+                <p class="text-lg text-gray-900 mb-2">Are you sure you want to delete this vendor?</p>
+                <p class="text-sm text-gray-600">This action cannot be undone and will remove all vendor data.</p>
+            </div>
+
+            <div class="flex space-x-3">
+                <button wire:click="$toggle('delete_modal_boo')" 
+                        class="flex-1 px-4 py-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium transition-colors">
+                    Cancel
+                </button>
+                <button wire:click="delete()" 
+                        class="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors">
+                    Yes, Delete
+                </button>
+            </div>
+        </div>
+    </div>
+    @endif
 </div>

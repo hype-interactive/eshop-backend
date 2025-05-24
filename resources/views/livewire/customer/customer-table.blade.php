@@ -1,125 +1,275 @@
-<div>
-    <div class="flex flex-col mt-6">
-        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+<div class="overflow-x-auto">
+    <div class="inline-block min-w-full align-middle">
+        <div class="overflow-hidden border border-gray-200 shadow-sm rounded-xl">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <!-- Date Column -->
+                        <th scope="col" class="px-6 py-4 text-left">
+                            <div class="flex items-center space-x-3">
+                                <input type="checkbox" 
+                                       class="h-4 w-4 border-gray-300 rounded transition-colors focus:ring-2"
+                                       style="color: #305AA3; focus:ring-color: #305AA3;">
+                                <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">Join Date</span>
+                            </div>
+                        </th>
 
-                <div class="overflow-hidden border border-gray-200 shadow-lg  md:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-200 ">
-                        <thead class="bg-white ">
-                            <tr>
+                        <!-- Customer Info Column -->
+                        <th scope="col" class="px-6 py-4 text-left">
+                            <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">Customer Information</span>
+                        </th>
 
-                                <th scope="col" class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 ">
-                                    <div class="flex items-center gap-x-3">
-                                        <input type="checkbox" class="text-blue-500 border-gray-300 rounded  ">
-                                        <span> Date </span>
+                        <!-- Status Column -->
+                        <th scope="col" class="px-6 py-4 text-left">
+                            <button class="flex items-center space-x-2 text-xs font-medium text-gray-500 uppercase tracking-wider hover:text-gray-700 transition-colors">
+                                <span>Status</span>
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/>
+                                </svg>
+                            </button>
+                        </th>
+
+                        <!-- Role Column -->
+                        <th scope="col" class="px-6 py-4 text-left">
+                            <button class="flex items-center space-x-2 text-xs font-medium text-gray-500 uppercase tracking-wider hover:text-gray-700 transition-colors">
+                                <span>Role</span>
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/>
+                                </svg>
+                            </button>
+                        </th>
+
+                        <!-- Orders Statistics -->
+                        <th scope="col" class="px-6 py-4 text-left">
+                            <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">Pending Orders</span>
+                        </th>
+
+                        <th scope="col" class="px-6 py-4 text-left">
+                            <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">Completed Orders</span>
+                        </th>
+
+                        <th scope="col" class="px-6 py-4 text-left">
+                            <span class="text-xs font-medium text-gray-500 uppercase tracking-wider">Total Orders</span>
+                        </th>
+
+                        <!-- Actions Column -->
+                        <!-- <th scope="col" class="relative px-6 py-4">
+                            <span class="sr-only">Actions</span>
+                        </th> -->
+                    </tr>
+                </thead>
+
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach ($customers as $customer)
+                    <tr class="cursor-pointer hover:bg-gray-50 transition-colors duration-200 group" 
+                        wire:click="viewCustomerTransactions({{ $customer->id }})">
+                        
+                        <!-- Join Date -->
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center space-x-3">
+                                <input type="checkbox" 
+                                       class="h-4 w-4 border-gray-300 rounded transition-colors"
+                                       style="color: #305AA3;"
+                                       onclick="event.stopPropagation();">
+                                <div class="text-sm text-gray-900 font-medium">
+                                    {{ $customer->created_at->format('M d, Y') }}
+                                </div>
+                            </div>
+                        </td>
+
+                        <!-- Customer Information -->
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center space-x-4">
+                                <div class="h-12 w-12 flex-shrink-0">
+                                    <img class="h-12 w-12 rounded-full object-cover border-2 border-gray-100 group-hover:border-blue-200 transition-colors" 
+                                         src="{{ asset('/profile/customer-profile.png') }}" 
+                                         alt="{{ $customer->full_name }}">
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-gray-900 group-hover:text-blue-700 transition-colors">
+                                        {{ $customer->full_name }}
                                     </div>
-                                </th>
-
-                                <th scope="col" class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 ">
-                                    <div class="flex items-center gap-x-3">
-                                        <span>Name</span>
-                                    </div>
-                                </th>
-
-
-                                <th scope="col" class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 ">
-                                    <button class="flex items-center gap-x-2">
-                                        <span>Status</span>
-
-                                        <svg class="h-3" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M2.13347 0.0999756H2.98516L5.01902 4.79058H3.86226L3.45549 3.79907H1.63772L1.24366 4.79058H0.0996094L2.13347 0.0999756ZM2.54025 1.46012L1.96822 2.92196H3.11227L2.54025 1.46012Z" fill="currentColor" stroke="currentColor" stroke-width="0.1" />
-                                            <path d="M0.722656 9.60832L3.09974 6.78633H0.811638V5.87109H4.35819V6.78633L2.01925 9.60832H4.43446V10.5617H0.722656V9.60832Z" fill="currentColor" stroke="currentColor" stroke-width="0.1" />
-                                            <path d="M8.45558 7.25664V7.40664H8.60558H9.66065C9.72481 7.40664 9.74667 7.42274 9.75141 7.42691C9.75148 7.42808 9.75146 7.42993 9.75116 7.43262C9.75001 7.44265 9.74458 7.46304 9.72525 7.49314C9.72522 7.4932 9.72518 7.49326 9.72514 7.49332L7.86959 10.3529L7.86924 10.3534C7.83227 10.4109 7.79863 10.418 7.78568 10.418C7.77272 10.418 7.73908 10.4109 7.70211 10.3534L7.70177 10.3529L5.84621 7.49332C5.84617 7.49325 5.84612 7.49318 5.84608 7.49311C5.82677 7.46302 5.82135 7.44264 5.8202 7.43262C5.81989 7.42993 5.81987 7.42808 5.81994 7.42691C5.82469 7.42274 5.84655 7.40664 5.91071 7.40664H6.96578H7.11578V7.25664V0.633865C7.11578 0.42434 7.29014 0.249976 7.49967 0.249976H8.07169C8.28121 0.249976 8.45558 0.42434 8.45558 0.633865V7.25664Z" fill="currentColor" stroke="currentColor" stroke-width="0.3" />
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                         </svg>
-                                    </button>
-                                </th>
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
-                                    <button class="flex items-center gap-x-2">
-                                        <span>Role</span>
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
-                                        </svg>
-                                    </button>
-                                </th>
-
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Pending  </th>
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Completed  </th>
-
-                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "> Total  </th>
-
-                                {{-- <th scope="col" class="relative py-3.5 px-4">
-                                    <span class=" font-normal text-gray-600 ">Edit</span>
-                                </th> --}}
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200  ">
-                            @foreach ($customers as $customer )
-
-                            <tr class="cursor-pointer hover:bg-gray-50 " wire:click="viewCustomerTransactions( {{ $customer->id }})">
-
-                                <td class="px-4 py-2 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                    <div class="inline-flex items-center gap-x-3">
-                                        <input type="checkbox" class="text-blue-500 border-gray-300 rounded ">
-                                        <div class="flex items-center gap-x-2">
-                                            {{ $customer->created_at->format('Y-m-d') }}
-                                        </div>
+                                        {{ $customer->phone }}
                                     </div>
-                                </td>
+                                </div>
+                            </div>
+                        </td>
 
-                                <td class="px-4 py-2 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                    <div class="inline-flex items-center gap-x-3">
-                                        <div class="flex items-center gap-x-2">
-                                            <img class="object-cover w-16 h-16 rounded-lg" src="{{ asset('/profile/customer-profile.png') }}" alt="">
-                                            <div>
-                                                <h2 class="font-medium text-gray-800  ">{{ $customer->full_name }}</h2>
-                                                <p class="text-sm font-normal text-gray-600 "> {{ $customer->phone }} </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
+                        <!-- Status -->
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
+                                Active
+                            </span>
+                        </td>
 
+                        <!-- Role -->
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium text-white"
+                                  style="background-color: #305AA3;">
+                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                                Customer
+                            </span>
+                        </td>
 
+                        <!-- Pending Orders -->
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                @php
+                                    $pendingCount = DB::table('orders')->where('customer_id', $customer->id)->where('status', 'pending')->count();
+                                @endphp
+                                <span class="text-sm font-medium text-gray-900">{{ $pendingCount }}</span>
+                                @if($pendingCount > 0)
+                                <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    Pending
+                                </span>
+                                @endif
+                            </div>
+                        </td>
 
-                                <td class="px-12 py-2 text-sm font-medium text-gray-700 whitespace-nowrap">
-                                    <div class="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 ">
-                                        <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                        <!-- Completed Orders -->
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                @php
+                                    $completedCount = DB::table('orders')->where('customer_id', $customer->id)->where('status', 'completed')->count();
+                                @endphp
+                                <span class="text-sm font-medium text-gray-900">{{ $completedCount }}</span>
+                                @if($completedCount > 0)
+                                <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    Done
+                                </span>
+                                @endif
+                            </div>
+                        </td>
 
-                                        <h2 class="text-sm font-normal text-emerald-500">Active</h2>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-2 text-sm text-gray-500  whitespace-nowrap"> Customer </td>
-                                <td class="px-4 py-2 text-sm text-gray-500  whitespace-nowrap"> {{ DB::table('orders')->where('customer_id',$customer->id)->where('status','pending')->count() }}</td>
-                                <td class="px-4 py-2 text-sm text-gray-500  whitespace-nowrap"> {{ DB::table('orders') ->where('customer_id',$customer->id)->where('status','completed')->count() }} </td>
-                                <td class="px-4 py-2 text-sm text-gray-500  whitespace-nowrap"> {{ DB::table('orders') ->where('customer_id',$customer->id)->count() }} </td>
+                        <!-- Total Orders -->
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            @php
+                                $totalCount = DB::table('orders')->where('customer_id', $customer->id)->count();
+                            @endphp
+                            <div class="flex items-center">
+                                <span class="text-sm font-semibold text-gray-900">{{ $totalCount }}</span>
+                                <div class="ml-2 flex-1 bg-gray-100 rounded-full h-2 max-w-16">
+                                    @if($totalCount > 0)
+                                    <div class="h-2 rounded-full transition-all duration-300"
+                                         style="background-color: #305AA3; width: {{ min(($completedCount / max($totalCount, 1)) * 100, 100) }}%"></div>
+                                    @endif
+                                </div>
+                            </div>
+                        </td>
 
-                                {{-- <td class="px-4 py-2 text-sm whitespace-nowrap">
-                                    <div class="flex items-center gap-x-6">
-                                        <button class="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                                            </svg>
-                                        </button>
+                        <!-- Actions -->
+                        <!-- <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <div class="flex items-center justify-end space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button onclick="event.stopPropagation();" 
+                                        class="inline-flex items-center p-2 text-gray-400 hover:bg-blue-50 rounded-lg transition-colors"
+                                        style="hover:color: #305AA3;"
+                                        title="View Details">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                                
+                                <button onclick="event.stopPropagation();" 
+                                        class="inline-flex items-center p-2 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                                        title="Contact Customer">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                </button>
 
-                                        <button class="text-gray-500 transition-colors duration-200  hover:text-yellow-500 focus:outline-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </td> --}}
-                            </tr>
+                                <button onclick="event.stopPropagation();" 
+                                        class="inline-flex items-center p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                        title="Edit Customer">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td> -->
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-                            @endforeach
-
-                        </tbody>
-                    </table>
+        <!-- Pagination Section -->
+        <div class="bg-white px-6 py-4 border-t border-gray-200">
+            <div class="flex flex-col sm:flex-row items-center justify-between space-y-3 sm:space-y-0">
+                <!-- Left side - Results info -->
+                <div class="flex items-center text-sm text-gray-700">
+                    <span>Showing</span>
+                    <select class="mx-2 px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-1 transition-colors"
+                            style="focus:ring-color: #305AA3; focus:border-color: #305AA3;">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <span>of <strong>{{ count($customers) }}</strong> customers</span>
                 </div>
 
+                <!-- Center - Page navigation -->
+                <div class="flex items-center space-x-1">
+                    <!-- Previous Button -->
+                    <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                        Previous
+                    </button>
+
+                    <!-- Page Numbers -->
+                    <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-white border border-gray-300 transition-colors"
+                            style="background-color: #305AA3; border-color: #305AA3;">
+                        1
+                    </button>
+                    <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 transition-colors">
+                        2
+                    </button>
+                    <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 transition-colors">
+                        3
+                    </button>
+
+                    <!-- Next Button -->
+                    <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 transition-colors">
+                        Next
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Right side - Quick stats -->
+                <div class="flex items-center space-x-4 text-sm text-gray-600">
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                        <span>{{ count($customers->where('status', 'active')) }} Active</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
+                        <span>{{ DB::table('orders')->where('status', 'pending')->count() }} Pending Orders</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile pagination info -->
+            <div class="sm:hidden mt-3 text-center text-sm text-gray-500">
+                Page 1 of {{ ceil(count($customers) / 10) }} ({{ count($customers) }} total customers)
             </div>
         </div>
     </div>
-
 </div>

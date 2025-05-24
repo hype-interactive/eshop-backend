@@ -86,7 +86,7 @@ public function update()
                //  Storage::disk('public')->delete(str_replace('/storage/', '', $product->image_url));
             }
             $imagePath = $this->photo->store('photos/product', 'public');
-            $productData['image_url'] = Storage::url($imagePath);
+            $productData['image_url'] = url(Storage::url($imagePath));
         }
 
          $edit_package=json_encode($productData);

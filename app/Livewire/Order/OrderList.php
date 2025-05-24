@@ -11,6 +11,7 @@ class OrderList extends Component
 {
     public $orders;
     public $order_products;
+    public  $payment_status;
     public $cancelled_order;
     public  $product_out_of_stocks;
     public $product_low_stock;

@@ -67,6 +67,7 @@ public $status;
         $this->title = $item->name;
         $this->content = $item->description;
         $this->image = $item->image_url;
+
         $this->subtitle=$item->name;
     }
 
@@ -87,9 +88,11 @@ public $status;
             if ($item->image_url && Storage::exists(parse_url($item->image_url, PHP_URL_PATH))) {
                 Storage::delete(parse_url($item->image_url, PHP_URL_PATH));
             }
-
+            
             $imagePath = $this->image->store('images', 'public');
-            $this->image_url = Storage::url($imagePath);
+            $this->image_url = url(Storage::url($imagePath));
+            
+
         } else {
             // Keep the old image URL if no new image is uploaded
             $this->image_url = $item->image_url;
@@ -128,8 +131,9 @@ public $status;
         // Handle image upload
         if ($this->image) {
             $imagePath = $this->image->store('billboard/images', 'public');
-            $this->image_url = Storage::url($imagePath);
+            $this->image_url = url(Storage::url($imagePath));
         }
+        
 
         ModelsBillboard::create([
             'name' => $this->name,

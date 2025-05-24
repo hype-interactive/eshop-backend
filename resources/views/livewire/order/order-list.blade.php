@@ -1,275 +1,287 @@
-<div>
-
-
+<div class="min-h-screen bg-gray-50">
     @switch($this->page_id)
         @case('1')
-
-        <div class="container mx-auto p-6">
-            <div class="flex justify-between mb-4">
-                <div class="text-xl font-semibold"> Orders </div>
-                {{-- <select class="border-gray-200 rounded p-2">
-                    <option>Jan - Jul, 2024</option>
-                    <option>Jan - Jul, 2024</option>
-                    <option>Jan - Jul, 2024</option>
-                    <option>Jan - Jul, 2024</option>
-
-                </select> --}}
-            </div>
-            <div class="grid grid-cols-4 gap-4 mb-6">
-                <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600">Total Orders</div>
-                    <div class="text-xl font-semibold"> {{ $total_orders }}</div>
-                </div>
-                <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600">Total Cancelled Orders</div>
-                    <div class="text-xl font-semibold">{{ $cancelled_order  }} </div>
-                </div>
-                <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600">Out of Stock Products</div>
-                    <div class="text-xl font-semibold">{{ $this->product_out_of_stocks }}</div>
-                </div>
-                <div class="p-4 bg-white rounded shadow">
-                    <div class="text-sm text-gray-600">In Stock Products</div>
-                    <div class="text-xl font-semibold"> {{ $this->product_onstock_stock }}</div>
-                </div>
+        {{-- Orders List View --}}
+        <div class="p-6">
+            {{-- Page Header --}}
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900">Order Management</h1>
+                <p class="text-gray-600 mt-2">Track and manage all customer orders</p>
             </div>
 
-            <section class="bg-white py-8 antialiased shadow d:bg-gray-900 md:py-16">
-                <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
-                  <div class="mx-auto max-w-5xl">
-                    <div class="gap-4 sm:flex sm:items-center sm:justify-between">
-                      <h2 class="text-xl font-semibold text-gray-900 d:text-white sm:text-2xl">My orders</h2>
-
-                      <div class="mt-6 gap-4 space-y-4 sm:mt-0 sm:flex sm:items-center sm:justify-end sm:space-y-0">
+            {{-- Statistics Cards --}}
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                    <div class="flex items-center justify-between">
                         <div>
-                          <label for="order-type" class="sr-only mb-2 block text-sm font-medium text-gray-900 d:text-white">Select order type</label>
-                          <select id="order-type" class="block w-full min-w-[8rem] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 d:border-gray-600 d:bg-gray-700 d:text-white d:placeholder:text-gray-400 d:focus:border-primary-500 d:focus:ring-primary-500">
-                            <option selected>All orders</option>
-                            <option value="confirmed">completed</option>
-                            <option value="cancelled">Cancelled</option>
-                          </select>
+                            <p class="text-sm font-medium text-gray-600">Total Orders</p>
+                            <p class="text-3xl font-bold text-gray-900 mt-2">{{ $total_orders }}</p>
                         </div>
+                        <div class="bg-blue-100 p-3 rounded-lg">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M8 11v6h8v-6M8 11H6a2 2 0 00-2 2v6a2 2 0 002 2h12a2 2 0 002-2v-6a2 2 0 00-2-2h-2"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
 
-                        <span class="inline-block text-gray-500 d:text-gray-400"> from </span>
-
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                    <div class="flex items-center justify-between">
                         <div>
-                          <label for="duration" class="sr-only mb-2 block text-sm font-medium text-gray-900 d:text-white">Select duration</label>
-                          <select id="duration" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 d:border-gray-600 d:bg-gray-700 d:text-white d:placeholder:text-gray-400 d:focus:border-primary-500 d:focus:ring-primary-500">
-                            <option selected>this week</option>
-                            <option value="this month">this month</option>
-                            <option value="last 3 months">the last 3 months</option>
-                            <option value="lats 6 months">the last 6 months</option>
-                            <option value="this year">this year</option>
-                          </select>
+                            <p class="text-sm font-medium text-gray-600">Cancelled Orders</p>
+                            <p class="text-3xl font-bold text-red-600 mt-2">{{ $cancelled_order }}</p>
                         </div>
-                      </div>
-                    </div>
-
-
-
-                    <div class="mt-6 flow-root sm:mt-8">
-                      <div class="divide-y divide-gray-200 d:divide-gray-700">
-
-
-                        @foreach ($this->orders as  $order)
-
-
-                        <div class="flex flex-wrap items-center gap-y-4 py-6">
-                          <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
-                            <dt class="text-base font-medium text-gray-500 d:text-gray-400">Order ID:</dt>
-                            <dd class="mt-1.5 text-base font-semibold text-gray-900 d:text-white">
-                              <a href="#" class="hover:underline">{{ $order->order_id }}</a>
-                            </dd>
-                          </dl>
-
-                          <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
-                            <dt class="text-base font-medium text-gray-500 d:text-gray-400">Date:</dt>
-                            <dd class="mt-1.5 text-base font-semibold text-gray-900 d:text-white"> {{ $order->created_at->format('Y-m-d') }}</dd>
-                          </dl>
-
-                          <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
-                            <dt class="text-base font-medium text-gray-500 d:text-gray-400">Price:</dt>
-                            <dd class="mt-1.5 text-base font-semibold text-gray-900 d:text-white"> {{ number_format($order->total,2) }} TZS </dd>
-                          </dl>
-
-                          <dl class="w-1/2 sm:w-1/4 lg:w-auto lg:flex-1">
-                            <dt class="text-base font-medium text-gray-500 d:text-gray-400">Status:</dt>
-                            @if($order->status =="pending")
-                            <dd class="me-2 mt-1.5 inline-flex items-center rounded bg-yellow-50 px-2.5 py-0.5 text-xs font-medium text-primary-800 d:bg-primary-900 d:text-primary-300">
-                              <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 4h-13m13 16h-13M8 20v-3.333a2 2 0 0 1 .4-1.2L10 12.6a1 1 0 0 0 0-1.2L8.4 8.533a2 2 0 0 1-.4-1.2V4h8v3.333a2 2 0 0 1-.4 1.2L13.957 11.4a1 1 0 0 0 0 1.2l1.643 2.867a2 2 0 0 1 .4 1.2V20H8Z" />
-                              </svg>
-                              {{ $order->status }}
-                            </dd>
-                            @elseif($order->status =='completed' )
-
-                            <dd class="me-2 mt-1.5 inline-flex items-center rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 d:bg-green-900 d:text-green-300">
-                                <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5" />
-                                </svg>
-                                completed
-                              </dd>
-                              @elseif($order->status =='cancelled' )
-
-                              <dd   class="me-2 mt-1.5 inline-flex items-center rounded bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 d:bg-red-900 d:text-red-300">
-                                <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
-                                </svg>
-                                Cancelled
-                              </dd>
-                              @endif
-
-
-
-                          </dl>
-
-                          <div class="w-full grid sm:grid-cols-2 lg:flex lg:w-64 lg:items-center lg:justify-end gap-4">
-                            @if($order->status =='completed'  )   @else
-                              <button type="button" class="w-full rounded-lg border border-red-700 px-3 py-2 text-center text-sm font-medium text-red-700 hover:bg-red-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-red-300 d:border-red-500 d:text-red-500 d:hover:bg-red-600 d:hover:text-white d:focus:ring-red-900 lg:w-auto" wire:click = "enableCancelModal({{ $order->id }})">Cancel order</button>
-
-                              @endif
-
-
-                            <a href="#" class="w-full inline-flex justify-center rounded-lg  border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 d:border-gray-600 d:bg-gray-800 d:text-gray-400 d:hover:bg-gray-700 d:hover:text-white d:focus:ring-gray-700 lg:w-auto" wire:click="viewOrder({{ $order->id }})" >View details</a>
-
-                        </div>
-                        </div>
-
-                        @endforeach
-
-                      </div>
-                    </div>
-
-                    <nav class="mt-6 flex items-center justify-center sm:mt-8" aria-label="Page navigation example">
-                      <ul class="flex h-8 items-center -space-x-px text-sm">
-                        <li>
-                          <a href="#" class="ms-0 flex h-8 items-center justify-center rounded-s-lg border border-e-0 border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 d:border-gray-700 d:bg-gray-800 d:text-gray-400 d:hover:bg-gray-700 d:hover:text-white">
-                            <span class="sr-only">Previous</span>
-                            <svg class="h-4 w-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7" />
+                        <div class="bg-red-100 p-3 rounded-lg">
+                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#" class="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 d:border-gray-700 d:bg-gray-800 d:text-gray-400 d:hover:bg-gray-700 d:hover:text-white">1</a>
-                        </li>
-                        <li>
-                          <a href="#" class="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 d:border-gray-700 d:bg-gray-800 d:text-gray-400 d:hover:bg-gray-700 d:hover:text-white">2</a>
-                        </li>
-                        <li>
-                          <a href="#" aria-current="page" class="z-10 flex h-8 items-center justify-center border border-primary-300 bg-primary-50 px-3 leading-tight text-primary-600 hover:bg-primary-100 hover:text-primary-700 d:border-gray-700 d:bg-gray-700 d:text-white">3</a>
-                        </li>
-                        <li>
-                          <a href="#" class="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 d:border-gray-700 d:bg-gray-800 d:text-gray-400 d:hover:bg-gray-700 d:hover:text-white">...</a>
-                        </li>
-                        <li>
-                          <a href="#" class="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 d:border-gray-700 d:bg-gray-800 d:text-gray-400 d:hover:bg-gray-700 d:hover:text-white">100</a>
-                        </li>
-                        <li>
-                          <a href="#" class="flex h-8 items-center justify-center rounded-e-lg border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 d:border-gray-700 d:bg-gray-800 d:text-gray-400 d:hover:bg-gray-700 d:hover:text-white">
-                            <span class="sr-only">Next</span>
-                            <svg class="h-4 w-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Out of Stock</p>
+                            <p class="text-3xl font-bold text-orange-600 mt-2">{{ $this->product_out_of_stocks }}</p>
+                        </div>
+                        <div class="bg-orange-100 p-3 rounded-lg">
+                            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16c-.77.833.192 2.5 1.732 2.5z"></path>
                             </svg>
-                          </a>
-                        </li>
-                      </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">In Stock</p>
+                            <p class="text-3xl font-bold text-green-600 mt-2">{{ $this->product_onstock_stock }}</p>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-lg">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Orders Section --}}
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                {{-- Header --}}
+                <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">All Orders</h3>
+                            <p class="text-sm text-gray-600 mt-1">Manage and track customer orders</p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <select class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option>All orders</option>
+                                <option value="completed">Completed</option>
+                                <option value="cancelled">Cancelled</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                            <select class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option>This week</option>
+                                <option value="this month">This month</option>
+                                <option value="last 3 months">Last 3 months</option>
+                                <option value="last 6 months">Last 6 months</option>
+                                <option value="this year">This year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Orders List --}}
+                <div class="divide-y divide-gray-200">
+                    @forelse ($this->orders as $order)
+                    <div class="p-6 hover:bg-gray-50 transition-colors duration-150">
+                        <div class="flex flex-wrap items-center gap-6">
+                            {{-- Order ID --}}
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-600">Order ID</p>
+                                        <p class="text-lg font-semibold text-gray-900">#{{ $order->order_id }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- Date --}}
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-600">Date</p>
+                                <p class="text-lg font-semibold text-gray-900">{{ $order->created_at->format('M d, Y') }}</p>
+                                <p class="text-sm text-gray-500">{{ $order->created_at->format('H:i A') }}</p>
+                            </div>
+
+                            {{-- Price --}}
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-600">Total Amount</p>
+                                <p class="text-lg font-bold text-gray-900">{{ number_format($order->total, 2) }} TZS</p>
+                            </div>
+
+                            {{-- Status --}}
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-600 mb-2">Status</p>
+                                @if($order->status == "pending")
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                        <svg class="w-1.5 h-1.5 mr-1.5 fill-current" viewBox="0 0 8 8">
+                                            <circle cx="4" cy="4" r="3"/>
+                                        </svg>
+                                        Pending
+                                    </span>
+                                @elseif($order->status == 'completed')
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        <svg class="w-1.5 h-1.5 mr-1.5 fill-current" viewBox="0 0 8 8">
+                                            <circle cx="4" cy="4" r="3"/>
+                                        </svg>
+                                        Completed
+                                    </span>
+                                @elseif($order->status == 'cancelled')
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                        <svg class="w-1.5 h-1.5 mr-1.5 fill-current" viewBox="0 0 8 8">
+                                            <circle cx="4" cy="4" r="3"/>
+                                        </svg>
+                                        Cancelled
+                                    </span>
+                                @endif
+                            </div>
+
+                            {{-- Actions --}}
+                            <div class="flex items-center space-x-2">
+                                @if($order->status != 'completed')
+                                    <button wire:click="enableCancelModal({{ $order->id }})" 
+                                        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center">
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                        Cancel
+                                    </button>
+                                @endif
+                                <button wire:click="viewOrder({{ $order->id }})" 
+                                    class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    @empty
+                    <div class="p-12 text-center">
+                        <div class="w-24 h-24 mx-auto bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">No orders found</h3>
+                        <p class="text-gray-500">Orders will appear here once customers start placing them.</p>
+                    </div>
+                    @endforelse
+                </div>
+
+                {{-- Pagination --}}
+                <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
+                    <nav class="flex items-center justify-between">
+                        <div class="flex-1 flex justify-between sm:hidden">
+                            <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Previous</a>
+                            <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Next</a>
+                        </div>
+                        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                            <div>
+                                <p class="text-sm text-gray-700">Showing <span class="font-medium">1</span> to <span class="font-medium">10</span> of <span class="font-medium">{{ count($this->orders) }}</span> results</p>
+                            </div>
+                            <div>
+                                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+                                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">1</a>
+                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">2</a>
+                                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </a>
+                                </nav>
+                            </div>
+                        </div>
                     </nav>
-                  </div>
                 </div>
-              </section>
+            </div>
+        </div>
 
-
-
-
-
-
-
-
-
-
-
-      @if( $this->isOpen )
-      <!-- Main modal -->
-      <div id="progress-modal" tabindex="-1" aria-hidden="true" class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden">
-        <div class="relative p-4 w-full max-w-md max-h-full">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow ">
-
-                  <div class=" w-full">
-
+        {{-- Cancel Order Modal --}}
+        @if($this->isOpen)
+        <div class="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center p-4">
+            <div class="relative w-full max-w-md mx-auto">
+                <div class="relative bg-white rounded-2xl shadow-2xl">
+                    {{-- Success Message --}}
                     @if (session()->has('message'))
-
-                    {{-- @if (session('alert-class') == 'alert-success') --}}
-                        <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8" role="alert">
-                            <div class="flex">
-                                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
-                                <div>
-                                    <p class="font-bold">The process is completed</p>
-                                    <p class="text-sm">{{ session('message') }} </p>
+                        <div class="p-6 border-b border-gray-200">
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                <div class="flex items-center">
+                                    <svg class="h-5 w-5 text-green-400 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div>
+                                        <p class="font-medium text-green-800">Success!</p>
+                                        <p class="text-sm text-green-600">{{ session('message') }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    {{-- @endif --}}
-                @endif
+                    @endif
 
-
-                      <div class="relative inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl s:bg-gray-900 sm:my-8 sm:align-middle sm:max-w-md sm:w-full sm:p-6">
-
-                        <div>
-                            {{-- <img class="object-cover w-full h-48 rounded-md" src="https://images.unsplash.com/photo-1579226905180-636b76d96082?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt=""> --}}
-                            <div class="mt-4 text-center">
-                                <h3 class="font-medium leading-6 text-gray-800 capitalize s:text-white" id="modal-title">
-                                   Are you sure you want to cancel this order ?
-                                </h3>
-                                <p class="mt-2 text-sm text-gray-500 s:text-gray-400">
-                                    Lorem, ipsum dolor sit amet consectetur
-                                    adipisicing elit. Aspernatur dolorum aliquam ea, ratione deleniti porro officia? Explicabo
-                                    maiores suscipit.
-                                </p>
-                            </div>
-                    </div>
-
-                      <!-- Modal footer -->
-                      <div class="flex items-end justify-end  mt-6 space-x-4 rtl:space-x-reverse">
-                          <button wire:click="$toggle('isOpen')" type="button" class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>
-                          <button wire:click="cancelOrder()" type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"> Confirm   </button>
-
+                    {{-- Modal Content --}}
+                    <div class="p-6">
+                        <div class="flex items-center justify-center w-12 h-12 mx-auto bg-red-100 rounded-full mb-4">
+                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16c-.77.833.192 2.5 1.732 2.5z"></path>
+                            </svg>
                         </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+                        
+                        <div class="text-center mb-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Cancel Order?</h3>
+                            <p class="text-gray-600">Are you sure you want to cancel this order? This action cannot be undone and the customer will be notified.</p>
+                        </div>
 
-      @endif
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button wire:click="cancelOrder()" 
+                                class="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200">
+                                Yes, Cancel Order
+                            </button>
+                            <button wire:click="$toggle('isOpen')" 
+                                class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-4 rounded-lg transition-colors duration-200">
+                                Keep Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
 
+        @break
 
-            @break
-
-
-            @case('2')
-       <livewire:order.view-order />
-
-            @break
+        @case('2')
+            <livewire:order.view-order />
+        @break
 
         @default
-
     @endswitch
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
