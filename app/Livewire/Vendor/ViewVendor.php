@@ -69,6 +69,8 @@ class ViewVendor extends Component
     }
 
    function  update(){
+
+
     $this->validate([
     'first_name'=>'required',
     'middle_name'=>'required',
@@ -84,7 +86,7 @@ class ViewVendor extends Component
      'last_name'=>$this->last_name,
      'phone_number'=>$this->phone_number,
      'email'=>$this->email,
-      'photo'=>$this->photo
+    //   'image_url'=>$this->photo
     ]);
 
     session()->flash('message','updated successfully ');

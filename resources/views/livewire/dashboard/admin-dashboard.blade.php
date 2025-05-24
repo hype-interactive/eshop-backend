@@ -219,21 +219,21 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
                             <div class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
-                            <span class="text-sm text-gray-700">Electronics</span>
+                            <span class="text-sm text-gray-700">Protein</span>
                         </div>
                         <span class="text-sm font-medium text-gray-900">45%</span>
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
                             <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-                            <span class="text-sm text-gray-700">Clothing</span>
+                            <span class="text-sm text-gray-700"> Fat</span>
                         </div>
                         <span class="text-sm font-medium text-gray-900">30%</span>
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
                             <div class="w-3 h-3 bg-yellow-500 rounded-full mr-3"></div>
-                            <span class="text-sm text-gray-700">Books</span>
+                            <span class="text-sm text-gray-700">Fruit</span>
                         </div>
                         <span class="text-sm font-medium text-gray-900">15%</span>
                     </div>

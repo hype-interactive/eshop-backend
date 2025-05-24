@@ -1,645 +1,314 @@
-
-<div>
-
-
-    <div class="mt-2 mx-4 ">
-        <div class="hidden mt-3 overflow-y-auto text-sm lg:items-center lg:flex whitespace-nowrap">
-           @if($this->section_page==1)
-            <a  wire:click="direction({{  $this->section_page }}) " class=" @if($this->section_page==1) text-indigo-600 @endif  cursor-pointer text-gray-600 hover:underline">
-                vendor List
-            </a>
-            @elseif($this->section_page==2)
-
-            <a wire:click="direction(1) "  class="  @if($this->section_page==1) text-indigo-600 @endif  cursor-pointer  text-indigo-600 text-gray-600 hover:underline">
-                vendor List
-            </a>
-
-            <span class="mx-1 text-gray-500">
-                /
-            </span>
-            <a  wire:click="direction({{  $this->section_page }}) "  class="   @if($this->section_page==2)  text-indigo-600 @endif   cursor-pointer  text-indigo-600 hover:underline">
-                vendor-Info
-            </a>
-
-            @endif
-
+<div class="bg-gray-50 min-h-screen">
+    <!-- Enhanced Breadcrumb Navigation -->
+    <div class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-4 py-4">
+                @if($this->section_page == 1)
+                    <button wire:click="direction({{ $this->section_page }})" 
+                            class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-lg font-medium">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                        Vendor List
+                    </button>
+                @elseif($this->section_page == 2)
+                    <button wire:click="direction(1)" 
+                            class="inline-flex items-center px-3 py-1 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors duration-200">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                        Vendor List
+                    </button>
+                    <span class="text-gray-400">/</span>
+                    <button wire:click="direction({{ $this->section_page }})" 
+                            class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-lg font-medium">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Vendor Info
+                    </button>
+                @endif
+            </div>
         </div>
     </div>
 
-
-
     @switch($this->section_page)
-       @case(1)
-
-
-
-
-       <div>
-        <div class="flex w-full justify-end item-end  mx-auto ">
-
-            <div class="mx-6 mt-2 ">
-                <a href="#" wire:click="viewInventory()"
-                    class="text-white bg-gradient-to-br from-blue-800 to-yellow-500 font-medium rounded-lg shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform inline-flex justify-center items-center text-sm px-5 py-2.5 text-center w-full sm:w-auto">
-                    <svg class="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
-                            clip-rule="evenodd"></path>
+        @case(1)
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <!-- Header with Action Button -->
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Vendor Management</h1>
+                    <p class="text-gray-600 mt-2">Manage vendor information and view business insights</p>
+                </div>
+                <button wire:click="viewInventory()" 
+                        class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"/>
                     </svg>
                     View Inventory
-                </a>
+                </button>
             </div>
 
-        </div>
-
-        <div class="grid grid-cols-1 px-4 pt-6 mb-6 xl:grid-cols-2 xl:gap-6">
-
-            <div class="bg-white shadow-lg shadow-gray-200 rounded-2xl p-4  mb-4 xl:mb-0">
-                <a class="flex items-center mb-6 text-2xl font-bold">
-                    <img src="{{ asset('loginSlider/icon.png') }}" class="mr-4 h-10" alt="Creative Tim Logo">
-                    <span>Subscriptions </span>
-                </a>
-                <p class="mb-2 text-base font-normal text-gray-500">
-                    Switch your subscription to a different type, such as a monthly plan, annual plan And
-                    see a list of subscription plans.
-                </p>
-                <p class="text-sm font-semibold text-gray-900">Next payment is after Apr 23 ,2025</p>
-
-
-                <div class="flex flex-col">
-                    <div class="overflow-x-auto rounded-2xl">
-                        <div class="inline-block min-w-full align-middle">
-                            <div class="overflow-hidden shadow-lg sm:rounded-2xl">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col"
-                                                class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                                Start Date
-                                            </th>
-                                            <th scope="col"
-                                                class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                                End Date
-                                            </th>
-                                            <th scope="col"
-                                                class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                                Amount
-                                            </th>
-
-                                            <th scope="col"
-                                                class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                                Status
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap">
-                                                <span class="font-semibold"> Apr 23 ,2024 </span>
-                                            </td>
-                                            <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap">
-                                                Apr 23 ,2025
-                                            </td>
-                                            <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                                230,000 /= TZS
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap">
-                                                <span
-                                                    class="bg-gradient-to-br from-green-500 to-green-700 text-xs uppercase font-bold text-white mr-2 px-2.5 py-1 rounded-md">
-                                                    Active </span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-3">
-                    <div>
-                        <a href="#"
-                            class="text-white bg-gradient-to-br from-blue-800 to-yellow-500 font-medium rounded-lg shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform inline-flex justify-center items-center text-sm px-5 py-2.5 text-center w-full sm:w-auto">
-                            <svg class="mr-2 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                            Change Plan
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#"
-                            class="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 font-medium inline-flex justify-center items-center rounded-lg text-sm px-5 py-2.5 text-center w-full sm:w-auto hover:scale-[1.02] transition-transform">
-                            Cancel Subscription
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white shadow-lg shadow-gray-200 rounded-2xl p-4 ">
-
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-xl font-bold text-gray-900"> Payments </h3>
-                    <div class="flex-shrink-0">
-                        <a class="p-2 text-sm font-medium text-gray-900 rounded-2xl hover:bg-gray-100" href="#">View
-                            all</a>
-                    </div>
-                </div>
-
-                <div class="flex flex-col">
-                    <div class="overflow-x-auto rounded-2xl">
-                        <div class="inline-block min-w-full align-middle">
-                            <div class="overflow-hidden shadow-lg sm:rounded-2xl">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead>
-                                        <tr>
-
-
-                                            <th scope="col"
-                                                class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-
-                                            </th>
-                                            <th scope="col"
-                                                class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                                Date Range
-                                            </th>
-                                            <th scope="col"
-                                                class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                                Pruducts
-                                            </th>
-
-                                            <th scope="col"
-                                                class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                                Amount
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap">
-                                                <span class="font-semibold"> Total sales </span>
-                                            </td>
-                                            <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap">
-                                                7 -july to 27-july
-                                            </td>
-                                            <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                                20
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap">
-
-                                                235,000.00 TZS
-                                            </td>
-
-                                        </tr>
-
-                                        <tr>
-                                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap">
-                                                <span class="font-semibold"> Charges </span>
-                                            </td>
-                                            <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap">
-                                                7 -july to 27-july
-                                            </td>
-                                            <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                                20
-                                            </td>
-                                            <td class="p-4 whitespace-nowrap">
-                                                40,000.00 TZS
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="p-4 pb-0 text-sm font-normal text-gray-900 whitespace-nowrap">
-                                                <span class="font-semibold"> Disbursed </span>
-                                            </td>
-                                            <td class="p-4 pb-0 text-sm font-normal text-gray-500 whitespace-nowrap">
-                                                7 -july to 27-july
-                                            </td>
-                                            <td class="p-4 pb-0 text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                                20
-                                            </td>
-                                            <td class="p-4 pb-0 whitespace-nowrap">
-                                                2,340.00 TZS >
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td class="p-4 pb-0 text-sm font-normal text-gray-900 whitespace-nowrap">
-                                                <span class="font-semibold"> status </span>
-                                            </td>
-                                            <td class="p-4 pb-0 text-sm font-normal text-gray-500 whitespace-nowrap">
-                                                7 -july to 27-july
-                                            </td>
-                                            <td class="p-4 pb-0 text-sm font-semibold text-gray-900 whitespace-nowrap">
-                                                20
-                                            </td>
-                                            <td class="p-4 pb-0 whitespace-nowrap">
-                                                <span
-                                                    class="bg-gradient-to-br from-red-400 to-red-600 text-xs uppercase font-bold text-white mr-2 px-2.5 py-1 rounded-md">
-                                                    Pending </span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="px-4">
-            <div class="bg-white shadow-lg shadow-gray-200 rounded-2xl p-4  mb-6">
-                <div class="flex justify-between mx-4 ">
-
-                    <h3 class="mb-4 text-xl font-bold">General Vendor Information</h3>
-                    <div class="relative">
-                        <svg wire:click="enableEditing" data-slot="icon" fill="none" stroke-width="1.5"
-                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10">
-                            </path>
-                        </svg>
-
-                        <label class="text-sm">
-                            edit
-                        </label>
-
-                    </div>
-                </div>
-
-                <div>
-
-                    @if (session()->has('message'))
-                        {{-- @if (session('alert-class') == 'alert-success') --}}
-                        <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mb-8"
-                            role="alert">
-                            <div class="flex">
-                                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path
-                                            d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
-                                    </svg></div>
-                                <div>
-                                    <p class="font-bold">The process is completed</p>
-                                    <p class="text-sm">{{ session('message') }} </p>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- @endif --}}
-                    @endif
-
-                    <div class="grid grid-cols-1 gap-6 mb-6 md:grid-cols-3">
-                        <div class="col-span-1">
-                            <div class="mb-4">
-                                <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900">First
-                                    Name @error('first_name')
-                                        <div class="text-xs text-red-500"> {{ $message }} </div>
-                                    @enderror
-                                </label>
-                                <input wire:model="first_name" {{ session('enableEditing') }} type="text"
-                                    name="first-name" id="first-name"
-                                    class="shadow-lg-sm  border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-2 focus:ring-blue-50 focus:border-blue-300 block w-full p-2.5"
-                                    placeholder="Bonnie" required="">
-                            </div>
-
-                            <div class="mb-4">
-                                <label for="organization" class="block mb-2 text-sm font-medium text-gray-900"> Middle
-                                    Name @error('middle_name')
-                                        <div class="text-xs text-red-500"> {{ $message }} </div>
-                                    @enderror
-                                </label>
-                                <input wire:model="middle_name" {{ session('enableEditing') }} type="text"
-                                    name="organization" id="organization"
-                                    class="shadow-lg-sm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-2 focus:ring-blue-50 focus:border-blue-300 block w-full p-2.5"
-                                    placeholder="Johnie " required="">
-                            </div>
-
-
-                        </div>
-                        <div class="col-span-1">
-                            <div class="mb-4">
-                                <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900">Last
-                                    Name @error('last_name')
-                                        <div class="text-xs text-red-500"> {{ $message }} </div>
-                                    @enderror
-                                </label>
-                                <input wire:model="last_name" {{ session('enableEditing') }} type="text"
-                                    name="last-name" id="last-name"
-                                    class="shadow-lg-sm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-2 focus:ring-blue-50 focus:border-blue-300 block w-full p-2.5"
-                                    placeholder="Green" required="">
-                            </div>
+            <!-- Overview Cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <!-- Simplified Subscription Card -->
+                <div class="bg-white rounded-2xl  border border-gray-100 overflow-hidden">
+                    <div class="bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-4">
+                        <div class="flex items-center justify-between">
                             <div>
-                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900"> Phone Number
-                                    @error('phone_number')
-                                        <div class="text-xs text-red-500"> {{ $message }} </div>
-                                    @enderror
-                                </label>
-                                <input wire:model="phone_number" {{ session('enableEditing') }} type="text"
-                                    name="email" id="email"
-                                    class="shadow-lg-sm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-2 focus:ring-blue-50 focus:border-blue-300 block w-full p-2.5"
-                                    placeholder="061443 *****" required="">
+                                <h3 class="text-xl font-bold text-white">Active Subscription</h3>
+                                <p class="text-green-100 mt-1">Your current plan status</p>
                             </div>
-
+                            <div class="p-3 bg-white bg-opacity-20 rounded-xl">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-6">
                             <div>
-                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email
-                                    @error('email')
-                                        <div class="text-xs text-red-500"> {{ $message }} </div>
-                                    @enderror
-                                </label>
-                                <input {{ session('enableEditing') }} wire:model="email" type="email" name="email"
-                                    id="email"
-                                    class="shadow-lg-sm border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-2 focus:ring-blue-50 focus:border-blue-300 block w-full p-2.5"
-                                    placeholder="example@company.com">
+                                <p class="text-2xl font-bold text-gray-900">230,000 TZS</p>
+                                <p class="text-sm text-gray-600">Annual Plan</p>
+                            </div>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-800 border border-green-200">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                Active
+                            </span>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-4 mb-6">
+                            <div class="flex items-center text-sm text-gray-600">
+                                <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <span>Next payment: <strong>Apr 23, 2025</strong></span>
                             </div>
                         </div>
-
-                        <div class="col-span-1">
-
-                            <section
-                                class="bg-white-300 mt-10 flex flex-col items-center rounded-full justify-center  mx-auto"
-                                style="width: 200px; height: 200px;">
-                                @if ($this->photo)
-                                    <img class="object-fill rounded-full " src="{{ $photo->temporaryUrl() }}"
-                                        style="width: 200px; height: 200px;">
-                                @else
-                                    @if ($this->image_url)
-                                        <img class="object-fill  rounded-full " src="{{ $this->image_url }}"
-                                            style="width: 200px; height: 200px;">
-                                    @else
-                                        <img class="object-fill   rounded-full"
-                                            src="{{ asset('product/product_image.jpeg') }}"
-                                            style="width: 300px; height: 200px;">
-                                    @endif
-
-                                @endif
-                            </section>
-
-
-                            <label
-                                class="flex flex-col cursor-pointer hover:bg-gray-100 hover:border-gray-300 rounded-full mx-auto mt-4 pt-2"
-                                style="width: 200px;">
-                                <div class="flex flex-col items-center justify-center ">
-
-                                    <div wire:loading wire:target="photo" class="">
-
-                                        <svg style="width: 50%; margin: 0 auto;" xmlns="http://www.w3.org/2000/svg"
-                                            class="animate-spin  w-8 h-8 text-gray-400 group-hover:text-gray-600"
-                                            fill="white" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-
-                                        </svg>
-                                        <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                                            Please wait...</p>
-
-                                    </div>
-
-                                    <div wire:loading.remove wire:target="photo"
-                                        class="flex flex-col items-center justify-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="w-8 h-8 text-gray-400 group-hover:text-gray-600" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                        </svg>
-                                        <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                                            Select new image</p>
-                                    </div>
-                                </div>
-                                <input type="file" {{ session('enableEditing') }} class="opacity-0"
-                                    wire:model="photo" />
-                            </label>
-                            @error('photo')
-                                <span class="error text-red-500 text-xs mx-auto">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        @if (session('enableEditing') == 'disabled')
-                        @else
-                            <button wire:click="update" {{ session('enableEditing') }}
-                                class="text-white bg-gradient-to-br from-blue-900 to-yellow-800 font-medium rounded-lg shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform text-sm px-5 py-2.5 text-center"
-                                type="submit">Update</button>
-                        @endif
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-
-
-        <div class="flex w-full  p-6 ">
-
-
-            <div class="w-3/4  ">
-
-                <div class="flex flex-col my-6 mx-4  bg-white  rounded-2xl shadow-xl shadow-gray-200">
-                    <div class="flex justify-between mx-4  ">
-
-                        <h3 class="mb-4 text-xl font-bold"> Transaction </h3>
-                        <div class="relative">
-                            <svg wire:click="enableEditing" data-slot="icon" fill="none" stroke-width="1.5"
-                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-                                aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10">
-                                </path>
-                            </svg>
-
-
-                        </div>
-                    </div>
-                    <div class="overflow-x-auto rounded-2xl">
-                        <div class="inline-block min-w-full align-middle">
-                            <div class="overflow-hidden">
-
-                                <table class="min-w-full divide-y divide-gray-200 table-fixed">
-                                    <thead class="bg-white">
-                                        <tr>
-                                            <th scope="col" class="p-4 lg:p-5">
-                                                ID
-                                            </th>
-                                            <th scope="col"
-                                                class="p-4 text-xs font-medium text-left text-gray-500 uppercase lg:p-5">
-                                                Customer/Product Name
-                                            </th>
-                                            <th scope="col"
-                                                class="p-4 text-xs font-medium text-left text-gray-500 uppercase lg:p-5">
-                                                Amount
-                                            </th>
-                                            <th scope="col"
-                                                class="p-4 text-xs font-medium text-left text-gray-500 uppercase lg:p-5">
-                                                Order Id
-                                            </th>
-                                            <th scope="col"
-                                                class="p-4 text-xs font-medium text-left text-gray-500 uppercase lg:p-5">
-                                                Date
-                                            </th>
-                                            <th scope="col" class="p-4 lg:p-5">
-                                                Status
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
-                                        <tr class="hover:bg-gray-100">
-                                            <td class="p-4 w-4 lg:p-5">
-                                                1
-                                            </td>
-                                            <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                                <div class="text-base font-semibold text-gray-900">Education Dashboard
-                                                </div>
-                                                <div class="text-sm font-normal text-gray-500">Html templates</div>
-                                            </td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                                20,000 /
-                                            </td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                                #194556
-                                            </td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                                22- july </td>
-                                            <td class="p-4 space-x-2 whitespace-nowrap lg:p-5">
-                                                Successfully
-                                            </td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-100">
-                                            <td class="p-4 w-4 lg:p-5">
-                                                1
-                                            </td>
-                                            <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                                <div class="text-base font-semibold text-gray-900">Education Dashboard
-                                                </div>
-                                                <div class="text-sm font-normal text-gray-500">Html templates</div>
-                                            </td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                                20,000.00 Tzs
-                                            </td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                                #194556
-                                            </td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                                22- july </td>
-                                            <td class="p-4 space-x-2 whitespace-nowrap lg:p-5">
-                                                Successfully
-                                            </td>
-                                        </tr>
-
-                                        <tr class="hover:bg-gray-100">
-                                            <td class="p-4 w-4 lg:p-5">
-                                                1
-                                            </td>
-                                            <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                                <div class="text-base font-semibold text-gray-900">Education Dashboard
-                                                </div>
-                                                <div class="text-sm font-normal text-gray-500">Html templates</div>
-                                            </td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                                20,000.00 TZS
-                                            </td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                                #194556
-                                            </td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                                22- july </td>
-                                            <td class="p-4 space-x-2 whitespace-nowrap lg:p-5">
-                                                Successfully
-                                            </td>
-                                        </tr>
-
-                                        <tr class="hover:bg-gray-100">
-                                            <td class="p-4 w-4 lg:p-5">
-                                                1
-                                            </td>
-                                            <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap lg:p-5">
-                                                <div class="text-base font-semibold text-gray-900">Education Dashboard
-                                                </div>
-                                                <div class="text-sm font-normal text-gray-500">Html templates</div>
-                                            </td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                                20,000.00 TZS
-                                            </td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                                #194556
-                                            </td>
-                                            <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-                                                22- july </td>
-                                            <td class="p-4 space-x-2 whitespace-nowrap lg:p-5">
-                                                Successfully
-                                            </td>
-                                        </tr>
-
-
-
-                                </table>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="w-1/3">
-
-                <div class="max-w-lg mt-6  mx-auto bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-xl font-bold mb-4">Filter Options</h2>
-                    <div class="space-y-4">
-
-                        <!-- Start Date Filter -->
-                        <div>
-                            <label for="start-date" class="block text-sm font-medium text-gray-700">Start Date</label>
-                            <input type="date" id="start-date" name="start-date"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        </div>
-
-                        <!-- End Date Filter -->
-                        <div>
-                            <label for="end-date" class="block text-sm font-medium text-gray-700">End Date</label>
-                            <input type="date" id="end-date" name="end-date"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        </div>
-
-                        <!-- Customer ID Filter -->
-                        <div>
-                            <label for="customer-id" class="block text-sm font-medium text-gray-700">Customer ID</label>
-                            <input type="text" id="customer-id" name="customer-id"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                placeholder="Enter Customer ID">
-                        </div>
-
-                        <!-- Amount Filter -->
-                        <div>
-                            <label for="amount" class="block text-sm font-medium text-gray-700">Amount</label>
-                            <input type="number" id="amount" name="amount"
-                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                placeholder="Enter Amount">
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div>
-                            <button type="submit"
-                                class="w-full inline-flex  bg-gradient-to-br from-blue-800 to-yellow-500 font-medium  justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  focus:outline-none focus:ring-2    ">
-                                Apply Filters
+                        <div class="flex space-x-3">
+                            <button class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-2 px-4 rounded-xl transition-all duration-200">
+                                Change Plan
+                            </button>
+                            <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-xl transition-all duration-200">
+                                Cancel
                             </button>
                         </div>
-                        </form>
                     </div>
-
-
                 </div>
 
+                <!-- Simplified Transaction Summary -->
+                <div class="bg-white rounded-2xl  border border-gray-100 overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 px-6 py-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Transaction Summary</h3>
+                                <p class="text-blue-100 mt-1">Your financial overview</p>
+                            </div>
+                            <button class="p-2 bg-white bg-opacity-20 rounded-xl hover:bg-opacity-30 transition-colors duration-200">
+                                <!-- <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg> -->
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-green-50 rounded-xl border border-green-200">
+                                <div class="flex items-center">
+                                    <div class="p-2 bg-green-100 rounded-lg">
+                                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-700">Total Sales</p>
+                                        <p class="text-xs text-gray-500">July 7-27, 2024</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-lg font-bold text-green-600">235,000.00 TZS</p>
+                                    <p class="text-xs text-gray-500">20 products</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-red-50 rounded-xl border border-red-200">
+                                <div class="flex items-center">
+                                    <div class="p-2 bg-red-100 rounded-lg">
+                                        <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-700">Platform Charges</p>
+                                        <p class="text-xs text-gray-500">Service fees</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-lg font-bold text-red-600">40,000.00 TZS</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-blue-50 rounded-xl border border-blue-200">
+                                <div class="flex items-center">
+                                    <div class="p-2 bg-blue-100 rounded-lg">
+                                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-700">Net Disbursed</p>
+                                        <p class="text-xs text-gray-500">Available funds</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-lg font-bold text-blue-600">195,000.00 TZS</p>
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 mt-1">
+                                        <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                                        </svg>
+                                        Pending
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendor Information Form -->
+            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-8">
+                <div class="bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900">Vendor Information</h3>
+                            <p class="text-gray-600 mt-1">Manage your profile details</p>
+                        </div>
+                        <button wire:click="enableEditing" 
+                                class="inline-flex items-center px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-xl transition-colors duration-200">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/>
+                            </svg>
+                            Edit Profile
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-6">
+                    @if (session()->has('message'))
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-4 mb-6">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-green-800">Success!</p>
+                                <p class="text-sm text-green-700">{{ session('message') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Form Fields -->
+                        <div class="lg:col-span-2 space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
+                                    <input wire:model="first_name" {{ session('enableEditing') }} type="text" 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white">
+                                    @error('first_name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Middle Name</label>
+                                    <input wire:model="middle_name" {{ session('enableEditing') }} type="text" 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white">
+                                    @error('middle_name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
+                                    <input wire:model="last_name" {{ session('enableEditing') }} type="text" 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white">
+                                    @error('last_name') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
+                                    <input wire:model="phone_number" {{ session('enableEditing') }} type="text" 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white">
+                                    @error('phone_number') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                                <input wire:model="email" {{ session('enableEditing') }} type="email" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white">
+                                @error('email') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                            </div>
+                        </div>
+
+                        <!-- Profile Picture -->
+                        <div class="flex flex-col items-center">
+                            <div class="w-48 h-48 rounded-2xl overflow-hidden bg-gray-100 mb-4 shadow-lg">
+                                @if ($this->photo)
+                                    <img class="w-full h-full object-cover" src="{{ $photo->temporaryUrl() }}">
+                                @elseif ($this->image_url)
+                                    <img class="w-full h-full object-cover" src="{{ $this->image_url }}">
+                                @else
+                                    <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-200 to-gray-300">
+                                        <svg class="w-20 h-20 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                        </svg>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <label class="cursor-pointer inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-all duration-200">
+                                <div wire:loading wire:target="photo" class="flex items-center">
+                                    <svg class="animate-spin w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+                                        <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                                    </svg>
+                                    Uploading...
+                                </div>
+                                <div wire:loading.remove wire:target="photo" class="flex items-center">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                                    </svg>
+                                    Change Photo
+                                </div>
+                                <input type="file" {{ session('enableEditing') }} class="hidden" wire:model="photo">
+                            </label>
+                            @error('photo') <p class="text-red-500 text-xs mt-2">{{ $message }}</p> @enderror
+                        </div>
+                    </div>
+
+                    @if (session('enableEditing') !== 'disabled')
+                    <div class="mt-8 pt-6 border-t border-gray-200">
+                        <button wire:click="update" 
+                                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Update Profile
+                        </button>
+                    </div>
+                    @endif
+                </div>
             </div>
         </div>
+        @break
 
-       @break
         @case(2)
         <livewire:inventory.inventory />
-
-            @break
+        @break
 
         @default
-
     @endswitch
-
+</div>

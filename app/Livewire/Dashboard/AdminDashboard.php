@@ -41,7 +41,7 @@ class AdminDashboard extends Component
         $this->registered_product = Product::count();
 
         // Use your existing approach - this works perfectly
-        $orders = Order::latest()->take(10)->get();
+        $orders = Order::latest()->take(5)->get();
         foreach($orders as $order) {
             // Keep your existing customer lookup approach
             $order['customer'] = Customer::where('id', $order->customer_id)->value('full_name') ?? 'Unknown Customer';

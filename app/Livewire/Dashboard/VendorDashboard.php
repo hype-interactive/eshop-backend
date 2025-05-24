@@ -19,7 +19,7 @@ class VendorDashboard extends Component
     {
 
 
-        $orders= Order::paginate(10);
+        $orders= Order::paginate(6);
         foreach($orders as $order){
             $order['customer']= Customer::where('id',$order->customer_id)->value('full_name');
 
