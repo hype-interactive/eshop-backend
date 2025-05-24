@@ -54,7 +54,7 @@
                      class="w-20 h-16 mx-auto mb-3 logo-glow rounded-xl bg-white/10 p-2">
                 <div class="absolute -inset-1 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-xl blur opacity-20"></div>
             </div>
-            <h2 class="text-xl font-bold text-white">eShop Admin</h2>
+            <h2 class="text-xl font-bold text-white">eShop @if(auth()->user()->role_id==1) Admin @else Vendor @endif </h2>
             <p class="text-sm text-blue-200 mt-1">Management System</p>
         </div>
 
